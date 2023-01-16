@@ -1,7 +1,9 @@
 import React from "react";
+import Link from "next/link";
+import { AiOutlineShopping } from "react-icons/ai";
 
-const Nvabar = () => {
-  return <div>Nvabar</div>;
+const Navabar = () => {
+  return <div>Navabar</div>;
 };
 
-export default Nvabar;
+export default Navabar;
