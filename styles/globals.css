@@ -608,6 +608,10 @@ span.text-red {
   margin-top: 10px;
 }
 
+.image-container {
+  width: 40%;
+}
+
 @media screen and (max-width: 800px) {
   .hero-banner-container {
     height: 560px;
