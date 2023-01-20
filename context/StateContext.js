@@ -10,6 +10,9 @@ export const StateContext = ({ children }) => {
   const [totalQuantities, setTotalQuantities] = useState(0);
   const [qty, setQty] = useState(1);
 
+  let foundProduct;
+  let index;
+
   const onAdd = (product, quantity) => {
     // we should check if the product that we want to add is aleary has been added before
     // if yes => update total price and qty of product and total qty)
@@ -45,6 +48,34 @@ export const StateContext = ({ children }) => {
     toast.success(`${qty} ${product.name} added to the cart.`);
   };
 
+  const toggleCartItemQuantity = (id, value) => {
+    foundProduct = cartItems.find((item) => item._id === id);
+    index = cartItems.findIndex((product) => product._id === id);
+    const newCartItems = cartItems.filter((item) => item._id !== id);
+
+    if (value === "inc") {
+      newCartItems.splice(index, 0, {
+        ...foundProduct,
+        quantity: foundProduct.quantity + 1,
+      });
+
+      setCartItems(newCartItems);
+      setTotalPrice((prevTotalPrice) => prevTotalPrice + foundProduct.price);
+      setTotalQuantities((prevTotalQuantity) => prevTotalQuantity + 1);
+    } else if (value === "dec") {
+      if (foundProduct.quantity > 1) {
+        newCartItems.splice(index, 0, {
+          ...foundProduct,
+          quantity: foundProduct.quantity - 1,
+        });
+
+        setCartItems(newCartItems);
+        setTotalPrice((prevTotalPrice) => prevTotalPrice - foundProduct.price);
+        setTotalQuantities((prevTotalQuantity) => prevTotalQuantity - 1);
+      }
+    }
+  };
+
   const increaseQty = () => {
     setQty((prevQty) => prevQty + 1);
   };
@@ -69,9 +100,9 @@ export const StateContext = ({ children }) => {
         increaseQty,
         decreaseQty,
         onAdd,
+        toggleCartItemQuantity,
       }}
     >
-      {console.log(cartItems)}
       {children}
     </Context.Provider>
   );
