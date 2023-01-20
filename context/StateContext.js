@@ -5,13 +5,17 @@ const Context = createContext();
 
 export const StateContext = ({ children }) => {
   const [showCart, setShowCart] = useState(false);
-  const [cartItem, setCartItem] = useState([]);
-  const [totalPrice, setTotalPrice] = useState();
+  const [cartItems, setCartItems] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
   const [totalQuantities, setTotalQuantities] = useState(0);
   const [qty, setQty] = useState(1);
 
   const onAdd = (product, quantity) => {
-    const checkProductInCart = cartItem.filter(
+    // we should check if the product that we want to add is aleary has been added before
+    // if yes => update total price and qty of product and total qty)
+    // if no => add product to the cartItems, change total price, total qty
+
+    const checkProductInCart = cartItems.find(
       (item) => item._id === product._id
     );
 
@@ -23,19 +27,19 @@ export const StateContext = ({ children }) => {
 
     // if particular product is already exist in the card: update quantity of all products in the cart
     if (checkProductInCart) {
-      const updatedCartItems = cartItem.map((cartProduct) => {
+      const updatedCartItems = cartItems.map((cartProduct) => {
         if (cartProduct._id === product._id) {
           return { ...cartProduct, quantity: cartProduct.quantity + quantity };
         }
       });
 
-      setCartItem(updatedCartItems);
+      setCartItems(updatedCartItems);
     } else {
       // if we add a new product to the card: change the amount of this product
       product.quantity = quantity;
 
       // update the cart with this product inside
-      setCartItem((prev) => [...prev, { ...product }]);
+      setCartItems([...cartItems, { ...product }]);
     }
 
     toast.success(`${qty} ${product.name} added to the cart.`);
@@ -58,7 +62,7 @@ export const StateContext = ({ children }) => {
       value={{
         showCart,
         setShowCart,
-        cartItem,
+        cartItems,
         totalPrice,
         totalQuantities,
         qty,
@@ -67,6 +71,7 @@ export const StateContext = ({ children }) => {
         onAdd,
       }}
     >
+      {console.log(cartItems)}
       {children}
     </Context.Provider>
   );
