@@ -612,6 +612,14 @@ span.text-red {
   width: 40%;
 }
 
+/* ------------------ Pre-Order Form----------*/
+.order-item {
+  display: flex;
+  justify-content: space-around;
+}
+
+/* ------------------ */
+
 @media screen and (max-width: 800px) {
   .hero-banner-container {
     height: 560px;

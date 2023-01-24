@@ -1,6 +1,11 @@
 import React from "react";
 
+import { urlFor } from "../../lib/client";
+import { useStateContext } from "../../context/StateContext";
+
 const OrderForm = () => {
+  const { cartItems } = useStateContext();
+
   return (
     <div>
       <h1>Pre-Order Form:</h1>
@@ -125,19 +130,32 @@ const OrderForm = () => {
 
           <div className="orders">
             <h2>Your orders:</h2>
+            {cartItems.length > 0 &&
+              cartItems.map((item) => {
+                return (
+                  <>
+                    <div className="order-item">
+                      <div className="order-image">
+                        <img
+                          src={urlFor(item?.image[0])}
+                          className="cart-product-image"
+                          style={{ width: "100px" }}
+                          alt="IMAGE"
+                        />
+                      </div>
+                      <div className="order-description">
+                        <h3>{item.name}</h3>
+                        <p>+ {item.quantity} -</p>
+                      </div>
+                      <div className="order-price">
+                        <h3>${item.price}</h3>
+                      </div>
+                    </div>{" "}
+                  </>
+                );
+              })}
 
-            <div className="order-item">
-              <div className="order-image">
-                <img src="" alt="IMAGE" />
-              </div>
-              <div className="order-description">
-                <h3>Name</h3>
-                <p>+ 1 -</p>
-              </div>
-              <div className="order-price">
-                <h3>$100</h3>
-              </div>
-            </div>
+            {console.log(cartItems)}
 
             {/* <div className="product-container">
               {cartItems.length >= 1 &&
