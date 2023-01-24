@@ -106,9 +106,15 @@ const Cart = () => {
               <h3>${totalPrice}</h3>
             </div>
             <div className="btn-container">
-              <button className="btn" type="button" onClick="">
-                Pay My Order
-              </button>
+              <Link href={`/order/order`}>
+                <button
+                  className="btn"
+                  type="button"
+                  onClick={() => setShowCart(false)}
+                >
+                  Pay My Order
+                </button>
+              </Link>
             </div>
           </div>
         )}
