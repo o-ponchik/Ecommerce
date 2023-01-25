@@ -18,7 +18,7 @@ const OrderForm = () => {
                 type="text"
                 name="first-name"
                 id="first-name"
-                enterkeyhint="next"
+                enterKeyHint="next"
                 required
               />
             </div>
@@ -28,7 +28,7 @@ const OrderForm = () => {
                 type="text"
                 name="last-name"
                 id="last-name"
-                enterkeyhint="next"
+                enterKeyHint="next"
                 required
               />
             </div>
@@ -41,7 +41,7 @@ const OrderForm = () => {
               type="email"
               name="email"
               id="email"
-              enterkeyhint="next"
+              enterKeyHint="next"
               required
               placeholder="example@gmail.com"
             />
@@ -57,7 +57,7 @@ const OrderForm = () => {
               id="phone"
               pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
               placeholder="093-123-4567"
-              enterkeyhint="next"
+              enterKeyHint="next"
               required
             />
           </div>
@@ -66,66 +66,70 @@ const OrderForm = () => {
               Shipping Address <span className="asterisk">*</span>
             </h3>
             <div className="box">
-              <label for="street-address">Street address</label>
+              <label htmlFor="street-address">Street address</label>
               <input
                 type="text"
                 id="street-address"
                 name="street-address"
-                autocomplete="street-address"
+                autoComplete="street-address"
                 required
-                enterkeyhint="next"
+                enterKeyHint="next"
               />
             </div>
             <div className="box">
-              <label for="postal-code">ZIP or postal code</label>
+              <label htmlFor="postal-code">ZIP or postal code</label>
               <input
                 className="postal-code"
                 id="postal-code"
                 name="postal-code"
-                autocomplete="postal-code"
-                enterkeyhint="next"
+                autoComplete="postal-code"
+                enterKeyHint="next"
                 required
               />
             </div>
             <div className="box">
-              <label for="city">City</label>
+              <label htmlFor="city">City</label>
               <input
                 required
                 type="text"
                 id="city"
                 name="city"
-                autocomplete="address-level2"
-                enterkeyhint="next"
+                autoComplete="address-level2"
+                enterKeyHint="next"
               />
             </div>
             <div className="box">
-              <label for="state">State</label>
+              <label htmlFor="state">State</label>
               <input
                 required
                 type="text"
                 id="state"
                 name="state"
-                enterkeyhint="next"
+                enterKeyHint="next"
               />
             </div>
             <div className="box">
-              <label for="country">Country</label>
+              <label htmlFor="country">Country</label>
               <input
                 required
                 type="text"
                 id="country"
                 name="country"
-                enterkeyhint="done"
+                enterKeyHint="done"
               />
             </div>
           </div>
           <div className="box details-form">
-            <label for="details">
+            <label htmlFor="details">
               If you have any additional notes about this order, please write.
             </label>
-            <textarea id="details" name="details" rows="5" cols="33">
-              Type here...
-            </textarea>
+            <textarea
+              id="details"
+              name="details"
+              rows="5"
+              cols="33"
+              defaultValue="  Type here..."
+            ></textarea>
           </div>
 
           <div className="orders">
