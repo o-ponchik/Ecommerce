@@ -7,12 +7,12 @@ const OrderForm = () => {
   const { cartItems } = useStateContext();
 
   return (
-    <div>
-      <h1>Pre-Order Form:</h1>
+    <div className="form-wrapper">
+      <h1 className="form-heading">Pre-Order Form:</h1>
       <form>
-        <div className="form-wrapper">
-          <div className="name-form">
-            <div>
+        <div className="">
+          <div className="box name-form">
+            <div className="first-name-form">
               <label htmlFor="first-name">First Name</label>
               <input
                 type="text"
@@ -33,7 +33,7 @@ const OrderForm = () => {
               />
             </div>
           </div>
-          <div className="email-form">
+          <div className="box email-form">
             <label htmlFor="email">
               Email <span className="asterisk">*</span>
             </label>
@@ -46,7 +46,7 @@ const OrderForm = () => {
               placeholder="example@gmail.com"
             />
           </div>
-          <div className="phone-form">
+          <div className="box phone-form">
             <label htmlFor="phome">
               Phone Number (enter xxx-xxx-xxxx){" "}
               <span className="asterisk">*</span>
@@ -61,11 +61,11 @@ const OrderForm = () => {
               required
             />
           </div>
-          <div className="address">
+          <div className="box address">
             <h3>
-              Shopping Address <span className="asterisk">*</span>
+              Shipping Address <span className="asterisk">*</span>
             </h3>
-            <div>
+            <div className="box">
               <label for="street-address">Street address</label>
               <input
                 type="text"
@@ -76,10 +76,10 @@ const OrderForm = () => {
                 enterkeyhint="next"
               />
             </div>
-            <div>
+            <div className="box">
               <label for="postal-code">ZIP or postal code</label>
               <input
-                class="postal-code"
+                className="postal-code"
                 id="postal-code"
                 name="postal-code"
                 autocomplete="postal-code"
@@ -87,7 +87,7 @@ const OrderForm = () => {
                 required
               />
             </div>
-            <div>
+            <div className="box">
               <label for="city">City</label>
               <input
                 required
@@ -98,7 +98,7 @@ const OrderForm = () => {
                 enterkeyhint="next"
               />
             </div>
-            <div>
+            <div className="box">
               <label for="state">State</label>
               <input
                 required
@@ -108,7 +108,7 @@ const OrderForm = () => {
                 enterkeyhint="next"
               />
             </div>
-            <div>
+            <div className="box">
               <label for="country">Country</label>
               <input
                 required
@@ -119,7 +119,7 @@ const OrderForm = () => {
               />
             </div>
           </div>
-          <div className="details-form">
+          <div className="box details-form">
             <label for="details">
               If you have any additional notes about this order, please write.
             </label>
@@ -207,6 +207,10 @@ const OrderForm = () => {
             </div> */}
           </div>
         </div>
+
+        <button type="submit" className="submit-form">
+          Submit
+        </button>
       </form>
     </div>
   );
