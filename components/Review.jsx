@@ -7,16 +7,26 @@ import Grid from "@mui/material/Grid";
 
 import { useStateContext } from "../context/StateContext";
 
-const addresses = ["1 MUI Drive", "Reactville", "Anytown", "99999", "USA"];
-const payments = [
-  { name: "Card type", detail: "Visa" },
-  { name: "Card holder", detail: "Mr John Smith" },
-  { name: "Card number", detail: "xxxx-xxxx-xxxx-1234" },
-  { name: "Expiry date", detail: "04/2024" },
-];
-
 export default function Review(props) {
-  const { cartItems, totalPrice, qty } = useStateContext();
+  const {
+    cartItems,
+    totalPrice,
+    firstName,
+    lastName,
+    address,
+    city,
+    state,
+    postalCode,
+    country,
+  } = useStateContext();
+
+  const addresses = [
+    `${address},
+    ${city},
+    ${state},
+    ${postalCode},
+    ${country}`,
+  ];
 
   return (
     <React.Fragment>
@@ -24,9 +34,8 @@ export default function Review(props) {
         Order summary
       </Typography>
       <List disablePadding>
-        {console.log(cartItems)}
         {cartItems.map((product) => (
-          <ListItem key={product.name} sx={{ py: 1, px: 0 }}>
+          <ListItem key={product.id} sx={{ py: 1, px: 0 }}>
             <ListItemText
               primary={product.name}
               secondary={`Quantity: ${product.quantity}`}
@@ -47,7 +56,9 @@ export default function Review(props) {
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
             Shipping
           </Typography>
-          <Typography gutterBottom>John Smith</Typography>
+          <Typography gutterBottom>
+            {firstName} {lastName}
+          </Typography>
           <Typography gutterBottom>{addresses.join(", ")}</Typography>
         </Grid>
       </Grid>

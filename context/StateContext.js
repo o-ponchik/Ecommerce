@@ -10,6 +10,15 @@ export const StateContext = ({ children }) => {
   const [totalQuantities, setTotalQuantities] = useState(0);
   const [qty, setQty] = useState(1);
 
+  // -----User Info----//
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [postalCode, setPostalCode] = useState("");
+  const [country, setCountry] = useState("");
+
   let foundProduct;
   let index;
 
@@ -118,6 +127,20 @@ export const StateContext = ({ children }) => {
         onAdd,
         toggleCartItemQuantity,
         onRemove,
+        firstName,
+        setFirstName,
+        lastName,
+        setLastName,
+        address,
+        setAddress,
+        city,
+        setCity,
+        state,
+        setState,
+        postalCode,
+        setPostalCode,
+        country,
+        setCountry,
       }}
     >
       {children}
