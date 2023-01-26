@@ -59,9 +59,7 @@ const ProductDetails = ({ product, products }) => {
               <span className="minus" onClick={decreaseQty}>
                 <AiOutlineMinus />
               </span>
-              <span className="num" onClick="">
-                {qty}
-              </span>
+              <span className="num">{qty}</span>
               <span className="plus" onClick={increaseQty}>
                 <AiOutlinePlus />
               </span>
@@ -77,7 +75,11 @@ const ProductDetails = ({ product, products }) => {
               Add to Cart
             </button>
             <Link href={`/order/order`}>
-              <button type="button" className="buy-now" onClick="">
+              <button
+                type="button"
+                className="buy-now"
+                onClick={() => onAdd(product, qty)}
+              >
                 Buy Now
               </button>
             </Link>
