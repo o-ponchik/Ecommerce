@@ -50,13 +50,13 @@ export default function Checkout() {
 
   const handleNext = () => {
     if (
-      !firstName &&
-      !lastName &&
-      !phone &&
-      !email &&
-      !address &&
-      !city &&
-      !postalCode &&
+      !firstName ||
+      !lastName ||
+      !phone ||
+      !email ||
+      !address ||
+      !city ||
+      !postalCode ||
       !country
     ) {
       toast.error("Please fill in all the required fields");

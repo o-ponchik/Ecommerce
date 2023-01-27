@@ -6,14 +6,23 @@ import { useStateContext } from "../context/StateContext";
 
 export default function AddressForm() {
   const {
+    firstName,
     setFirstName,
+    lastName,
     setLastName,
+    phone,
     setPhone,
+    email,
     setEmail,
+    address,
     setAddress,
+    city,
     setCity,
+    state,
     setState,
+    postalCode,
     setPostalCode,
+    country,
     setCountry,
   } = useStateContext();
 
@@ -32,6 +41,7 @@ export default function AddressForm() {
             fullWidth
             autoComplete="given-name"
             variant="standard"
+            value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
           />
         </Grid>
@@ -44,6 +54,7 @@ export default function AddressForm() {
             fullWidth
             autoComplete="family-name"
             variant="standard"
+            value={lastName}
             onChange={(e) => setLastName(e.target.value)}
           />
         </Grid>
@@ -56,6 +67,7 @@ export default function AddressForm() {
             fullWidth
             autoComplete="phone number"
             variant="standard"
+            value={phone}
             onChange={(e) => setPhone(e.target.value)}
           />
         </Grid>
@@ -68,6 +80,7 @@ export default function AddressForm() {
             fullWidth
             autoComplete="email"
             variant="standard"
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </Grid>
@@ -80,6 +93,7 @@ export default function AddressForm() {
             fullWidth
             autoComplete="shipping address-line"
             variant="standard"
+            value={address}
             onChange={(e) => setAddress(e.target.value)}
           />
         </Grid>
@@ -93,6 +107,7 @@ export default function AddressForm() {
             fullWidth
             autoComplete="shipping address-level2"
             variant="standard"
+            value={city}
             onChange={(e) => setCity(e.target.value)}
           />
         </Grid>
@@ -103,6 +118,7 @@ export default function AddressForm() {
             label="State/Province/Region"
             fullWidth
             variant="standard"
+            value={!state ? "" : state}
             onChange={(e) => setState(e.target.value)}
           />
         </Grid>
@@ -115,6 +131,7 @@ export default function AddressForm() {
             fullWidth
             autoComplete="shipping postal-code"
             variant="standard"
+            value={postalCode}
             onChange={(e) => setPostalCode(e.target.value)}
           />
         </Grid>
@@ -127,6 +144,7 @@ export default function AddressForm() {
             fullWidth
             autoComplete="shipping country"
             variant="standard"
+            value={country}
             onChange={(e) => setCountry(e.target.value)}
           />
         </Grid>
