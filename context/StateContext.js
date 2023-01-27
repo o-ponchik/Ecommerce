@@ -13,6 +13,8 @@ export const StateContext = ({ children }) => {
   // -----User Info----//
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
@@ -133,6 +135,10 @@ export const StateContext = ({ children }) => {
         setFirstName,
         lastName,
         setLastName,
+        phone,
+        setPhone,
+        email,
+        setEmail,
         address,
         setAddress,
         city,

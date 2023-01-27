@@ -8,6 +8,8 @@ export default function AddressForm() {
   const {
     setFirstName,
     setLastName,
+    setPhone,
+    setEmail,
     setAddress,
     setCity,
     setState,
@@ -43,6 +45,30 @@ export default function AddressForm() {
             autoComplete="family-name"
             variant="standard"
             onChange={(e) => setLastName(e.target.value)}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            required
+            id="phone"
+            name="phone"
+            label="Phone number"
+            fullWidth
+            autoComplete="phone number"
+            variant="standard"
+            onChange={(e) => setPhone(e.target.value)}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            required
+            id="email"
+            name="email"
+            label="Email"
+            fullWidth
+            autoComplete="email"
+            variant="standard"
+            onChange={(e) => setEmail(e.target.value)}
           />
         </Grid>
         <Grid item xs={12}>
