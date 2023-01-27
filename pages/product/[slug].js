@@ -74,7 +74,7 @@ const ProductDetails = ({ product, products }) => {
             >
               Add to Cart
             </button>
-            <Link href={`/order/order`}>
+            <Link href={`/checkout/checkout`}>
               <button
                 type="button"
                 className="buy-now"
