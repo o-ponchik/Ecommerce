@@ -59,15 +59,17 @@ export const StateContext = ({ children }) => {
 
   // remove product from the Cart list
   const onRemove = (product) => {
+    console.log(cartItems);
+    console.log(product);
     foundProduct = cartItems.filter((item) => item._id === product._id);
     const newCartItems = cartItems.filter((item) => item._id !== product._id);
 
     setTotalPrice(
       (prevTotalPrice) =>
-        prevTotalPrice - foundProduct.price * foundProduct.quantity
+        prevTotalPrice - foundProduct[0].price * foundProduct[0].quantity
     );
     setTotalQuantities(
-      (prevTotalQuantity) => prevTotalQuantity - foundProduct.quantity
+      (prevTotalQuantity) => prevTotalQuantity - foundProduct[0].quantity
     );
     setCartItems(newCartItems);
   };
