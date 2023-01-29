@@ -1,4 +1,5 @@
 import * as React from "react";
+import axios from "axios";
 import CssBaseline from "@mui/material/CssBaseline";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -48,7 +49,7 @@ export default function Checkout() {
     country,
   } = useStateContext();
 
-  const handleNext = () => {
+  const handleNext = async (e) => {
     if (
       !firstName ||
       !lastName ||
@@ -61,6 +62,48 @@ export default function Checkout() {
     ) {
       toast.error("Please fill in all the required fields");
       return;
+    }
+
+    if (activeStep === 1) {
+      console.log("submit");
+
+      const orderPayload = {
+        customer: {
+          name: `${firstName} ${lastName}`,
+          email: email,
+          phone: phone,
+          details: "Additional customer information",
+          address: {
+            street: address,
+            city: city,
+            state: state,
+            zipCode: postalCode,
+            country: country,
+          },
+        },
+        product: [
+          cartItems.map((item) => {
+            return { _ref: `product-${item._id}` };
+          }),
+        ],
+        status: "pending",
+        totalPrice: totalPrice,
+        date: "2022-01-01T12:00:00.000Z",
+      };
+
+      console.log("Payload", orderPayload);
+
+      try {
+        const { data } = await axios({
+          url: "../api/v1/order/create",
+          method: "POST",
+          data: orderPayload,
+        });
+
+        console.log("Response back:", data);
+      } catch {
+        console.log("Error", error);
+      }
     }
 
     setActiveStep(activeStep + 1);
