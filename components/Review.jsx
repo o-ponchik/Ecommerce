@@ -36,15 +36,19 @@ export default function Review(props) {
         Order summary
       </Typography>
       <List disablePadding>
-        {cartItems.map((product) => (
-          <ListItem key={product.id} sx={{ py: 1, px: 0 }}>
-            <ListItemText
-              primary={product.name}
-              secondary={`Quantity: ${product.quantity}`}
-            />
-            <Typography variant="body2">${product.price}</Typography>
-          </ListItem>
-        ))}
+        {cartItems.map((product) => {
+          console.log(product);
+
+          return (
+            <ListItem key={product._id} sx={{ py: 1, px: 0 }}>
+              <ListItemText
+                primary={product.name}
+                secondary={`Quantity: ${product.quantity}`}
+              />
+              <Typography variant="body2">${product.price}</Typography>
+            </ListItem>
+          );
+        })}
 
         <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText primary="Total" />

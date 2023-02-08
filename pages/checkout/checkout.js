@@ -15,6 +15,9 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import AddressForm from "../../components/AddressForm";
 import Review from "../../components/Review";
 import { toast } from "react-hot-toast";
+import dynamic from "next/dynamic";
+
+import { client } from "../../lib/client";
 
 import { useStateContext } from "../../context/StateContext";
 
@@ -33,7 +36,7 @@ function getStepContent(step) {
 
 const theme = createTheme();
 
-export default function Checkout() {
+function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
   const {
     cartItems,
@@ -50,22 +53,22 @@ export default function Checkout() {
   } = useStateContext();
 
   const handleNext = async (e) => {
-    if (
-      !firstName ||
-      !lastName ||
-      !phone ||
-      !email ||
-      !address ||
-      !city ||
-      !postalCode ||
-      !country
-    ) {
-      toast.error("Please fill in all the required fields");
-      return;
-    }
+    // if (
+    //   !firstName ||
+    //   !lastName ||
+    //   !phone ||
+    //   !email ||
+    //   !address ||
+    //   !city ||
+    //   !postalCode ||
+    //   !country
+    // ) {
+    //   toast.error("Please fill in all the required fields");
+    //   return;
+    // }
 
     if (activeStep === 1) {
-      console.log("submit");
+      console.log(cartItems);
 
       const orderPayload = {
         customer: {
@@ -81,28 +84,33 @@ export default function Checkout() {
             country: country,
           },
         },
-        product: [
-          cartItems.map((item) => {
-            return { _ref: `product-${item._id}` };
-          }),
-        ],
+        // product: [
+        //   cartItems.map((item) => {
+        //     return { _ref: `product-${item._id}` };
+        //   }),
+        // ],
+        product: cartItems.map((x) => ({
+          ...x,
+        })),
         status: "pending",
         totalPrice: totalPrice,
-        date: "2022-01-01T12:00:00.000Z",
       };
 
-      console.log("Payload", orderPayload);
+      console.log("Payload: ", orderPayload);
+      console.log(JSON.stringify(orderPayload));
 
       try {
-        const { data } = await axios({
-          url: "../api/v1/order/create",
-          method: "POST",
-          data: orderPayload,
-        });
-
-        console.log("Response back:", data);
-      } catch {
-        console.log("Error", error);
+        await axios
+          .post("../api/v1/order/create", orderPayload, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+          .then(function (response) {
+            console.log(response);
+          });
+      } catch (error) {
+        console.error(error);
       }
     }
 
@@ -175,3 +183,5 @@ export default function Checkout() {
     </ThemeProvider>
   );
 }
+
+export default Checkout;
