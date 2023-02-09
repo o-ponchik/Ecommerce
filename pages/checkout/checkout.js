@@ -15,9 +15,6 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import AddressForm from "../../components/AddressForm";
 import Review from "../../components/Review";
 import { toast } from "react-hot-toast";
-import dynamic from "next/dynamic";
-
-import { client } from "../../lib/client";
 
 import { useStateContext } from "../../context/StateContext";
 
@@ -53,22 +50,24 @@ function Checkout() {
   } = useStateContext();
 
   const handleNext = async (e) => {
-    // if (
-    //   !firstName ||
-    //   !lastName ||
-    //   !phone ||
-    //   !email ||
-    //   !address ||
-    //   !city ||
-    //   !postalCode ||
-    //   !country
-    // ) {
-    //   toast.error("Please fill in all the required fields");
-    //   return;
-    // }
+    if (
+      !firstName ||
+      !lastName ||
+      !phone ||
+      !email ||
+      !address ||
+      !city ||
+      !postalCode ||
+      !country
+    ) {
+      toast.error("Please fill in all the required fields");
+      return;
+    }
 
     if (activeStep === 1) {
       console.log(cartItems);
+
+      const key = Math.floor(Math.random() * 100);
 
       const orderPayload = {
         customer: {
@@ -84,15 +83,14 @@ function Checkout() {
             country: country,
           },
         },
-        // product: [
-        //   cartItems.map((item) => {
-        //     return { _ref: `product-${item._id}` };
-        //   }),
-        // ],
-        product: cartItems.map((x) => ({
-          ...x,
+        orderItems: cartItems.map((item) => ({
+          ...item,
+          // _key: item.id,
+          // _type: "orderItem",
+          // slug: undefined,
+          // details: undefined,
         })),
-        status: "pending",
+        status: "Pending",
         totalPrice: totalPrice,
       };
 
