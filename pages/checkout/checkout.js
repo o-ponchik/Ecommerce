@@ -67,8 +67,6 @@ function Checkout() {
     if (activeStep === 1) {
       console.log(cartItems);
 
-      const key = Math.floor(Math.random() * 100);
-
       const orderPayload = {
         customer: {
           name: `${firstName} ${lastName}`,
@@ -83,13 +81,16 @@ function Checkout() {
             country: country,
           },
         },
-        orderItems: cartItems.map((item) => ({
-          ...item,
-          // _key: item.id,
-          // _type: "orderItem",
-          // slug: undefined,
-          // details: undefined,
-        })),
+        orderItems: cartItems.map((item) => {
+          const key = new Date().getTime();
+          return {
+            ...item,
+            _key: `order-${key}`,
+            _type: "orderItem",
+            slug: undefined,
+            details: undefined,
+          };
+        }),
         status: "Pending",
         totalPrice: totalPrice,
       };
