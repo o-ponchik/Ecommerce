@@ -47,6 +47,7 @@ function Checkout() {
     state,
     postalCode,
     country,
+    details,
   } = useStateContext();
 
   const handleNext = async (e) => {
@@ -72,7 +73,7 @@ function Checkout() {
           name: `${firstName} ${lastName}`,
           email: email,
           phone: phone,
-          details: "Additional customer information",
+          details: details,
           address: {
             street: address,
             city: city,
@@ -88,7 +89,6 @@ function Checkout() {
             _key: `order-${key}`,
             _type: "orderItem",
             slug: undefined,
-            details: undefined,
           };
         }),
         status: "Pending",

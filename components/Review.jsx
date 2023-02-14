@@ -4,6 +4,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
 
 import { useStateContext } from "../context/StateContext";
 
@@ -20,6 +21,7 @@ export default function Review(props) {
     state,
     postalCode,
     country,
+    setDetails,
   } = useStateContext();
 
   const addresses = [
@@ -32,7 +34,7 @@ export default function Review(props) {
 
   return (
     <React.Fragment>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant="h6" color="primary" gutterBottom>
         Order summary
       </Typography>
       <List disablePadding>
@@ -59,7 +61,7 @@ export default function Review(props) {
       </List>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
-          <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
+          <Typography variant="h6" color="primary" gutterBottom sx={{ mt: 2 }}>
             Shipping:
           </Typography>
           <Typography gutterBottom>
@@ -68,6 +70,22 @@ export default function Review(props) {
           <Typography gutterBottom>{phone}</Typography>
           <Typography gutterBottom>{email}</Typography>
           <Typography gutterBottom>{addresses.join(", ")}</Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            id="details"
+            name="details"
+            label="Your message (optional)..."
+            fullWidth
+            autoComplete="details"
+            variant="outlined"
+            multiline
+            rows={4}
+            onChange={(e) => {
+              if (e.target.value.trim() === "") return;
+              setDetails(e.target.value);
+            }}
+          />
         </Grid>
       </Grid>
     </React.Fragment>

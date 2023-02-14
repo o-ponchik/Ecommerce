@@ -20,6 +20,7 @@ export const StateContext = ({ children }) => {
   const [state, setState] = useState("");
   const [postalCode, setPostalCode] = useState("");
   const [country, setCountry] = useState("");
+  const [details, setDetails] = useState("");
 
   let foundProduct;
   let index;
@@ -149,6 +150,8 @@ export const StateContext = ({ children }) => {
         setPostalCode,
         country,
         setCountry,
+        details,
+        setDetails,
       }}
     >
       {children}
