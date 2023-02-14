@@ -1,6 +1,6 @@
 ## Welcome to the E-commerce Web Site by Mariia Matviian
 
-# This admin-page branch was created for building backend part of application like make an order and send it to the data lake of Sanity Studio and then build admin page ftching and rendering this data.
+### This admin-page branch was created for building backend part of application like make an order and send it to the data lake of Sanity Studio and then build admin page ftching and rendering this data.
 
 This E-commerce Web Site is designed to provide a seamless shopping experience for users. Built using React, Next, and Sanity, this site offers a dynamic and interactive platform for customers to purchase products with ease.
 
