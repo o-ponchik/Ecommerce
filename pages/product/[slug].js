@@ -9,6 +9,7 @@ import {
 import { client, urlFor } from "../../lib/client";
 import Product from "../../components/Product";
 import { useStateContext } from "../../context/StateContext";
+import Link from "next/link";
 
 const ProductDetails = ({ product, products }) => {
   const { image, name, details, price } = product;
@@ -30,6 +31,7 @@ const ProductDetails = ({ product, products }) => {
           <div className="small-images-container">
             {image?.map((item, i) => (
               <img
+                key={i}
                 src={urlFor(item)}
                 className={i === index ? "small-image" : "small-image"}
                 onMouseEnter={() => setIndex(i)}
@@ -58,9 +60,7 @@ const ProductDetails = ({ product, products }) => {
               <span className="minus" onClick={decreaseQty}>
                 <AiOutlineMinus />
               </span>
-              <span className="num" onClick="">
-                {qty}
-              </span>
+              <span className="num">{qty}</span>
               <span className="plus" onClick={increaseQty}>
                 <AiOutlinePlus />
               </span>
@@ -75,9 +75,15 @@ const ProductDetails = ({ product, products }) => {
             >
               Add to Cart
             </button>
-            <button type="button" className="buy-now" onClick="">
-              Buy Now
-            </button>
+            <Link href={`/checkout/checkout`}>
+              <button
+                type="button"
+                className="buy-now"
+                onClick={() => onAdd(product, qty)}
+              >
+                Buy Now
+              </button>
+            </Link>
           </div>
         </div>
       </div>
