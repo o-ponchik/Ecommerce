@@ -35,6 +35,7 @@ const theme = createTheme();
 
 function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
+  const [isLoading, setIsLoading] = React.useState(false);
   const [isErrorCreateOrder, setIsErrorCreateOrder] = React.useState(false);
 
   const {
@@ -114,6 +115,7 @@ function Checkout() {
 
   const sendData = async (data) => {
     try {
+      setIsLoading(true);
       await axios
         .post("../api/v1/order/create", data, {
           headers: {
@@ -123,12 +125,33 @@ function Checkout() {
         .then(function (response) {
           console.log(response);
         });
+
+      setIsLoading(false);
     } catch (error) {
       console.error(error);
 
       setIsErrorCreateOrder(true);
     }
   };
+
+  let orderResult =
+    !isLoading && !isErrorCreateOrder ? (
+      <React.Fragment>
+        <Typography variant="h5" gutterBottom>
+          Thank you for your order!
+        </Typography>
+        <Typography variant="subtitle1">
+          We will contact you soon to discuss the payment method and shipping of
+          your order.
+        </Typography>
+      </React.Fragment>
+    ) : (
+      <React.Fragment>
+        <Typography variant="h5" gutterBottom>
+          Creating an order...
+        </Typography>
+      </React.Fragment>
+    );
 
   return (
     <ThemeProvider theme={theme}>
@@ -158,15 +181,7 @@ function Checkout() {
             ))}
           </Stepper>
           {activeStep === steps.length ? (
-            <React.Fragment>
-              <Typography variant="h5" gutterBottom>
-                Thank you for your order!
-              </Typography>
-              <Typography variant="subtitle1">
-                We will contact you soon to discuss the payment method and
-                shipping of your order.
-              </Typography>
-            </React.Fragment>
+            orderResult
           ) : (
             <React.Fragment>
               {getStepContent(activeStep)}
