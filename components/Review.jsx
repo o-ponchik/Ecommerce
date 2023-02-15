@@ -39,8 +39,6 @@ export default function Review(props) {
       </Typography>
       <List disablePadding>
         {cartItems.map((product) => {
-          console.log(product);
-
           return (
             <ListItem key={product._id} sx={{ py: 1, px: 0 }}>
               <ListItemText

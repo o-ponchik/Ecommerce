@@ -3,7 +3,6 @@ import axios from "axios";
 
 const createOrder = async (req, res) => {
   console.log("endpoint");
-  console.log("Json parsing req.body: ", req.body);
 
   const projectId = "as16wqx5";
   const dataset = "production";

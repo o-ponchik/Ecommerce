@@ -35,6 +35,8 @@ const theme = createTheme();
 
 function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
+  const [isErrorCreateOrder, setIsErrorCreateOrder] = React.useState(false);
+
   const {
     cartItems,
     totalPrice,
@@ -50,7 +52,7 @@ function Checkout() {
     details,
   } = useStateContext();
 
-  const handleNext = async (e) => {
+  const handleNext = (e) => {
     if (
       !firstName ||
       !lastName ||
@@ -65,9 +67,15 @@ function Checkout() {
       return;
     }
 
-    if (activeStep === 1) {
-      console.log(cartItems);
+    setActiveStep(activeStep + 1);
+  };
 
+  const handleBack = () => {
+    setActiveStep(activeStep - 1);
+  };
+
+  React.useEffect(() => {
+    if (activeStep === 2) {
       const orderPayload = {
         customer: {
           name: `${firstName} ${lastName}`,
@@ -95,29 +103,31 @@ function Checkout() {
         totalPrice: totalPrice,
       };
 
-      console.log("Payload: ", orderPayload);
-      console.log(JSON.stringify(orderPayload));
-
-      try {
-        await axios
-          .post("../api/v1/order/create", orderPayload, {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          })
-          .then(function (response) {
-            console.log(response);
-          });
-      } catch (error) {
-        console.error(error);
-      }
+      const callSendDataFunction = sendData(orderPayload);
+      toast.promise(callSendDataFunction, {
+        loading: "Process",
+        error: "Error occurs with sending data",
+        success: "Success!",
+      });
     }
+  }, [activeStep]);
 
-    setActiveStep(activeStep + 1);
-  };
+  const sendData = async (data) => {
+    try {
+      await axios
+        .post("../api/v1/order/create", data, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then(function (response) {
+          console.log(response);
+        });
+    } catch (error) {
+      console.error(error);
 
-  const handleBack = () => {
-    setActiveStep(activeStep - 1);
+      setIsErrorCreateOrder(true);
+    }
   };
 
   return (
