@@ -10,6 +10,18 @@ export const StateContext = ({ children }) => {
   const [totalQuantities, setTotalQuantities] = useState(0);
   const [qty, setQty] = useState(1);
 
+  // -----User Info----//
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [postalCode, setPostalCode] = useState("");
+  const [country, setCountry] = useState("");
+  const [details, setDetails] = useState("");
+
   let foundProduct;
   let index;
 
@@ -50,15 +62,17 @@ export const StateContext = ({ children }) => {
 
   // remove product from the Cart list
   const onRemove = (product) => {
+    console.log(cartItems);
+    console.log(product);
     foundProduct = cartItems.filter((item) => item._id === product._id);
     const newCartItems = cartItems.filter((item) => item._id !== product._id);
 
     setTotalPrice(
       (prevTotalPrice) =>
-        prevTotalPrice - foundProduct.price * foundProduct.quantity
+        prevTotalPrice - foundProduct[0].price * foundProduct[0].quantity
     );
     setTotalQuantities(
-      (prevTotalQuantity) => prevTotalQuantity - foundProduct.quantity
+      (prevTotalQuantity) => prevTotalQuantity - foundProduct[0].quantity
     );
     setCartItems(newCartItems);
   };
@@ -118,6 +132,26 @@ export const StateContext = ({ children }) => {
         onAdd,
         toggleCartItemQuantity,
         onRemove,
+        firstName,
+        setFirstName,
+        lastName,
+        setLastName,
+        phone,
+        setPhone,
+        email,
+        setEmail,
+        address,
+        setAddress,
+        city,
+        setCity,
+        state,
+        setState,
+        postalCode,
+        setPostalCode,
+        country,
+        setCountry,
+        details,
+        setDetails,
       }}
     >
       {children}
