@@ -71,7 +71,7 @@ function Checkout() {
     // }
     let formIsValid = false;
     const isEmpty = (value) => value.trim() === "";
-    const lengthAtLeastTwo = (value) => value.trim().length <= 2;
+    const validLenght = (value, num) => value.trim().length <= num;
 
     const emailValidation = (value) =>
       value
@@ -91,22 +91,22 @@ function Checkout() {
     };
 
     if (activeStep === 0) {
-      const firstNameIsValid =
-        !isEmpty(firstName) && lengthAtLeastTwo(firstName);
-      const lastNameIsValid = !isEmpty(lastName) && lengthAtLeastTwo(lastName);
-      const cityIsValid = !isEmpty(city) && lengthAtLeastTwo(city);
-      const countryIsValid = !isEmpty(country) && lengthAtLeastTwo(country);
+      const firstNameIsValid = !isEmpty(firstName) && validLenght(firstName, 2);
+      const lastNameIsValid = !isEmpty(lastName) && validLenght(lastName, 2);
+      const cityIsValid = !isEmpty(city) && validLenght(city, 2);
+      const countryIsValid = !isEmpty(country) && validLenght(country, 2);
       const emailIsVaild = !isEmpty(email) && emailValidation(email);
       const phoneIsValid = !isEmpty(phone) && phoneValidation(phone);
       const postalCodeIsValid =
         !isEmpty(postalCode) && postalCodeValidation(postalCode);
+      const addressIsValid = !isEmpty(address) && validLenght(lastName, 5);
 
       setFormInputsValidity({
         inputFirstName: firstNameIsValid,
         inputLastName: lastNameIsValid,
         inputPhone: phoneIsValid,
         inputEmail: emailIsVaild,
-        inputAddress: true,
+        inputAddress: addressIsValid,
         inputCity: cityIsValid,
         inputPostalCode: postalCodeIsValid,
         inputCountry: countryIsValid,

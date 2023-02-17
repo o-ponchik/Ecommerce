@@ -115,6 +115,10 @@ export default function AddressForm() {
             autoComplete="shipping address-line"
             variant="standard"
             value={address}
+            error={!formInputsValidity.inputAddress}
+            helperText={
+              !formInputsValidity.inputAddress && "Address can not be empty!"
+            }
             onChange={(e) => setAddress(e.target.value)}
           />
         </Grid>
