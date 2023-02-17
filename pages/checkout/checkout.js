@@ -71,30 +71,38 @@ function Checkout() {
     // }
     let formIsValid = false;
     const isEmpty = (value) => value.trim() === "" || value.trim().length < 2;
+    const emailValidation = (value) =>
+      value.trim() !== "" &&
+      value
+        .toLowerCase()
+        .match(
+          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        );
 
     if (activeStep === 0) {
       const firstNameIsValid = !isEmpty(firstName);
       const lastNameIsValid = !isEmpty(lastName);
       const cityIsValid = !isEmpty(city);
       const countryIsValid = !isEmpty(country);
+      const emailIsVaild = emailValidation(email);
 
       setFormInputsValidity({
         inputFirstName: firstNameIsValid,
         inputLastName: lastNameIsValid,
         inputPhone: true,
-        inputEmail: true,
+        inputEmail: emailIsVaild,
         inputAddress: true,
         inputCity: cityIsValid,
         inputPostalCode: true,
         inputCountry: countryIsValid,
       });
 
-      console.log(firstNameIsValid, lastNameIsValid);
-
-      // inputsValidation(formInputsValidity);
-
       formIsValid =
-        firstNameIsValid && lastNameIsValid && cityIsValid && countryIsValid;
+        firstNameIsValid &&
+        lastNameIsValid &&
+        emailIsVaild &&
+        cityIsValid &&
+        countryIsValid;
     }
 
     if (!formIsValid) {

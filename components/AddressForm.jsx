@@ -32,7 +32,6 @@ export default function AddressForm() {
       <Typography variant="h6" gutterBottom>
         Shipping address
       </Typography>
-      {console.log("Name Error: ", formInputsValidity.inputFirstName)}
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
           <TextField
@@ -93,6 +92,11 @@ export default function AddressForm() {
             autoComplete="email"
             variant="standard"
             value={email}
+            error={!formInputsValidity.inputEmail}
+            helperText={
+              !formInputsValidity.inputEmail &&
+              "Invalid email. Example: 123@gmail.com"
+            }
             onChange={(e) => setEmail(e.target.value)}
           />
         </Grid>
