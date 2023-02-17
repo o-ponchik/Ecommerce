@@ -51,22 +51,59 @@ function Checkout() {
     postalCode,
     country,
     details,
+    inputsValidation,
+    setFormInputsValidity,
   } = useStateContext();
 
   const handleNext = (e) => {
-    if (
-      !firstName ||
-      !lastName ||
-      !phone ||
-      !email ||
-      !address ||
-      !city ||
-      !postalCode ||
-      !country
-    ) {
-      toast.error("Please fill in all the required fields");
+    // if (
+    //   !firstName ||
+    //   !lastName ||
+    //   !phone ||
+    //   !email ||
+    //   !address ||
+    //   !city ||
+    //   !postalCode ||
+    //   !country
+    // ) {
+    //   toast.error("Please fill in all the required fields");
+    //   return;
+    // }
+    let formIsValid = false;
+    const isEmpty = (value) => value.trim() === "" || value.trim().length < 2;
+
+    if (activeStep === 0) {
+      const firstNameIsValid = !isEmpty(firstName);
+      const lastNameIsValid = !isEmpty(lastName);
+      const cityIsValid = !isEmpty(city);
+      const countryIsValid = !isEmpty(country);
+
+      setFormInputsValidity({
+        inputFirstName: firstNameIsValid,
+        inputLastName: lastNameIsValid,
+        inputPhone: true,
+        inputEmail: true,
+        inputAddress: true,
+        inputCity: cityIsValid,
+        inputPostalCode: true,
+        inputCountry: countryIsValid,
+      });
+
+      console.log(firstNameIsValid, lastNameIsValid);
+
+      // inputsValidation(formInputsValidity);
+
+      formIsValid =
+        firstNameIsValid && lastNameIsValid && cityIsValid && countryIsValid;
+    }
+
+    if (!formIsValid) {
+      console.log("invalid form");
+
       return;
     }
+
+    console.log("valid form");
 
     setActiveStep(activeStep + 1);
   };

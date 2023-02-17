@@ -24,6 +24,7 @@ export default function AddressForm() {
     setPostalCode,
     country,
     setCountry,
+    formInputsValidity,
   } = useStateContext();
 
   return (
@@ -31,6 +32,7 @@ export default function AddressForm() {
       <Typography variant="h6" gutterBottom>
         Shipping address
       </Typography>
+      {console.log("Name Error: ", formInputsValidity.inputFirstName)}
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
           <TextField
@@ -42,6 +44,11 @@ export default function AddressForm() {
             autoComplete="given-name"
             variant="standard"
             value={firstName}
+            error={!formInputsValidity.inputFirstName}
+            helperText={
+              !formInputsValidity.inputFirstName &&
+              "Name shouldn't be empty and contain at least 2 charachters"
+            }
             onChange={(e) => setFirstName(e.target.value)}
           />
         </Grid>
@@ -55,6 +62,11 @@ export default function AddressForm() {
             autoComplete="family-name"
             variant="standard"
             value={lastName}
+            error={!formInputsValidity.inputLastName}
+            helperText={
+              !formInputsValidity.inputLastName &&
+              "Name shouldn't be empty and contain at least 2 charachters"
+            }
             onChange={(e) => setLastName(e.target.value)}
           />
         </Grid>
@@ -108,6 +120,10 @@ export default function AddressForm() {
             autoComplete="shipping address-level2"
             variant="standard"
             value={city}
+            error={!formInputsValidity.inputCity}
+            helperText={
+              !formInputsValidity.inputCity && "City shouldn't be empty"
+            }
             onChange={(e) => setCity(e.target.value)}
           />
         </Grid>
@@ -145,6 +161,10 @@ export default function AddressForm() {
             autoComplete="shipping country"
             variant="standard"
             value={country}
+            error={!formInputsValidity.inputCountry}
+            helperText={
+              !formInputsValidity.inputCountry && "Country shouldn't be empty"
+            }
             onChange={(e) => setCountry(e.target.value)}
           />
         </Grid>

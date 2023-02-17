@@ -22,6 +22,18 @@ export const StateContext = ({ children }) => {
   const [country, setCountry] = useState("");
   const [details, setDetails] = useState("");
 
+  //-----Form inputs validation------
+  const [formInputsValidity, setFormInputsValidity] = useState({
+    inputFirstName: true,
+    inputLastName: true,
+    inputPhone: true,
+    inputEmail: true,
+    inputAddress: true,
+    inputCity: true,
+    inputPostalCode: true,
+    inputCountry: true,
+  });
+
   let foundProduct;
   let index;
 
@@ -118,6 +130,11 @@ export const StateContext = ({ children }) => {
     });
   };
 
+  //----test----
+  const inputsValidation = (inputs) => {
+    console.log(inputs.inputFirstName);
+  };
+
   return (
     <Context.Provider
       value={{
@@ -152,6 +169,9 @@ export const StateContext = ({ children }) => {
         setCountry,
         details,
         setDetails,
+        inputsValidation,
+        formInputsValidity,
+        setFormInputsValidity,
       }}
     >
       {children}
