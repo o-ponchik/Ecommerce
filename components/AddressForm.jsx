@@ -157,6 +157,11 @@ export default function AddressForm() {
             autoComplete="shipping postal-code"
             variant="standard"
             value={postalCode}
+            error={!formInputsValidity.inputPostalCode}
+            helperText={
+              !formInputsValidity.inputPostalCode &&
+              "Invalid postal code! Example: 01010"
+            }
             onChange={(e) => setPostalCode(e.target.value)}
           />
         </Grid>
