@@ -9,7 +9,6 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
-import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import AddressForm from "../../components/AddressForm";
@@ -51,27 +50,13 @@ function Checkout() {
     postalCode,
     country,
     details,
-    inputsValidation,
     setFormInputsValidity,
   } = useStateContext();
 
   const handleNext = (e) => {
-    // if (
-    //   !firstName ||
-    //   !lastName ||
-    //   !phone ||
-    //   !email ||
-    //   !address ||
-    //   !city ||
-    //   !postalCode ||
-    //   !country
-    // ) {
-    //   toast.error("Please fill in all the required fields");
-    //   return;
-    // }
     let formIsValid = false;
     const isEmpty = (value) => value.trim() === "";
-    const validLenght = (value, num) => value.trim().length <= num;
+    const validLenght = (value, num) => value.trim().length >= num;
 
     const emailValidation = (value) =>
       value
@@ -112,25 +97,20 @@ function Checkout() {
         inputCountry: countryIsValid,
       });
 
-      console.log(postalCodeValidation(postalCode));
-
       formIsValid =
         firstNameIsValid &&
         lastNameIsValid &&
         emailIsVaild &&
         phoneIsValid &&
         postalCode &&
+        addressIsValid &&
         cityIsValid &&
         countryIsValid;
+
+      if (!formIsValid) {
+        return;
+      }
     }
-
-    if (!formIsValid) {
-      console.log("invalid form");
-
-      return;
-    }
-
-    console.log("valid form");
 
     setActiveStep(activeStep + 1);
   };
@@ -141,6 +121,7 @@ function Checkout() {
 
   React.useEffect(() => {
     if (activeStep === 2) {
+      console.log("step 2");
       const orderPayload = {
         customer: {
           name: `${firstName} ${lastName}`,
