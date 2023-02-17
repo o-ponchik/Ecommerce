@@ -70,26 +70,35 @@ function Checkout() {
     //   return;
     // }
     let formIsValid = false;
-    const isEmpty = (value) => value.trim() === "" || value.trim().length < 2;
+    const isEmpty = (value) => value.trim() === "";
+    const lengthAtLeastTwo = (value) => value.trim().length <= 2;
+
     const emailValidation = (value) =>
-      value.trim() !== "" &&
       value
         .toLowerCase()
         .match(
           /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         );
 
+    const phoneValidation = (value) => {
+      const re = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+
+      return re.test(value);
+    };
+
     if (activeStep === 0) {
-      const firstNameIsValid = !isEmpty(firstName);
-      const lastNameIsValid = !isEmpty(lastName);
-      const cityIsValid = !isEmpty(city);
-      const countryIsValid = !isEmpty(country);
-      const emailIsVaild = emailValidation(email);
+      const firstNameIsValid =
+        !isEmpty(firstName) || lengthAtLeastTwo(firstName);
+      const lastNameIsValid = !isEmpty(lastName) || lengthAtLeastTwo(lastName);
+      const cityIsValid = !isEmpty(city) && lengthAtLeastTwo(city);
+      const countryIsValid = !isEmpty(country) && lengthAtLeastTwo(country);
+      const emailIsVaild = !isEmpty(email) && emailValidation(email);
+      const phoneIsValid = !isEmpty(phone) && phoneValidation(phone);
 
       setFormInputsValidity({
         inputFirstName: firstNameIsValid,
         inputLastName: lastNameIsValid,
-        inputPhone: true,
+        inputPhone: phoneIsValid,
         inputEmail: emailIsVaild,
         inputAddress: true,
         inputCity: cityIsValid,
@@ -97,10 +106,13 @@ function Checkout() {
         inputCountry: countryIsValid,
       });
 
+      console.log(phoneIsValid);
+
       formIsValid =
         firstNameIsValid &&
         lastNameIsValid &&
         emailIsVaild &&
+        phoneIsValid &&
         cityIsValid &&
         countryIsValid;
     }

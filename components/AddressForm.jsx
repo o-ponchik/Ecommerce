@@ -79,6 +79,11 @@ export default function AddressForm() {
             autoComplete="phone number"
             variant="standard"
             value={phone}
+            error={!formInputsValidity.inputPhone}
+            helperText={
+              !formInputsValidity.inputPhone &&
+              "Invalid phone number! Example: +31636363634"
+            }
             onChange={(e) => setPhone(e.target.value)}
           />
         </Grid>
