@@ -130,9 +130,9 @@ export const StateContext = ({ children }) => {
     });
   };
 
-  //----test----
-  const inputsValidation = (inputs) => {
-    console.log(inputs.inputFirstName);
+  const clearCart = () => {
+    setCartItems([]);
+    setTotalQuantities(0);
   };
 
   return (
@@ -169,9 +169,9 @@ export const StateContext = ({ children }) => {
         setCountry,
         details,
         setDetails,
-        inputsValidation,
         formInputsValidity,
         setFormInputsValidity,
+        clearCart,
       }}
     >
       {children}

@@ -51,6 +51,7 @@ function Checkout() {
     country,
     details,
     setFormInputsValidity,
+    clearCart,
   } = useStateContext();
 
   const handleNext = (e) => {
@@ -172,6 +173,7 @@ function Checkout() {
         });
 
       setIsLoading(false);
+      clearCart();
     } catch (error) {
       console.error(error);
 
