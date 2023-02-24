@@ -14,6 +14,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import AddressForm from "../../components/AddressForm";
 import Review from "../../components/Review";
 import { toast } from "react-hot-toast";
+import errors from "../../context/Constants";
 
 import { useStateContext } from "../../context/StateContext";
 
@@ -36,6 +37,8 @@ function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [isLoading, setIsLoading] = React.useState(false);
   const [isErrorCreateOrder, setIsErrorCreateOrder] = React.useState(false);
+  const { ERROR_INVALID_NAME, ERROR_INVALID_PHONE, ERROR_INVALID_EMAIL } =
+    errors;
 
   const {
     cartItems,
@@ -175,7 +178,19 @@ function Checkout() {
       setIsLoading(false);
       clearCart();
     } catch (error) {
-      console.error(error);
+      console.error("error: ", error);
+
+      const subcode = error.response.data.subcode;
+
+      if (subcode === ERROR_INVALID_NAME) {
+        console.error("error subcode: ", subcode, "Name invalid");
+      }
+      if (subcode === ERROR_INVALID_PHONE) {
+        console.error("error subcode: ", subcode, "Phone invalid");
+      }
+      if (subcode === ERROR_INVALID_EMAIL) {
+        console.error("error subcode: ", subcode, "Email invalid");
+      }
 
       setIsErrorCreateOrder(true);
     }
