@@ -37,6 +37,7 @@ function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [isLoading, setIsLoading] = React.useState(false);
   const [isErrorCreateOrder, setIsErrorCreateOrder] = React.useState(false);
+  const [errorMessage, setErrorMessage] = React.useState(false);
   const { ERROR_INVALID_NAME, ERROR_INVALID_PHONE, ERROR_INVALID_EMAIL } =
     errors;
 
@@ -130,7 +131,7 @@ function Checkout() {
       const orderPayload = {
         customer: {
           name: `${firstName} ${lastName}`,
-          email: email,
+          email: `email`,
           phone: phone,
           details: details,
           address: {
@@ -186,37 +187,54 @@ function Checkout() {
 
       if (subcode === ERROR_INVALID_NAME) {
         console.error("error subcode: ", subcode, "Name invalid");
+        setErrorMessage("Name is invalid");
       }
       if (subcode === ERROR_INVALID_PHONE) {
         console.error("error subcode: ", subcode, "Phone invalid");
+        setErrorMessage("Phone number is invalid");
       }
       if (subcode === ERROR_INVALID_EMAIL) {
         console.error("error subcode: ", subcode, "Email invalid");
+        setErrorMessage("Email is invalid");
       }
 
       setIsLoading(false);
-      // setIsErrorCreateOrder(true);
+      setIsErrorCreateOrder(true);
     }
   };
 
-  let orderResult =
-    !isLoading && !isErrorCreateOrder ? (
-      <React.Fragment>
-        <Typography variant="h5" gutterBottom>
-          Thank you for your order!
-        </Typography>
-        <Typography variant="subtitle1">
-          We will contact you soon to discuss the payment method and shipping of
-          your order.
-        </Typography>
-      </React.Fragment>
-    ) : (
+  let orderResult = (
+    <React.Fragment>
+      <Typography variant="h5" gutterBottom>
+        Thank you for your order!
+      </Typography>
+      <Typography variant="subtitle1">
+        We will contact you soon to discuss the payment method and shipping of
+        your order.
+      </Typography>
+    </React.Fragment>
+  );
+
+  if (isLoading && !isErrorCreateOrder) {
+    orderResult = (
       <React.Fragment>
         <Typography variant="h5" gutterBottom>
           Creating an order...
         </Typography>
       </React.Fragment>
     );
+  }
+
+  if (!isLoading && isErrorCreateOrder) {
+    orderResult = (
+      <React.Fragment>
+        <Typography variant="h5" gutterBottom>
+          Oops something went wrong...{""}
+          <p style={{ color: "red" }}>{errorMessage}</p>
+        </Typography>
+      </React.Fragment>
+    );
+  }
 
   return (
     <ThemeProvider theme={theme}>
