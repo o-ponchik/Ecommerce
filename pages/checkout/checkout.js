@@ -194,7 +194,8 @@ function Checkout() {
         console.error("error subcode: ", subcode, "Email invalid");
       }
 
-      setIsErrorCreateOrder(true);
+      setIsLoading(false);
+      // setIsErrorCreateOrder(true);
     }
   };
 

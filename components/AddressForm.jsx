@@ -82,7 +82,7 @@ export default function AddressForm() {
             error={!formInputsValidity.inputPhone}
             helperText={
               !formInputsValidity.inputPhone &&
-              "Invalid phone number! Example: +31636363634"
+              "Invalid phone number! Example: 093 123 4567"
             }
             onChange={(e) => setPhone(e.target.value)}
           />
