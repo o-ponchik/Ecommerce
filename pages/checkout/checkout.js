@@ -131,7 +131,7 @@ function Checkout() {
       const orderPayload = {
         customer: {
           name: `${firstName} ${lastName}`,
-          email: `email`,
+          email: email,
           phone: phone,
           details: details,
           address: {
