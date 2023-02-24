@@ -135,6 +135,19 @@ export const StateContext = ({ children }) => {
     setTotalQuantities(0);
   };
 
+  const resetForm = () => {
+    setFirstName("");
+    setLastName("");
+    setPhone("");
+    setEmail("");
+    setAddress("");
+    setCity("");
+    setState("");
+    setPostalCode("");
+    setCountry("");
+    setDetails("");
+  };
+
   return (
     <Context.Provider
       value={{
@@ -172,6 +185,7 @@ export const StateContext = ({ children }) => {
         formInputsValidity,
         setFormInputsValidity,
         clearCart,
+        resetForm,
       }}
     >
       {children}
