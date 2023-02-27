@@ -134,6 +134,7 @@ function Checkout() {
         },
         orderItems: cartItems.map((item) => {
           const key = new Date().getTime();
+          console.log("item: ", item);
           return {
             ...item,
             _key: `order-${key}`,
