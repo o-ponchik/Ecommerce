@@ -133,11 +133,10 @@ function Checkout() {
           },
         },
         orderItems: cartItems.map((item) => {
-          const key = new Date().getTime();
           console.log("item: ", item);
           return {
             ...item,
-            _key: `order-${key}`,
+            _key: `order-${item._id}`,
             _type: "orderItem",
             slug: undefined,
           };
