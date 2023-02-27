@@ -1,27 +1,21 @@
 // import nc from "next-connect";
 import axios from "axios";
 import errors from "../../../../context/Constants";
+import useForm from "../../../../hooks/use-form";
 
 const createOrder = async (req, res) => {
   const projectId = "as16wqx5";
   const dataset = "production";
   const tokenWithWriteAccess = process.env.NEXT_PUBLIC_SANITY_TOKEN;
+  const {
+    isEmpty,
+    validLenght,
+    emailValidation: isEmailValid,
+    phoneValidation: isPhoneValid,
+  } = useForm();
 
   const { ERROR_INVALID_NAME, ERROR_INVALID_PHONE, ERROR_INVALID_EMAIL } =
     errors;
-
-  const isEmpty = (value) => value.trim() === "";
-  const validLenght = (value, num) => value.trim().length >= num;
-  const isEmailValid = (value) =>
-    value
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
-  const isPhoneValid = (value) => {
-    const re = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-    return re.test(value);
-  };
 
   console.log("req.body: ", req.body);
 

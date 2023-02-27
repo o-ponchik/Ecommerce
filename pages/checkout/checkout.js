@@ -15,6 +15,7 @@ import AddressForm from "../../components/AddressForm";
 import Review from "../../components/Review";
 import { toast } from "react-hot-toast";
 import errors from "../../context/Constants";
+import useForm from "../../hooks/use-form";
 
 import { useStateContext } from "../../context/StateContext";
 
@@ -59,27 +60,16 @@ function Checkout() {
     resetForm,
   } = useStateContext();
 
+  const {
+    isEmpty,
+    validLenght,
+    emailValidation,
+    phoneValidation,
+    postalCodeValidation,
+  } = useForm();
+
   const handleNext = (e) => {
     let formIsValid = false;
-    const isEmpty = (value) => value.trim() === "";
-    const validLenght = (value, num) => value.trim().length >= num;
-
-    const emailValidation = (value) =>
-      value
-        .toLowerCase()
-        .match(
-          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        );
-
-    const phoneValidation = (value) => {
-      const re = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-      return re.test(value);
-    };
-
-    const postalCodeValidation = (value) => {
-      const re = /(^\d{5}$)|(^\d{5}-\d{4}$)/;
-      return re.test(value);
-    };
 
     if (activeStep === 0) {
       const firstNameIsValid = !isEmpty(firstName) && validLenght(firstName, 2);
@@ -108,7 +98,7 @@ function Checkout() {
         lastNameIsValid &&
         emailIsVaild &&
         phoneIsValid &&
-        postalCode &&
+        postalCodeIsValid &&
         addressIsValid &&
         cityIsValid &&
         countryIsValid;
