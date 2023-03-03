@@ -92,11 +92,7 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-function preventDefault(event) {
-  event.preventDefault();
-}
-
-export default function Orders({ orders }) {
+export default function DashboardOrders({ orders }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
