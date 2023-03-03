@@ -1,11 +1,14 @@
 import React from "react";
-import Dashboard from "../../components/admin/Dashboard";
+import Dashboard from "../../components/adminPage/Dashboard";
+import { AdminContext } from "../../context/AdminContext";
 import { client } from "../../lib/client";
 
 const Admin = ({ orders }) => {
   return (
     <>
-      <Dashboard orders={orders} />
+      <AdminContext>
+        <Dashboard orders={orders} />
+      </AdminContext>
     </>
   );
 };
