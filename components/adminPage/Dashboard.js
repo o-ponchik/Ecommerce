@@ -5,7 +5,6 @@ import MuiDrawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
 import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
@@ -16,12 +15,14 @@ import Paper from "@mui/material/Paper";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { mainListItems, secondaryListItems } from "./listItems";
+import { ListItems } from "./ListItems.js";
 import Chart from "./Chart";
 import Deposits from "./Deposits";
 import Orders from "./DashboardOrders";
 
 import { useAdminContext } from "../../context/AdminContext";
+
+import { teal } from "@mui/material/colors";
 
 const drawerWidth = 240;
 
@@ -69,7 +70,13 @@ const Drawer = styled(MuiDrawer, {
   },
 }));
 
-const mdTheme = createTheme();
+const mdTheme = createTheme({
+  palette: {
+    primary: {
+      main: teal[800],
+    },
+  },
+});
 
 function DashboardContent({ orders }) {
   const { showDashboard, setShowDashboard } = useAdminContext();
@@ -121,10 +128,10 @@ function DashboardContent({ orders }) {
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
-        <AppBar position="absolute" open={open}>
+        <AppBar position="absolute">
           <Toolbar
             sx={{
-              pr: "24px", // keep right padding when drawer closed
+              pr: "23px", // keep right padding when drawer closed
             }}
           >
             <IconButton
@@ -155,7 +162,7 @@ function DashboardContent({ orders }) {
             </IconButton>
           </Toolbar>
         </AppBar>
-        <Drawer variant="permanent" open={open}>
+        <Drawer variant="permanent" open={open} sx={{ height: "40vh" }}>
           <Toolbar
             sx={{
               display: "flex",
@@ -169,11 +176,7 @@ function DashboardContent({ orders }) {
             </IconButton>
           </Toolbar>
           <Divider />
-          <List component="nav">
-            {mainListItems}
-            <Divider sx={{ my: 1 }} />
-            {secondaryListItems}
-          </List>
+          <ListItems />
         </Drawer>
         <Box
           component="main"
