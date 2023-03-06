@@ -18,11 +18,12 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import { ListItems } from "./ListItems.js";
 import Chart from "./Chart";
 import Deposits from "./Deposits";
-import Orders from "./DashboardOrders";
+import DashboardOrders from "./DashboardOrders";
 
 import { useAdminContext } from "../../context/AdminContext";
 
 import { teal } from "@mui/material/colors";
+import Orders from "./Orders.js";
 
 const drawerWidth = 240;
 
@@ -118,7 +119,7 @@ function DashboardContent({ orders }) {
         {/* Recent Orders */}
         <Grid item xs={12}>
           <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-            <Orders orders={orders} />
+            <DashboardOrders orders={orders} />
           </Paper>
         </Grid>
       </Grid>
@@ -193,6 +194,7 @@ function DashboardContent({ orders }) {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             {showDashboard && dashboard}
+            {!showDashboard && <Orders />}
           </Container>
         </Box>
       </Box>
