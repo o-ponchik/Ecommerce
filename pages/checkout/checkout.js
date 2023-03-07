@@ -80,7 +80,7 @@ function Checkout() {
       const phoneIsValid = !isEmpty(phone) && phoneValidation(phone);
       const postalCodeIsValid =
         !isEmpty(postalCode) && postalCodeValidation(postalCode);
-      const addressIsValid = !isEmpty(address) && validLenght(lastName, 5);
+      const addressIsValid = !isEmpty(address) && validLenght(address, 5);
 
       setFormInputsValidity({
         inputFirstName: firstNameIsValid,
