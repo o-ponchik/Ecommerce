@@ -82,6 +82,10 @@ const mdTheme = createTheme({
 function DashboardContent({ orders }) {
   const { showDashboard, setShowDashboard } = useAdminContext();
 
+  const qtyOfPendingOrders = orders
+    .map((order) => order.status === "pending")
+    .filter(Boolean).length;
+
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -157,7 +161,7 @@ function DashboardContent({ orders }) {
               Dashboard
             </Typography>
             <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
+              <Badge badgeContent={qtyOfPendingOrders} color="secondary">
                 <NotificationsIcon />
               </Badge>
             </IconButton>

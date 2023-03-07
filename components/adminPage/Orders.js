@@ -14,15 +14,13 @@ const dateTransform = (date) => {
 };
 
 export default function Orders({ order, num }) {
-  console.log(order);
-
   const { name, phone, email, details } = order.customer;
   const { street, city, country, state, zipCode } = order.customer.address;
 
   let colorStatusOrder;
   let orderStatusText;
 
-  if (order.status === "Pending") {
+  if (order.status === "pending") {
     colorStatusOrder = "#e1f5fe";
     orderStatusText = "#01579b";
   } else if (order.status === "inProgress") {
