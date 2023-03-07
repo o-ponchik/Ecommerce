@@ -7,7 +7,35 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
-export default function Orders() {
+const dateTransform = (date) => {
+  const transformedDate = new Date(date);
+
+  return transformedDate.toLocaleString();
+};
+
+export default function Orders({ order, num }) {
+  console.log(order);
+
+  const { name, phone, email, details } = order.customer;
+  const { street, city, country, state, zipCode } = order.customer.address;
+
+  let colorStatusOrder;
+  let orderStatusText;
+
+  if (order.status === "Pending") {
+    colorStatusOrder = "#e1f5fe";
+    orderStatusText = "#01579b";
+  } else if (order.status === "inProgress") {
+    colorStatusOrder = "#fff8e1";
+    orderStatusText = "#f57f17";
+  } else if (order.status === "completed") {
+    colorStatusOrder = "#e8f5e9";
+    orderStatusText = "#2e7d32";
+  } else {
+    colorStatusOrder = "#ffebee";
+    orderStatusText = "#b71c1c";
+  }
+
   const boldStyleHead = {
     fontWeight: "700",
     color: "#004d40",
@@ -15,7 +43,7 @@ export default function Orders() {
   };
   const orderStatusStyle = {
     fontWeight: "700",
-    color: "green",
+    color: orderStatusText,
     fontSize: "18px",
   };
   const styleHeaders = {
@@ -25,18 +53,18 @@ export default function Orders() {
   };
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} style={{ marginBottom: "2rem" }}>
       <Table sx={{ minWidth: 700 }} aria-label="spanning table">
-        <TableHead>
+        <TableHead style={{ backgroundColor: colorStatusOrder }}>
           <TableRow>
             <TableCell align="left" style={boldStyleHead}>
-              Order № 123
+              Order № {num}
             </TableCell>
             <TableCell align="left" colSpan={2}>
-              10/03/23 17:43
+              {dateTransform(order.createdAt)}
             </TableCell>
             <TableCell align="center" style={orderStatusStyle}>
-              Pending
+              {order.status}
             </TableCell>
           </TableRow>
         </TableHead>
@@ -57,11 +85,11 @@ export default function Orders() {
           </TableRow>
 
           <TableRow>
-            <TableCell>Mariia</TableCell>
-            <TableCell align="left">0934567890</TableCell>
-            <TableCell align="left">mariia@gmail.com</TableCell>
+            <TableCell>{name}</TableCell>
+            <TableCell align="left">{phone}</TableCell>
+            <TableCell align="left">{email}</TableCell>
             <TableCell align="center">
-              98 Maple rd, Toronto, ON, Canada, 3R4T5Y
+              {street}, {city},{state ? state : ""},{country}, {zipCode}
             </TableCell>
           </TableRow>
 
@@ -77,22 +105,17 @@ export default function Orders() {
             </TableCell>
           </TableRow>
 
-          <TableRow>
-            <TableCell colSpan={2}>Candles Set 3</TableCell>
-            <TableCell align="center">2</TableCell>
-            <TableCell align="center">30$</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell colSpan={2}>Candles Set 3</TableCell>
-            <TableCell align="center">2</TableCell>
-            <TableCell align="center">30$</TableCell>
-          </TableRow>
+          {order.orderItems.map((item) => (
+            <TableRow key={item._id}>
+              <TableCell colSpan={2}>{item.name}</TableCell>
+              <TableCell align="center">{item.quantity}</TableCell>
+              <TableCell align="center">{item.price} $</TableCell>
+            </TableRow>
+          ))}
 
           <TableRow>
             <TableCell style={styleHeaders}>Detaiils:</TableCell>
-            <TableCell colSpan={3}>
-              I want two yellow and one blue candles
-            </TableCell>
+            <TableCell colSpan={3}>{details ? details : "-"}</TableCell>
           </TableRow>
 
           <TableRow>
@@ -100,7 +123,7 @@ export default function Orders() {
               Total
             </TableCell>
             <TableCell style={styleHeaders} align="center">
-              60$
+              {order.totalPrice} $
             </TableCell>
           </TableRow>
 
@@ -108,11 +131,17 @@ export default function Orders() {
             <TableCell align="center" style={styleHeaders}>
               Is Paid:
             </TableCell>
-            <TableCell align="center">Yes 12/03/23</TableCell>
+            <TableCell align="center">
+              {order.isPaid ? `Yes - ${dateTransform(order.paidAt)}` : "No"}
+            </TableCell>
             <TableCell align="center" style={styleHeaders}>
               Is Delivered:
             </TableCell>
-            <TableCell align="center">No</TableCell>
+            <TableCell align="center">
+              {order.isDelivered
+                ? `Yes - ${dateTransform(order.deliveredAt)}`
+                : "No"}
+            </TableCell>
           </TableRow>
         </TableBody>
       </Table>
