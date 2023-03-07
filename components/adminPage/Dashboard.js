@@ -194,7 +194,10 @@ function DashboardContent({ orders }) {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             {showDashboard && dashboard}
-            {!showDashboard && <Orders />}
+            {!showDashboard &&
+              orders.map((order, index) => (
+                <Orders order={order} key={order._id} num={index + 1} />
+              ))}
           </Container>
         </Box>
       </Box>
