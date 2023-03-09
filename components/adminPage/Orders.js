@@ -52,7 +52,7 @@ export default function Orders({ order, num }) {
 
   return (
     <TableContainer component={Paper} style={{ marginBottom: "2rem" }}>
-      <Table sx={{ minWidth: 700 }} aria-label="spanning table">
+      <Table sx={{ minWidth: 700 }} aria-label="spanning table" size="small">
         <TableHead style={{ backgroundColor: colorStatusOrder }}>
           <TableRow>
             <TableCell align="left" style={boldStyleHead}>
