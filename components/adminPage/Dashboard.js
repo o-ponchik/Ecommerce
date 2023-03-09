@@ -195,7 +195,6 @@ function DashboardContent({ orders }) {
             overflow: "auto",
           }}
         >
-          <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             {showDashboard && dashboard}
             {!showDashboard &&
