@@ -23,16 +23,18 @@ export default function Orders({ order, num }) {
   const { street, city, country, state, zipCode } = order.customer.address;
   const [open, setOpen] = React.useState(false);
 
+  order.status = order.status[0].toUpperCase() + order.status.slice(1);
+
   let colorStatusOrder;
   let orderStatusText;
 
-  if (order.status === "pending") {
+  if (order.status === "Pending") {
     colorStatusOrder = "#e1f5fe";
     orderStatusText = "#01579b";
-  } else if (order.status === "inProgress") {
+  } else if (order.status === "InProgress") {
     colorStatusOrder = "#fff8e1";
     orderStatusText = "#f57f17";
-  } else if (order.status === "completed") {
+  } else if (order.status === "Completed") {
     colorStatusOrder = "#e8f5e9";
     orderStatusText = "#2e7d32";
   } else {
