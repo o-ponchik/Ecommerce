@@ -83,7 +83,7 @@ function DashboardContent({ orders }) {
   const { showDashboard, setShowDashboard } = useAdminContext();
 
   const qtyOfPendingOrders = orders
-    .map((order) => order.status === "pending")
+    .map((order) => order.status === "Pending")
     .filter(Boolean).length;
 
   const [open, setOpen] = React.useState(true);
