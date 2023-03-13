@@ -1,4 +1,5 @@
 import * as React from "react";
+import axios from "axios";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -11,6 +12,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Collapse from "@mui/material/Collapse";
 import Box from "@mui/material/Box";
+import { updateOrderStatusWrapper } from "../../lib/client";
 
 const dateTransform = (date) => {
   const transformedDate = new Date(date);
@@ -22,19 +24,19 @@ export default function Orders({ order, num }) {
   const { name, phone, email, details } = order.customer;
   const { street, city, country, state, zipCode } = order.customer.address;
   const [open, setOpen] = React.useState(false);
-
   order.status = order.status[0].toUpperCase() + order.status.slice(1);
+  const [orderStatus, setOrderStatus] = React.useState(order.status);
 
   let colorStatusOrder;
   let orderStatusText;
 
-  if (order.status === "Pending") {
+  if (orderStatus === "Pending") {
     colorStatusOrder = "#e1f5fe";
     orderStatusText = "#01579b";
-  } else if (order.status === "InProgress") {
+  } else if (orderStatus === "InProgress") {
     colorStatusOrder = "#fff8e1";
     orderStatusText = "#f57f17";
-  } else if (order.status === "Completed") {
+  } else if (orderStatus === "Completed") {
     colorStatusOrder = "#e8f5e9";
     orderStatusText = "#2e7d32";
   } else {
@@ -59,6 +61,13 @@ export default function Orders({ order, num }) {
     backgroundColor: "#f5f5f5",
   };
 
+  const changeOrderStatus = async () => {
+    const res = await updateOrderStatusWrapper(order._id, "inProgress");
+    console.log("order status updated: ", res);
+    const status = res.status[0].toUpperCase() + res.status.slice(1);
+    setOrderStatus(status);
+  };
+
   return (
     <TableContainer component={Paper} style={{ marginBottom: "1rem" }}>
       <Table sx={{ minWidth: 700 }} aria-label="spanning table" size="small">
@@ -79,8 +88,8 @@ export default function Orders({ order, num }) {
             <TableCell align="center">
               {dateTransform(order.createdAt)}
             </TableCell>
-            <TableCell align="right" style={orderStatusStyle} width="30%">
-              {order.status}
+            <TableCell align="right" style={orderStatusStyle} width="40%">
+              {orderStatus}
             </TableCell>
           </TableRow>
         </TableHead>
@@ -158,6 +167,12 @@ export default function Orders({ order, num }) {
                         ? `Yes - ${dateTransform(order.deliveredAt)}`
                         : "No"}
                     </TableCell>
+                  </TableRow>
+
+                  <TableRow>
+                    {orderStatus === "Pending" && (
+                      <button onClick={changeOrderStatus}>to work</button>
+                    )}
                   </TableRow>
                 </Box>
               </Collapse>
