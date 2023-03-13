@@ -12,6 +12,10 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Collapse from "@mui/material/Collapse";
 import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+import NativeSelect from "@mui/material/NativeSelect";
+
 import { updateOrderStatusWrapper } from "../../lib/client";
 
 const dateTransform = (date) => {
@@ -61,8 +65,8 @@ export default function Orders({ order, num }) {
     backgroundColor: "#f5f5f5",
   };
 
-  const changeOrderStatus = async () => {
-    const res = await updateOrderStatusWrapper(order._id, "inProgress");
+  const changeOrderStatus = async (e) => {
+    const res = await updateOrderStatusWrapper(order._id, e.target.value);
     console.log("order status updated: ", res);
     const status = res.status[0].toUpperCase() + res.status.slice(1);
     setOrderStatus(status);
@@ -88,8 +92,24 @@ export default function Orders({ order, num }) {
             <TableCell align="center">
               {dateTransform(order.createdAt)}
             </TableCell>
-            <TableCell align="right" style={orderStatusStyle} width="40%">
-              {orderStatus}
+            <TableCell>
+              <FormControl fullWidth onChange={changeOrderStatus}>
+                <NativeSelect defaultValue={orderStatus}>
+                  {console.log(orderStatus)}
+                  <option style={orderStatusStyle} value="Pending">
+                    Pending
+                  </option>
+                  <option style={orderStatusStyle} value="InProgress">
+                    InProgress
+                  </option>
+                  <option style={orderStatusStyle} value="Completed">
+                    Completed
+                  </option>
+                  <option style={{ color: "red" }} value="Cancelled">
+                    Cancelled
+                  </option>
+                </NativeSelect>
+              </FormControl>
             </TableCell>
           </TableRow>
         </TableHead>
@@ -167,12 +187,6 @@ export default function Orders({ order, num }) {
                         ? `Yes - ${dateTransform(order.deliveredAt)}`
                         : "No"}
                     </TableCell>
-                  </TableRow>
-
-                  <TableRow>
-                    {orderStatus === "Pending" && (
-                      <button onClick={changeOrderStatus}>to work</button>
-                    )}
                   </TableRow>
                 </Box>
               </Collapse>
