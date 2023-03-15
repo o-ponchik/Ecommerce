@@ -30,6 +30,8 @@ export default function Orders({ order, num }) {
   const [open, setOpen] = React.useState(false);
   order.status = order.status[0].toUpperCase() + order.status.slice(1);
   const [orderStatus, setOrderStatus] = React.useState(order.status);
+  const [delivered, setDelivered] = React.useState(order.isDelivered);
+  const [paid, setPaid] = React.useState(order.isPaid);
 
   let colorStatusOrder;
   let orderStatusText;
@@ -65,11 +67,19 @@ export default function Orders({ order, num }) {
     backgroundColor: "#f5f5f5",
   };
 
-  const changeOrderStatus = async (e) => {
-    const res = await updateOrderStatusWrapper(order._id, e.target.value);
-    console.log("order status updated: ", res);
+  const changeOrderStatus = async (e, value) => {
+    const res = await updateOrderStatusWrapper(
+      order._id,
+      value,
+      e.target.value
+    );
+    console.log("order updated: ", res);
+
     const status = res.status[0].toUpperCase() + res.status.slice(1);
+
     setOrderStatus(status);
+    setPaid(res.isPaid);
+    setDelivered(res.isDelivered);
   };
 
   return (
@@ -93,9 +103,13 @@ export default function Orders({ order, num }) {
               {dateTransform(order.createdAt)}
             </TableCell>
             <TableCell>
-              <FormControl fullWidth onChange={changeOrderStatus}>
+              <FormControl
+                fullWidth
+                onChange={(e) => {
+                  changeOrderStatus(e, "status");
+                }}
+              >
                 <NativeSelect defaultValue={orderStatus}>
-                  {console.log(orderStatus)}
                   <option style={orderStatusStyle} value="Pending">
                     Pending
                   </option>
@@ -105,9 +119,7 @@ export default function Orders({ order, num }) {
                   <option style={orderStatusStyle} value="Completed">
                     Completed
                   </option>
-                  <option style={{ color: "red" }} value="Cancelled">
-                    Cancelled
-                  </option>
+                  <option value="Cancelled">Cancelled</option>
                 </NativeSelect>
               </FormControl>
             </TableCell>
@@ -166,26 +178,55 @@ export default function Orders({ order, num }) {
                   </TableRow>
 
                   <TableRow>
+                    <TableCell style={styleHeaders}>Is Paid:</TableCell>
+                    {/* <TableCell>{order.isPaid ? "Yes" : "No"}</TableCell> */}
+                    <FormControl fullWidth>
+                      <NativeSelect
+                        defaultValue={paid === "true" ? "true" : "false"}
+                        style={{ padding: "0.2rem" }}
+                        onChange={(e) => {
+                          changeOrderStatus(e, "isPaid");
+                        }}
+                      >
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                      </NativeSelect>
+                    </FormControl>
+                    <TableCell style={styleHeaders}>Date:</TableCell>
+                    <TableCell>
+                      {order.paidAt ? dateTransform(order.paidAt) : ""}
+                    </TableCell>
+                  </TableRow>
+
+                  <TableRow>
+                    <TableCell style={styleHeaders}>Is Delivered:</TableCell>
+                    {/* <TableCell>{order.isDelivered ? "Yes" : "No"}</TableCell> */}
+                    <FormControl fullWidth>
+                      <NativeSelect
+                        defaultValue={delivered === "true" ? "true" : "false"}
+                        style={{ padding: "0.2rem" }}
+                        onChange={(e) => {
+                          changeOrderStatus(e, "isDelivered");
+                        }}
+                      >
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                      </NativeSelect>
+                    </FormControl>
+                    <TableCell style={styleHeaders}>Date:</TableCell>
+                    <TableCell>
+                      {order.deliveredAt
+                        ? dateTransform(order.deliveredAt)
+                        : ""}
+                    </TableCell>
+                  </TableRow>
+
+                  <TableRow>
                     <TableCell style={styleHeaders} colSpan={3}>
                       Total Price:
                     </TableCell>
                     <TableCell style={styleHeaders}>
                       {order.totalPrice} $
-                    </TableCell>
-                  </TableRow>
-
-                  <TableRow>
-                    <TableCell style={styleHeaders}>Is Paid:</TableCell>
-                    <TableCell>
-                      {order.isPaid
-                        ? `Yes - ${dateTransform(order.paidAt)}`
-                        : "No"}
-                    </TableCell>
-                    <TableCell style={styleHeaders}>Is Delivered:</TableCell>
-                    <TableCell>
-                      {order.isDelivered
-                        ? `Yes - ${dateTransform(order.deliveredAt)}`
-                        : "No"}
                     </TableCell>
                   </TableRow>
                 </Box>
