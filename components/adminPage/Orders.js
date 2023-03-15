@@ -15,6 +15,11 @@ import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import NativeSelect from "@mui/material/NativeSelect";
+import dayjs from "dayjs";
+import "dayjs/locale/en-gb";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 import { updateOrderStatusWrapper } from "../../lib/client";
 
@@ -68,12 +73,15 @@ export default function Orders({ order, num }) {
   };
 
   const changeOrderStatus = async (e, value) => {
+    console.log("Event: ", e);
+    console.log("Value: ", value);
+
     const resPromise = new Promise(async (resolve, reject) => {
       try {
         const res = await updateOrderStatusWrapper(
           order._id,
           value,
-          e.target.value
+          value === "deliveredAt" || value === "paidAt" ? e : e.target.value
         );
         console.log("order updated: ", res);
 
@@ -95,27 +103,6 @@ export default function Orders({ order, num }) {
       error: "Error occurred",
     });
   };
-
-  // const changeOrderStatus = async (e, value) => {
-  //   const res = await updateOrderStatusWrapper(
-  //     order._id,
-  //     value,
-  //     e.target.value
-  //   );
-  //   console.log("order updated: ", res);
-
-  //   toast.promise(res, {
-  //     loading: "Loading",
-  //     success: "Has changed",
-  //     error: "Error occured",
-  //   });
-
-  //   const status = res.status[0].toUpperCase() + res.status.slice(1);
-
-  //   setOrderStatus(status);
-  //   setPaid(res.isPaid);
-  //   setDelivered(res.isDelivered);
-  // };
 
   return (
     <TableContainer component={Paper} style={{ marginBottom: "1rem" }}>
@@ -214,46 +201,84 @@ export default function Orders({ order, num }) {
 
                   <TableRow>
                     <TableCell style={styleHeaders}>Is Paid:</TableCell>
-                    {/* <TableCell>{order.isPaid ? "Yes" : "No"}</TableCell> */}
-                    <FormControl fullWidth>
-                      <NativeSelect
-                        defaultValue={paid === "true" ? "true" : "false"}
-                        style={{ padding: "0.2rem" }}
-                        onChange={(e) => {
-                          changeOrderStatus(e, "isPaid");
-                        }}
-                      >
-                        <option value="true">Yes</option>
-                        <option value="false">No</option>
-                      </NativeSelect>
-                    </FormControl>
-                    <TableCell style={styleHeaders}>Date:</TableCell>
+
                     <TableCell>
-                      {order.paidAt ? dateTransform(order.paidAt) : ""}
+                      <FormControl fullWidth>
+                        <NativeSelect
+                          defaultValue={paid === true ? true : false}
+                          style={{ padding: "0.2rem" }}
+                          onChange={(e) => {
+                            changeOrderStatus(e, "isPaid");
+                          }}
+                        >
+                          <option value={true}>Yes</option>
+                          <option value={false}>No</option>
+                        </NativeSelect>
+                      </FormControl>
                     </TableCell>
+
+                    <TableCell style={styleHeaders}>Date:</TableCell>
+
+                    <TableCell>
+                      <LocalizationProvider
+                        dateAdapter={AdapterDayjs}
+                        adapterLocale="en-gb"
+                      >
+                        <DatePicker
+                          onChange={(e) => {
+                            const isoDateString = e.toISOString();
+                            changeOrderStatus(isoDateString, "paidAt");
+                          }}
+                          defaultValue={order.paidAt ? dayjs(order.paidAt) : ""}
+                        />
+                      </LocalizationProvider>
+                    </TableCell>
+                    {/* <TableCell>
+                      {order.paidAt ? dateTransform(order.paidAt) : ""}
+                    </TableCell> */}
                   </TableRow>
 
                   <TableRow>
                     <TableCell style={styleHeaders}>Is Delivered:</TableCell>
-                    {/* <TableCell>{order.isDelivered ? "Yes" : "No"}</TableCell> */}
-                    <FormControl fullWidth>
-                      <NativeSelect
-                        defaultValue={delivered === "true" ? "true" : "false"}
-                        style={{ padding: "0.2rem" }}
-                        onChange={(e) => {
-                          changeOrderStatus(e, "isDelivered");
-                        }}
-                      >
-                        <option value="true">Yes</option>
-                        <option value="false">No</option>
-                      </NativeSelect>
-                    </FormControl>
-                    <TableCell style={styleHeaders}>Date:</TableCell>
+
                     <TableCell>
+                      <FormControl fullWidth>
+                        <NativeSelect
+                          defaultValue={delivered === true ? true : false}
+                          style={{ padding: "0.2rem" }}
+                          onChange={(e) => {
+                            changeOrderStatus(e, "isDelivered");
+                          }}
+                        >
+                          <option value={true}>Yes</option>
+                          <option value={false}>No</option>
+                        </NativeSelect>
+                      </FormControl>
+                    </TableCell>
+
+                    <TableCell style={styleHeaders}>Date:</TableCell>
+
+                    <TableCell>
+                      <LocalizationProvider
+                        dateAdapter={AdapterDayjs}
+                        adapterLocale="en-gb"
+                      >
+                        <DatePicker
+                          onChange={(e) => {
+                            const isoDateString = e.toISOString();
+                            changeOrderStatus(isoDateString, "deliveredAt");
+                          }}
+                          defaultValue={
+                            order.deliveredAt ? dayjs(order.deliveredAt) : ""
+                          }
+                        />
+                      </LocalizationProvider>
+                    </TableCell>
+                    {/* <TableCell>
                       {order.deliveredAt
                         ? dateTransform(order.deliveredAt)
                         : ""}
-                    </TableCell>
+                    </TableCell> */}
                   </TableRow>
 
                   <TableRow>
