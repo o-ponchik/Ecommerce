@@ -1,5 +1,5 @@
 import * as React from "react";
-import axios from "axios";
+import toast from "react-hot-toast";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -68,19 +68,54 @@ export default function Orders({ order, num }) {
   };
 
   const changeOrderStatus = async (e, value) => {
-    const res = await updateOrderStatusWrapper(
-      order._id,
-      value,
-      e.target.value
-    );
-    console.log("order updated: ", res);
+    const resPromise = new Promise(async (resolve, reject) => {
+      try {
+        const res = await updateOrderStatusWrapper(
+          order._id,
+          value,
+          e.target.value
+        );
+        console.log("order updated: ", res);
 
-    const status = res.status[0].toUpperCase() + res.status.slice(1);
+        const status = res.status[0].toUpperCase() + res.status.slice(1);
 
-    setOrderStatus(status);
-    setPaid(res.isPaid);
-    setDelivered(res.isDelivered);
+        setOrderStatus(status);
+        setPaid(res.isPaid);
+        setDelivered(res.isDelivered);
+
+        resolve(res);
+      } catch (error) {
+        reject(error);
+      }
+    });
+
+    toast.promise(resPromise, {
+      loading: "Loading",
+      success: "Has changed",
+      error: "Error occurred",
+    });
   };
+
+  // const changeOrderStatus = async (e, value) => {
+  //   const res = await updateOrderStatusWrapper(
+  //     order._id,
+  //     value,
+  //     e.target.value
+  //   );
+  //   console.log("order updated: ", res);
+
+  //   toast.promise(res, {
+  //     loading: "Loading",
+  //     success: "Has changed",
+  //     error: "Error occured",
+  //   });
+
+  //   const status = res.status[0].toUpperCase() + res.status.slice(1);
+
+  //   setOrderStatus(status);
+  //   setPaid(res.isPaid);
+  //   setDelivered(res.isDelivered);
+  // };
 
   return (
     <TableContainer component={Paper} style={{ marginBottom: "1rem" }}>
