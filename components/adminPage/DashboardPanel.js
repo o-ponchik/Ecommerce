@@ -16,11 +16,8 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { ListItems } from "./ListItems.js";
 
-import { useAdminContext } from "../../context/AdminContext";
-
 import { teal } from "@mui/material/colors";
-
-import Link from "next/link";
+import List from "@mui/material/List";
 
 const drawerWidth = 240;
 
@@ -86,51 +83,6 @@ const DashboardContent = ({ children, orders }) => {
     setOpen(!open);
   };
 
-  // const dashboard = (
-  //   <>
-  //     <Grid container spacing={3}>
-  //       {/* Chart */}
-  //       <Grid item xs={12} md={8} lg={9}>
-  //         <Paper
-  //           sx={{
-  //             p: 2,
-  //             display: "flex",
-  //             flexDirection: "column",
-  //             height: 240,
-  //           }}
-  //         >
-  //           <Chart />
-  //         </Paper>
-  //       </Grid>
-  //       {/* Recent Deposits */}
-  //       <Grid item xs={12} md={4} lg={3}>
-  //         <Paper
-  //           sx={{
-  //             p: 2,
-  //             display: "flex",
-  //             flexDirection: "column",
-  //             height: 240,
-  //           }}
-  //         >
-  //           <Deposits />
-  //         </Paper>
-  //       </Grid>
-  //       {/* Recent Orders */}
-  //       <Grid item xs={12}>
-  //         <Paper
-  //           sx={{
-  //             p: 2,
-  //             display: "flex",
-  //             flexDirection: "column",
-  //           }}
-  //         >
-  //           <DashboardOrders orders={orders} />
-  //         </Paper>
-  //       </Grid>
-  //     </Grid>
-  //   </>
-  // );
-
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: "flex" }}>
@@ -138,7 +90,7 @@ const DashboardContent = ({ children, orders }) => {
         <AppBar position="absolute">
           <Toolbar
             sx={{
-              pr: "23px", // keep right padding when drawer closed
+              pr: "24px", // keep right padding when drawer closed
             }}
           >
             <IconButton
@@ -169,7 +121,7 @@ const DashboardContent = ({ children, orders }) => {
             </IconButton>
           </Toolbar>
         </AppBar>
-        <Drawer variant="permanent" open={open} sx={{ height: "40vh" }}>
+        <Drawer variant="permanent" open={open} sx={{ mt: [8] }}>
           <Toolbar
             sx={{
               display: "flex",
@@ -183,7 +135,9 @@ const DashboardContent = ({ children, orders }) => {
             </IconButton>
           </Toolbar>
           <Divider />
-          <ListItems orders={orders} />
+          <List component="nav">
+            <ListItems orders={orders} />
+          </List>
         </Drawer>
         <Box
           component="main"

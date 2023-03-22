@@ -47,13 +47,6 @@ export function ListItems() {
           <ListItemText primary="Reports" />
         </ListItemButton>
       </Link>
-
-      <ListItemButton>
-        <ListItemIcon>
-          <LayersIcon />
-        </ListItemIcon>
-        <ListItemText primary="Integrations" />
-      </ListItemButton>
     </React.Fragment>
   );
 }
