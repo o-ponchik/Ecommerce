@@ -1,13 +1,19 @@
-import React from "react";
-import Dashboard from "../../components/adminPage/Dashboard";
+import React, { useEffect } from "react";
+
 import { AdminContext } from "../../context/AdminContext";
+
+import DashboardPanel from "../../components/adminPage/DashboardPanel";
+import Dashboard from "../../components/adminPage/Dashboard";
 import { client } from "../../lib/client";
 
 const Admin = ({ orders }) => {
+  console.log("Admin orders: ", orders);
   return (
     <>
       <AdminContext>
-        <Dashboard orders={orders} />
+        <DashboardPanel orders={orders}>
+          <Dashboard orders={orders} />
+        </DashboardPanel>
       </AdminContext>
     </>
   );
@@ -21,3 +27,7 @@ export const getStaticProps = async () => {
 };
 
 export default Admin;
+
+Admin.getLayout = function PageLayout(page) {
+  return <>{page}</>;
+};
