@@ -9,11 +9,11 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import Badge from "@mui/material/Badge";
 import Container from "@mui/material/Container";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import NotificationsIcon from "@mui/icons-material/Notifications";
+// import Badge from "@mui/material/Badge";
+// import NotificationsIcon from "@mui/icons-material/Notifications";
 import { ListItems } from "./ListItems.js";
 
 import { teal } from "@mui/material/colors";
@@ -114,11 +114,12 @@ const DashboardContent = ({ children, orders }) => {
             >
               Dashboard
             </Typography>
-            <IconButton color="inherit">
+            {/* Badge Notification */}
+            {/* <IconButton color="inherit">
               <Badge badgeContent={qtyOfPendingOrders} color="secondary">
                 <NotificationsIcon />
               </Badge>
-            </IconButton>
+            </IconButton> */}
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open} sx={{ mt: [8] }}>
@@ -136,7 +137,7 @@ const DashboardContent = ({ children, orders }) => {
           </Toolbar>
           <Divider />
           <List component="nav">
-            <ListItems orders={orders} />
+            <ListItems qty={qtyOfPendingOrders} />
           </List>
         </Drawer>
         <Box

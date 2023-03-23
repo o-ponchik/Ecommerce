@@ -4,12 +4,13 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import PeopleIcon from "@mui/icons-material/People";
-import BarChartIcon from "@mui/icons-material/BarChart";
-import LayersIcon from "@mui/icons-material/Layers";
+import Badge from "@mui/material/Badge";
+// import PeopleIcon from "@mui/icons-material/People";
+// import BarChartIcon from "@mui/icons-material/BarChart";
+// import LayersIcon from "@mui/icons-material/Layers";
 import Link from "next/link";
 
-export function ListItems() {
+export function ListItems({ qty }) {
   return (
     <React.Fragment>
       <Link href={"/admin/dashboard"}>
@@ -23,14 +24,15 @@ export function ListItems() {
       <Link href={"/admin/list/orders"}>
         <ListItemButton>
           <ListItemIcon>
-            <ShoppingCartIcon />
+            <Badge badgeContent={qty} color="primary">
+              <ShoppingCartIcon color="action" />
+            </Badge>
           </ListItemIcon>
-
           <ListItemText primary="Orders" />
         </ListItemButton>
       </Link>
 
-      <Link href={"/admin/list/customers"}>
+      {/* <Link href={"/admin/list/customers"}>
         <ListItemButton>
           <ListItemIcon>
             <PeopleIcon />
@@ -46,7 +48,7 @@ export function ListItems() {
           </ListItemIcon>
           <ListItemText primary="Reports" />
         </ListItemButton>
-      </Link>
+      </Link> */}
     </React.Fragment>
   );
 }
