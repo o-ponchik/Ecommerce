@@ -6,7 +6,6 @@ import DashboardPanel from "../../../components/adminPage/DashboardPanel";
 import { client } from "../../../lib/client";
 
 const OrdersPanel = ({ orders }) => {
-  console.log("Orders from orders: ", orders);
   return (
     <DashboardPanel orders={orders}>
       {orders.map((order, index) => (
