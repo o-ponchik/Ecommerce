@@ -12,6 +12,8 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import axios from "axios";
+import { useRouter } from "next/router";
 
 function Copyright(props) {
   return (
@@ -33,14 +35,29 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignIn() {
-  const handleSubmit = (event) => {
+export default function LogIn() {
+  const router = useRouter();
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    const username = data.get("username");
+    const password = data.get("password");
+
+    const credentials = { username, password };
+
+    const user = await axios.post("/api/auth/login", credentials);
+
+    if (user.status === 200) {
+      router.push("/admin/dashboard");
+    }
+
+    console.log("user: ", user);
+  };
+
+  const handleLogOut = async () => {
+    const user = await axios.get("/api/auth/logout");
+    console.log("logged out: ", user);
   };
 
   return (
@@ -71,10 +88,10 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="username"
+              label="Username"
+              name="username"
+              autoComplete="username"
               autoFocus
             />
             <TextField
@@ -98,6 +115,14 @@ export default function SignIn() {
               sx={{ mt: 3, mb: 2 }}
             >
               Log In
+            </Button>
+            <Button
+              onClick={handleLogOut}
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Log Out
             </Button>
             {/* <Grid container>
               <Grid item xs>
