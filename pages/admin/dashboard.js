@@ -7,7 +7,6 @@ import Dashboard from "../../components/adminPage/Dashboard";
 import { client } from "../../lib/client";
 
 const Admin = ({ orders }) => {
-  console.log("Admin orders: ", orders);
   return (
     <>
       <AdminContext>
