@@ -53,13 +53,10 @@ const Login = () => {
     if (user.status === 200) {
       router.push("/admin/dashboard");
     }
-
-    console.log("user: ", user);
   };
 
   const handleLogOut = async () => {
     const user = await axios.get("/api/auth/logout");
-    console.log("logged out: ", user);
   };
 
   return (

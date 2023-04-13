@@ -3,7 +3,6 @@ import { jwtVerify } from "jose";
 
 export async function middleware(request) {
   const jwt = request.cookies?.OursiteJWT;
-  console.log(jwt);
 
   if (request.nextUrl.pathname.includes("/admin")) {
     if (!jwt) {
@@ -15,7 +14,6 @@ export async function middleware(request) {
         jwt,
         new TextEncoder().encode("secret")
       );
-      console.log(payload);
     } catch (err) {
       console.error({ err });
       return NextResponse.redirect(new URL("/login", request.url));
