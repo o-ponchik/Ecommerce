@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect } from "react";
 import toast from "react-hot-toast";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -20,8 +21,6 @@ import "dayjs/locale/en-gb";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-
-import { updateOrderStatusWrapper } from "../../lib/client";
 
 const dateTransform = (date) => {
   const transformedDate = new Date(date);
@@ -72,27 +71,37 @@ export default function Orders({ order, num }) {
     backgroundColor: "#f5f5f5",
   };
 
-  const changeOrderStatus = async (e, value) => {
-    console.log("Event: ", e);
-    console.log("Value: ", value);
+  const handleChangeOrderData = async (e, property) => {
+    // console.log("Event: ", e);
+    // console.log("Value: ", e.target.value);
+    // console.log("Property: ", property);
+    // console.log("orderID", order._id);
 
     const resPromise = new Promise(async (resolve, reject) => {
       try {
-        const res = await updateOrderStatusWrapper(
-          order._id,
-          value,
-          value === "deliveredAt" || value === "paidAt" ? e : e.target.value
-        );
-        console.log("order updated: ", res);
+        const value =
+          property === "deliveredAt" || property === "paidAt"
+            ? e
+            : e.target.value;
 
-        const status = res.status[0].toUpperCase() + res.status.slice(1);
+        const response = fetch("/api/v1/updateOrderData/update-order", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            orderId: order._id,
+            property,
+            value: value,
+          }),
+        });
 
-        setOrderStatus(status);
-        setPaid(res.isPaid);
-        setDelivered(res.isDelivered);
+        const updatedOrder = await response;
 
-        resolve(res);
+        console.log("order updated: ", updatedOrder);
+        resolve(updatedOrder);
       } catch (error) {
+        console.error("Error updating order data", error);
         reject(error);
       }
     });
@@ -102,6 +111,10 @@ export default function Orders({ order, num }) {
       success: "Has changed",
       error: "Error occurred",
     });
+
+    // setOrderStatus(status);
+    // setPaid(response.isPaid);
+    // setDelivered(response.isDelivered);
   };
 
   return (
@@ -128,7 +141,7 @@ export default function Orders({ order, num }) {
               <FormControl
                 fullWidth
                 onChange={(e) => {
-                  changeOrderStatus(e, "status");
+                  handleChangeOrderData(e, "status");
                 }}
               >
                 <NativeSelect defaultValue={orderStatus}>
@@ -208,7 +221,7 @@ export default function Orders({ order, num }) {
                           defaultValue={paid === true ? true : false}
                           style={{ padding: "0.2rem" }}
                           onChange={(e) => {
-                            changeOrderStatus(e, "isPaid");
+                            handleChangeOrderData(e, "isPaid");
                           }}
                         >
                           <option value={true}>Yes</option>
@@ -227,7 +240,7 @@ export default function Orders({ order, num }) {
                         <DatePicker
                           onChange={(e) => {
                             const isoDateString = e.toISOString();
-                            changeOrderStatus(isoDateString, "paidAt");
+                            handleChangeOrderData(isoDateString, "paidAt");
                           }}
                           defaultValue={order.paidAt ? dayjs(order.paidAt) : ""}
                         />
@@ -247,7 +260,7 @@ export default function Orders({ order, num }) {
                           defaultValue={delivered === true ? true : false}
                           style={{ padding: "0.2rem" }}
                           onChange={(e) => {
-                            changeOrderStatus(e, "isDelivered");
+                            handleChangeOrderData(e, "isDelivered");
                           }}
                         >
                           <option value={true}>Yes</option>
@@ -266,7 +279,7 @@ export default function Orders({ order, num }) {
                         <DatePicker
                           onChange={(e) => {
                             const isoDateString = e.toISOString();
-                            changeOrderStatus(isoDateString, "deliveredAt");
+                            handleChangeOrderData(isoDateString, "deliveredAt");
                           }}
                           defaultValue={
                             order.deliveredAt ? dayjs(order.deliveredAt) : ""
