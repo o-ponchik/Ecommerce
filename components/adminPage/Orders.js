@@ -13,7 +13,6 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Collapse from "@mui/material/Collapse";
 import Box from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import NativeSelect from "@mui/material/NativeSelect";
 import dayjs from "dayjs";
@@ -21,6 +20,7 @@ import "dayjs/locale/en-gb";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { useAdminContext } from "../../context/AdminContext";
 
 const dateTransform = (date) => {
   const transformedDate = new Date(date);
@@ -28,14 +28,13 @@ const dateTransform = (date) => {
   return transformedDate.toLocaleString();
 };
 
-export default function Orders({ order, num }) {
+export default function Orders({ order, num, onOrderUpdate }) {
   const { name, phone, email, details } = order.customer;
   const { street, city, country, state, zipCode } = order.customer.address;
   const [open, setOpen] = React.useState(false);
   order.status = order.status[0].toUpperCase() + order.status.slice(1);
   const [orderStatus, setOrderStatus] = React.useState(order.status);
-  const [delivered, setDelivered] = React.useState(order.isDelivered);
-  const [paid, setPaid] = React.useState(order.isPaid);
+  const { setIsUpdated } = useAdminContext();
 
   let colorStatusOrder;
   let orderStatusText;
@@ -72,11 +71,6 @@ export default function Orders({ order, num }) {
   };
 
   const handleChangeOrderData = async (e, property) => {
-    // console.log("Event: ", e);
-    // console.log("Value: ", e.target.value);
-    // console.log("Property: ", property);
-    // console.log("orderID", order._id);
-
     const resPromise = new Promise(async (resolve, reject) => {
       try {
         const value =
@@ -84,7 +78,7 @@ export default function Orders({ order, num }) {
             ? e
             : e.target.value;
 
-        const response = fetch("/api/v1/updateOrderData/update-order", {
+        const response = fetch("/api/v1/order/update-order", {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -99,7 +93,15 @@ export default function Orders({ order, num }) {
         const updatedOrder = await response;
 
         console.log("order updated: ", updatedOrder);
+
         resolve(updatedOrder);
+
+        if (property === "status") {
+          setOrderStatus(e.target.value);
+        }
+
+        onOrderUpdate();
+        setIsUpdated(true);
       } catch (error) {
         console.error("Error updating order data", error);
         reject(error);
@@ -111,10 +113,6 @@ export default function Orders({ order, num }) {
       success: "Has changed",
       error: "Error occurred",
     });
-
-    // setOrderStatus(status);
-    // setPaid(response.isPaid);
-    // setDelivered(response.isDelivered);
   };
 
   return (
@@ -218,7 +216,7 @@ export default function Orders({ order, num }) {
                     <TableCell>
                       <FormControl fullWidth>
                         <NativeSelect
-                          defaultValue={paid === true ? true : false}
+                          defaultValue={order.isPaid === true ? true : false}
                           style={{ padding: "0.2rem" }}
                           onChange={(e) => {
                             handleChangeOrderData(e, "isPaid");
@@ -257,7 +255,9 @@ export default function Orders({ order, num }) {
                     <TableCell>
                       <FormControl fullWidth>
                         <NativeSelect
-                          defaultValue={delivered === true ? true : false}
+                          defaultValue={
+                            order.isDelivered === true ? true : false
+                          }
                           style={{ padding: "0.2rem" }}
                           onChange={(e) => {
                             handleChangeOrderData(e, "isDelivered");

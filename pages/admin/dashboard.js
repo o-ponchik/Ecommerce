@@ -1,12 +1,24 @@
 import React, { useEffect } from "react";
-
 import { AdminContext } from "../../context/AdminContext";
-
 import DashboardPanel from "../../components/adminPage/DashboardPanel";
 import Dashboard from "../../components/adminPage/Dashboard";
 import { client } from "../../lib/client";
+import { useAdminContext } from "../../context/AdminContext";
+import { useRouter } from "next/router";
 
 const Admin = ({ orders }) => {
+  const router = useRouter();
+  const { isUpdated, setIsUpdated } = useAdminContext();
+
+  const refreshData = () => {
+    router.replace(router.asPath);
+  };
+
+  if (isUpdated) {
+    refreshData();
+    setIsUpdated(false);
+  }
+
   return (
     <>
       <AdminContext>
@@ -18,7 +30,7 @@ const Admin = ({ orders }) => {
   );
 };
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const ordersQuery = '*[_type == "order"]';
   const orders = await client.fetch(ordersQuery);
 
