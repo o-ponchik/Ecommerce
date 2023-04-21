@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiDrawer from "@mui/material/Drawer";
@@ -12,12 +11,12 @@ import IconButton from "@mui/material/IconButton";
 import Container from "@mui/material/Container";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-// import Badge from "@mui/material/Badge";
-// import NotificationsIcon from "@mui/icons-material/Notifications";
+import { Button } from "@mui/material";
 import { ListItems } from "./ListItems.js";
-
 import { teal } from "@mui/material/colors";
 import List from "@mui/material/List";
+import { useRouter } from "next/router";
+import axios from "axios";
 
 const drawerWidth = 240;
 
@@ -74,6 +73,8 @@ const mdTheme = createTheme({
 });
 
 const DashboardContent = ({ children, orders }) => {
+  const router = useRouter();
+
   const qtyOfPendingOrders = orders
     .map((order) => order.status === "Pending")
     .filter(Boolean).length;
@@ -81,6 +82,16 @@ const DashboardContent = ({ children, orders }) => {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
+  };
+
+  const handleLogOut = async () => {
+    console.log("Log Out");
+
+    const response = await axios("/api/auth/logout");
+
+    if (response.status === 200) {
+      router.push("/login");
+    }
   };
 
   return (
@@ -114,12 +125,14 @@ const DashboardContent = ({ children, orders }) => {
             >
               Dashboard
             </Typography>
-            {/* Badge Notification */}
-            {/* <IconButton color="inherit">
-              <Badge badgeContent={qtyOfPendingOrders} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton> */}
+
+            <Button
+              sx={{ color: "#fff", borderColor: "#fff" }}
+              variant="outlined"
+              onClick={handleLogOut}
+            >
+              Log Out
+            </Button>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open} sx={{ mt: [8] }}>
