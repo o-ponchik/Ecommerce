@@ -28,6 +28,6 @@ export default async function (req, res) {
     res.setHeader("Set-Cookie", serialised);
     res.status(200).json({ message: "Success!" });
   } else {
-    res.json({ message: "Invalid credentials!" });
+    res.status(401).json({ message: "Invalid credentials!" });
   }
 }

@@ -12,6 +12,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
 import { useRouter } from "next/router";
+import toast, { Toaster } from "react-hot-toast";
 // import Grid from "@mui/material/Grid";
 // import FormControlLabel from "@mui/material/FormControlLabel";
 // import Checkbox from "@mui/material/Checkbox";
@@ -41,16 +42,21 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const username = data.get("username");
-    const password = data.get("password");
+    try {
+      const data = new FormData(event.currentTarget);
+      const username = data.get("username");
+      const password = data.get("password");
 
-    const credentials = { username, password };
+      const credentials = { username, password };
 
-    const user = await axios.post("/api/auth/login", credentials);
+      const user = await axios.post("/api/auth/login", credentials);
 
-    if (user.status === 200) {
-      router.push("/admin/dashboard");
+      if (user.status === 200) {
+        router.push("/admin/dashboard");
+      }
+    } catch (error) {
+      const errorMsg = error.response.data.message;
+      toast.error(`${errorMsg} Please, try one more time.`);
     }
   };
 
