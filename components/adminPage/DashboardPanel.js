@@ -85,8 +85,6 @@ const DashboardContent = ({ children, orders }) => {
   };
 
   const handleLogOut = async () => {
-    console.log("Log Out");
-
     const response = await axios("/api/auth/logout");
 
     if (response.status === 200) {

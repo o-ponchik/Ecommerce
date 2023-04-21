@@ -1,14 +1,9 @@
 import React from "react";
-// import LogIn from "../components/LogIn";
-
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
@@ -16,6 +11,9 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
 import { useRouter } from "next/router";
+// import Grid from "@mui/material/Grid";
+// import FormControlLabel from "@mui/material/FormControlLabel";
+// import Checkbox from "@mui/material/Checkbox";
 
 function Copyright(props) {
   return (
@@ -53,10 +51,6 @@ const Login = () => {
     if (user.status === 200) {
       router.push("/admin/dashboard");
     }
-  };
-
-  const handleLogOut = async () => {
-    const user = await axios.get("/api/auth/logout");
   };
 
   return (
@@ -115,14 +109,7 @@ const Login = () => {
             >
               Log In
             </Button>
-            <Button
-              onClick={handleLogOut}
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Log Out
-            </Button>
+
             {/* <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
