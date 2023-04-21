@@ -5,6 +5,7 @@ import Dashboard from "../../components/adminPage/Dashboard";
 import { client } from "../../lib/client";
 import { useAdminContext } from "../../context/AdminContext";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 const Admin = ({ orders }) => {
   const router = useRouter();
@@ -22,6 +23,9 @@ const Admin = ({ orders }) => {
   return (
     <>
       <AdminContext>
+        <Head>
+          <title>Dashboard|Candles</title>
+        </Head>
         <DashboardPanel orders={orders}>
           <Dashboard orders={orders} />
         </DashboardPanel>
