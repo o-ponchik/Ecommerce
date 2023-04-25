@@ -104,8 +104,8 @@ const DashboardContent = ({ window, children, orders }) => {
         <AppBar
           position="fixed"
           sx={{
-            width: { sm: `calc(100% - ${drawerWidth}px)` },
-            ml: { sm: `${drawerWidth}px` },
+            width: { md: `calc(100% - ${drawerWidth}px)` },
+            ml: { md: `${drawerWidth}px` },
           }}
         >
           <Toolbar>
@@ -114,7 +114,7 @@ const DashboardContent = ({ window, children, orders }) => {
               aria-label="open drawer"
               edge="start"
               onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { sm: "none" } }}
+              sx={{ mr: 2, display: { md: "none" } }}
             >
               <MenuIcon />
             </IconButton>
@@ -125,7 +125,7 @@ const DashboardContent = ({ window, children, orders }) => {
         </AppBar>
         <Box
           component="nav"
-          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+          sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 } }}
           aria-label="mailbox folders"
         >
           <Drawer
@@ -137,7 +137,7 @@ const DashboardContent = ({ window, children, orders }) => {
               keepMounted: true,
             }}
             sx={{
-              display: { xs: "block", sm: "none" },
+              display: { sm: "block", md: "none" },
               "& .MuiDrawer-paper": {
                 boxSizing: "border-box",
                 width: drawerWidth,
@@ -149,7 +149,7 @@ const DashboardContent = ({ window, children, orders }) => {
           <Drawer
             variant="permanent"
             sx={{
-              display: { xs: "none", sm: "block" },
+              display: { xs: "none", sm: "none", md: "block" },
               "& .MuiDrawer-paper": {
                 boxSizing: "border-box",
                 width: drawerWidth,
