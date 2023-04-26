@@ -9,7 +9,6 @@ const OrdersPanel = ({ orders }) => {
   const router = useRouter();
 
   const refreshData = () => {
-    console.log("refreshing data");
     router.replace(router.asPath);
   };
 

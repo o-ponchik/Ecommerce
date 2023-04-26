@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useEffect } from "react";
 import toast from "react-hot-toast";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -92,8 +91,6 @@ export default function Orders({ order, num, onOrderUpdate }) {
 
         const updatedOrder = await response;
 
-        console.log("order updated: ", updatedOrder);
-
         resolve(updatedOrder);
 
         if (property === "status") {
@@ -109,9 +106,9 @@ export default function Orders({ order, num, onOrderUpdate }) {
     });
 
     toast.promise(resPromise, {
-      loading: "Loading",
+      loading: "Loading...",
       success: "Has changed",
-      error: "Error occurred",
+      error: "Error occurred during updating data",
     });
   };
 
