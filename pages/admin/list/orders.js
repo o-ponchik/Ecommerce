@@ -18,14 +18,16 @@ const OrdersPanel = ({ orders }) => {
         <title>Orders|Candles</title>
       </Head>
       <DashboardPanel orders={orders}>
-        {orders.map((order, index) => (
-          <Orders
-            order={order}
-            key={order._id}
-            num={index + 1}
-            onOrderUpdate={refreshData}
-          />
-        ))}
+        {orders
+          .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+          .map((order, index) => (
+            <Orders
+              order={order}
+              key={order._id}
+              num={index + 1}
+              onOrderUpdate={refreshData}
+            />
+          ))}
       </DashboardPanel>
     </>
   );

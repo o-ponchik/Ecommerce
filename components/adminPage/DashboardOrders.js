@@ -129,18 +129,22 @@ export default function DashboardOrders({ orders }) {
                   page * rowsPerPage + rowsPerPage
                 )
               : orders
-            ).map((order) => (
-              <TableRow key={order._id}>
-                <TableCell>{dateTransform(order.createdAt)}</TableCell>
-                <TableCell>{order.customer.name}</TableCell>
-                <TableCell>
-                  {order.customer.address.city},{" "}
-                  {order.customer.address.country}
-                </TableCell>
-                <TableCell>{order.status}</TableCell>
-                <TableCell align="right">{`$${order.totalPrice}`}</TableCell>
-              </TableRow>
-            ))}
+            )
+              .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+              .map((order) => {
+                return (
+                  <TableRow key={order._id}>
+                    <TableCell>{dateTransform(order.createdAt)}</TableCell>
+                    <TableCell>{order.customer.name}</TableCell>
+                    <TableCell>
+                      {order.customer.address.city},{" "}
+                      {order.customer.address.country}
+                    </TableCell>
+                    <TableCell>{order.status}</TableCell>
+                    <TableCell align="right">{`$${order.totalPrice}`}</TableCell>
+                  </TableRow>
+                );
+              })}
             {emptyRows > 0 && (
               <TableRow style={{ height: 33 * emptyRows }}>
                 <TableCell colSpan={6} />
