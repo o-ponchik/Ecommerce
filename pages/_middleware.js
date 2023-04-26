@@ -4,6 +4,12 @@ import { jwtVerify } from "jose";
 export async function middleware(request) {
   const jwt = request.cookies?.OursiteJWT;
 
+  if (request.nextUrl.pathname.includes("/login")) {
+    if (jwt) {
+      return NextResponse.redirect(new URL("/admin/dashboard", request.url));
+    }
+  }
+
   if (request.nextUrl.pathname.includes("/admin")) {
     if (!jwt) {
       return NextResponse.redirect(new URL("/login", request.url));
