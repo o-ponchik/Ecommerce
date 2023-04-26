@@ -110,59 +110,65 @@ export default function DashboardOrders({ orders }) {
 
   return (
     <React.Fragment>
-      <Title>Recent Orders</Title>
-      <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Ship To</TableCell>
-            <TableCell>Status</TableCell>
-            <TableCell align="right">Sale Amount</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {(rowsPerPage > 0
-            ? orders.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            : orders
-          ).map((order) => (
-            <TableRow key={order._id}>
-              <TableCell>{dateTransform(order.createdAt)}</TableCell>
-              <TableCell>{order.customer.name}</TableCell>
-              <TableCell>
-                {order.customer.address.city}, {order.customer.address.country}
-              </TableCell>
-              <TableCell>{order.status}</TableCell>
-              <TableCell align="right">{`$${order.totalPrice}`}</TableCell>
+      <div style={{ overflowX: "auto" }}>
+        <Title>Recent Orders</Title>
+        <Table size="small">
+          <TableHead>
+            <TableRow>
+              <TableCell>Date</TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell>Ship To</TableCell>
+              <TableCell>Status</TableCell>
+              <TableCell align="right">Sale Amount</TableCell>
             </TableRow>
-          ))}
-          {emptyRows > 0 && (
-            <TableRow style={{ height: 33 * emptyRows }}>
-              <TableCell colSpan={6} />
+          </TableHead>
+          <TableBody>
+            {(rowsPerPage > 0
+              ? orders.slice(
+                  page * rowsPerPage,
+                  page * rowsPerPage + rowsPerPage
+                )
+              : orders
+            ).map((order) => (
+              <TableRow key={order._id}>
+                <TableCell>{dateTransform(order.createdAt)}</TableCell>
+                <TableCell>{order.customer.name}</TableCell>
+                <TableCell>
+                  {order.customer.address.city},{" "}
+                  {order.customer.address.country}
+                </TableCell>
+                <TableCell>{order.status}</TableCell>
+                <TableCell align="right">{`$${order.totalPrice}`}</TableCell>
+              </TableRow>
+            ))}
+            {emptyRows > 0 && (
+              <TableRow style={{ height: 33 * emptyRows }}>
+                <TableCell colSpan={6} />
+              </TableRow>
+            )}
+          </TableBody>
+          <TableFooter>
+            <TableRow>
+              <TablePagination
+                rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
+                colSpan={6}
+                count={orders.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                SelectProps={{
+                  inputProps: {
+                    "aria-label": "rows per page",
+                  },
+                  native: true,
+                }}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+                ActionsComponent={TablePaginationActions}
+              />
             </TableRow>
-          )}
-        </TableBody>
-        <TableFooter>
-          <TableRow>
-            <TablePagination
-              rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-              colSpan={6}
-              count={orders.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              SelectProps={{
-                inputProps: {
-                  "aria-label": "rows per page",
-                },
-                native: true,
-              }}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-              ActionsComponent={TablePaginationActions}
-            />
-          </TableRow>
-        </TableFooter>
-      </Table>
+          </TableFooter>
+        </Table>
+      </div>
     </React.Fragment>
   );
 }
