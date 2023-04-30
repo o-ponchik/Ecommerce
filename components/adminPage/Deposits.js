@@ -1,27 +1,47 @@
 import * as React from "react";
-import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import Title from "./Title";
 
-function preventDefault(event) {
-  event.preventDefault();
-}
+export default function Deposits({ orders }) {
+  console.log("Statisctics", { orders });
 
-export default function Deposits() {
+  const filteredOrders = (orders, status) => {
+    return orders.filter((order) => order.status === status).length;
+  };
+
+  const totalAmountOfAllOrders = orders.length;
+  const completedOrders = filteredOrders(orders, "Completed");
+  const pendingOrders = filteredOrders(orders, "Pending");
+  const inProgressOrders = filteredOrders(orders, "InProgress");
+  const canceledOrders = filteredOrders(orders, "Cancelled");
+
+  const totalIncome = orders
+    .filter((order) => order.status === "Completed")
+    .map((order) => order.totalPrice)
+    .reduce((acum, curr) => acum + curr);
+
   return (
     <React.Fragment>
-      <Title>Recent Deposits</Title>
-      <Typography component="p" variant="h4">
-        $3,024.00
+      <Title>Statistics</Title>
+      <Typography color="text.primary" component="p">
+        Total amount of orders: {totalAmountOfAllOrders}
       </Typography>
-      <Typography color="text.secondary" sx={{ flex: 1 }}>
-        on 15 March, 2019
+      <Typography color="success.main" component="p">
+        Completed: {completedOrders}
       </Typography>
-      <div>
-        <Link color="primary" href="#" onClick={preventDefault}>
-          View balance
-        </Link>
-      </div>
+      <Typography color="info.main" component="p">
+        Pending: {pendingOrders}
+      </Typography>
+      <Typography color="warning.main" component="p">
+        In Progress: {inProgressOrders}
+      </Typography>
+      <Typography color="error.main" component="p">
+        Canceled: {canceledOrders}
+      </Typography>
+      <Typography color="text.primary" sx={{ flex: 1 }}>
+        Total income of completed orders: $
+        {completedOrders > 0 ? totalIncome : 0}
+      </Typography>
     </React.Fragment>
   );
 }

@@ -32,7 +32,7 @@ const Dashboard = ({ orders }) => {
               height: 240,
             }}
           >
-            <Deposits />
+            <Deposits orders={orders} />
           </Paper>
         </Grid>
         {/* Recent Orders */}
