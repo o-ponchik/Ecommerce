@@ -6,6 +6,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -34,6 +35,8 @@ export default function Orders({ order, num, onOrderUpdate }) {
   order.status = order.status[0].toUpperCase() + order.status.slice(1);
   const [orderStatus, setOrderStatus] = React.useState(order.status);
   const { setIsUpdated } = useAdminContext();
+
+  console.log({ order });
 
   let colorStatusOrder;
   let orderStatusText;
@@ -170,8 +173,8 @@ export default function Orders({ order, num, onOrderUpdate }) {
                     <TableCell style={styleHeaders} align="left" width="25%">
                       Email
                     </TableCell>
-                    <TableCell style={styleHeaders} width="25%">
-                      Address
+                    <TableCell style={styleHeaders} align="left" width="25%">
+                      Created At
                     </TableCell>
                   </TableRow>
 
@@ -179,9 +182,33 @@ export default function Orders({ order, num, onOrderUpdate }) {
                     <TableCell>{name}</TableCell>
                     <TableCell align="left">{phone}</TableCell>
                     <TableCell align="left">{email}</TableCell>
-                    <TableCell>
-                      {street}, {city},{state ? state : ""},{country}, {zipCode}
+                    <TableCell align="left">
+                      {dateTransform(order.createdAt)}
                     </TableCell>
+                  </TableRow>
+
+                  <TableRow>
+                    <TableCell style={styleHeaders} width="25%">
+                      Street
+                    </TableCell>
+                    <TableCell style={styleHeaders} width="25%">
+                      City, State
+                    </TableCell>
+                    <TableCell style={styleHeaders} width="25%">
+                      Country
+                    </TableCell>
+                    <TableCell style={styleHeaders} width="25%">
+                      Zip Code
+                    </TableCell>
+                  </TableRow>
+
+                  <TableRow>
+                    <TableCell>{street}</TableCell>
+                    <TableCell>
+                      {city} {state ? `, ${state}` : ""}
+                    </TableCell>
+                    <TableCell>{country}</TableCell>
+                    <TableCell>{zipCode}</TableCell>
                   </TableRow>
 
                   <TableRow>
@@ -225,7 +252,7 @@ export default function Orders({ order, num, onOrderUpdate }) {
                       </FormControl>
                     </TableCell>
 
-                    <TableCell style={styleHeaders}>Date:</TableCell>
+                    <TableCell style={styleHeaders}>Paid Date:</TableCell>
 
                     <TableCell>
                       <LocalizationProvider
@@ -266,7 +293,7 @@ export default function Orders({ order, num, onOrderUpdate }) {
                       </FormControl>
                     </TableCell>
 
-                    <TableCell style={styleHeaders}>Date:</TableCell>
+                    <TableCell style={styleHeaders}>Delivered Date:</TableCell>
 
                     <TableCell>
                       <LocalizationProvider
