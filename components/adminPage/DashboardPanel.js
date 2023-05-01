@@ -95,10 +95,7 @@ const DashboardContent = ({ window, children, orders }) => {
         <CssBaseline />
         <AppBar
           position="fixed"
-          sx={{
-            width: { md: `calc(100% - ${drawerWidth}px)` },
-            ml: { md: `${drawerWidth}px` },
-          }}
+          sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
         >
           <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
             <IconButton
