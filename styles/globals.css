@@ -306,6 +306,11 @@ span.text-red {
   display: flex;
   gap: 10px;
 }
+
+.footer-container .icons .instagram {
+  cursor: pointer;
+}
+
 .cart-heading {
   display: flex;
   align-items: center;
