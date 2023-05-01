@@ -86,14 +86,6 @@ const DashboardContent = ({ window, children, orders }) => {
         <ListItems qty={qtyOfPendingOrders} />
       </List>
       <Divider />
-      <Button
-        sx={{ margin: "2rem 2rem" }}
-        color="primary"
-        variant="outlined"
-        onClick={handleLogOut}
-      >
-        Log Out
-      </Button>
     </>
   );
 
@@ -108,7 +100,7 @@ const DashboardContent = ({ window, children, orders }) => {
             ml: { md: `${drawerWidth}px` },
           }}
         >
-          <Toolbar>
+          <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
             <IconButton
               color="inherit"
               aria-label="open drawer"
@@ -118,9 +110,18 @@ const DashboardContent = ({ window, children, orders }) => {
             >
               <MenuIcon />
             </IconButton>
+
             <Typography variant="h6" noWrap component="div">
               Logo
             </Typography>
+            <Button
+              className="logOut-btn"
+              sx={{ color: "#fff", borderColor: "#fff" }}
+              variant="outlined"
+              onClick={handleLogOut}
+            >
+              Log Out
+            </Button>
           </Toolbar>
         </AppBar>
         <Box
