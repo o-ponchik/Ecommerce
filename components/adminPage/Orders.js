@@ -119,16 +119,13 @@ export default function Orders({ order, num, onOrderUpdate }) {
     <TableContainer component={Paper} style={{ marginBottom: "1rem" }}>
       <Table sx={{ minWidth: 700 }} aria-label="spanning table" size="small">
         <TableHead style={{ backgroundColor: colorStatusOrder }}>
-          <TableRow>
-            <TableCell>
-              <IconButton
-                aria-label="expand row"
-                size="small"
-                onClick={() => setOpen(!open)}
-              >
-                {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-              </IconButton>
-            </TableCell>
+          <TableRow
+            onClick={(event) => {
+              if (event.target.tagName.toLowerCase() !== "select") {
+                setOpen(!open);
+              }
+            }}
+          >
             <TableCell align="left" style={boldStyleHead}>
               Order № {num}
             </TableCell>
