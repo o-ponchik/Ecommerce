@@ -69,7 +69,6 @@ const DashboardContent = ({ window, children, orders }) => {
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
-  ////
   const handleLogOut = async () => {
     const response = await axios("/api/auth/logout");
 
@@ -79,14 +78,14 @@ const DashboardContent = ({ window, children, orders }) => {
   };
 
   const drawer = (
-    <>
+    <Box sx={{ height: "auto" }}>
       <DrawerHeader></DrawerHeader>
       <Divider />
       <List component="nav">
         <ListItems qty={qtyOfPendingOrders} />
       </List>
       <Divider />
-    </>
+    </Box>
   );
 
   return (
@@ -123,7 +122,10 @@ const DashboardContent = ({ window, children, orders }) => {
         </AppBar>
         <Box
           component="nav"
-          sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 } }}
+          sx={{
+            width: { md: drawerWidth },
+            flexShrink: { md: 0 },
+          }}
           aria-label="mailbox folders"
         >
           <Drawer
@@ -151,6 +153,7 @@ const DashboardContent = ({ window, children, orders }) => {
               "& .MuiDrawer-paper": {
                 boxSizing: "border-box",
                 width: drawerWidth,
+                height: "auto",
               },
             }}
             open
