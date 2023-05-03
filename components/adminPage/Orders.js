@@ -6,11 +6,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
-import IconButton from "@mui/material/IconButton";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Collapse from "@mui/material/Collapse";
 import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
@@ -127,7 +123,9 @@ export default function Orders({ order, num, onOrderUpdate }) {
             }}
           >
             <TableCell align="left" style={boldStyleHead}>
-              Order № {num}
+              {order.orderNumber
+                ? `Order: ${order.orderNumber}`
+                : `Order: ${num}`}
             </TableCell>
             <TableCell align="center">
               {dateTransform(order.createdAt)}
@@ -155,7 +153,7 @@ export default function Orders({ order, num, onOrderUpdate }) {
             </TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
+        <TableBody sx={{ overflowX: "overlay" }}>
           <TableRow>
             <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
               <Collapse in={open} timeout="auto" unmountOnExit>

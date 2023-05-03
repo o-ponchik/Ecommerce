@@ -16,6 +16,7 @@ import Review from "../../components/Review";
 import { toast } from "react-hot-toast";
 import errors from "../../context/Constants";
 import useForm from "../../hooks/use-form";
+import { generateOrderNumber } from "../../utils/generateOrderNumer";
 
 import { useStateContext } from "../../context/StateContext";
 
@@ -58,7 +59,15 @@ function Checkout() {
     setFormInputsValidity,
     clearCart,
     resetForm,
+    orderNumber,
+    setOrderNumber,
   } = useStateContext();
+
+  const orderNum = () => {
+    const generatedNum = generateOrderNumber();
+    setOrderNumber(generatedNum);
+    return generatedNum;
+  };
 
   const {
     isEmpty,
@@ -141,6 +150,7 @@ function Checkout() {
             slug: undefined,
           };
         }),
+        orderNumber: orderNum(),
         status: "Pending",
         totalPrice: totalPrice,
       };
@@ -197,6 +207,9 @@ function Checkout() {
     <React.Fragment>
       <Typography variant="h5" gutterBottom>
         Thank you for your order!
+      </Typography>
+      <Typography variant="6" gutterBottom color="primary">
+        Your order number: {orderNumber}
       </Typography>
       <Typography variant="subtitle1">
         We will contact you soon to discuss the payment method and shipping of

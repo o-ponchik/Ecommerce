@@ -21,6 +21,7 @@ export const StateContext = ({ children }) => {
   const [postalCode, setPostalCode] = useState("");
   const [country, setCountry] = useState("");
   const [details, setDetails] = useState("");
+  const [orderNumber, setOrderNumber] = useState("");
 
   //-----Form inputs validation------
   const [formInputsValidity, setFormInputsValidity] = useState({
@@ -188,6 +189,8 @@ export const StateContext = ({ children }) => {
         setCountry,
         details,
         setDetails,
+        orderNumber,
+        setOrderNumber,
         formInputsValidity,
         setFormInputsValidity,
         clearCart,
