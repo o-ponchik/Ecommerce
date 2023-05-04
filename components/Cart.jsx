@@ -3,8 +3,8 @@ import Link from "next/link";
 import {
   AiOutlineMinus,
   AiOutlinePlus,
-  AiOutlineLeft,
   AiOutlineShopping,
+  AiOutlineClose,
 } from "react-icons/ai";
 import { TiDeleteOutline } from "react-icons/ti";
 import { useStateContext } from "../context/StateContext";
@@ -29,8 +29,8 @@ const Cart = () => {
           className="cart-heading"
           onClick={() => setShowCart(false)}
         >
-          <AiOutlineLeft />
-          <span className="heading">Your Cart</span>
+          <AiOutlineClose />
+          <span className="heading">Close Your Cart</span>
           <span className="cart-num-items">({totalQuantities} items)</span>
         </button>
 
@@ -111,7 +111,7 @@ const Cart = () => {
                   type="button"
                   onClick={() => setShowCart(false)}
                 >
-                  Pay My Order
+                  Go To Checkout
                 </button>
               </Link>
             </div>
