@@ -1,7 +1,6 @@
 import * as React from "react";
 import axios from "axios";
 import CssBaseline from "@mui/material/CssBaseline";
-import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
@@ -17,7 +16,7 @@ import { toast } from "react-hot-toast";
 import errors from "../../context/Constants";
 import useForm from "../../hooks/use-form";
 import { generateOrderNumber } from "../../utils/generateOrderNumer";
-
+import Link from "next/link";
 import { useStateContext } from "../../context/StateContext";
 
 const steps = ["Shipping address", "Review your order"];
@@ -258,7 +257,7 @@ function Checkout() {
             ))}
           </Stepper>
           {activeStep === steps.length ? (
-            orderResult
+            <React.Fragment>{orderResult}</React.Fragment>
           ) : (
             <React.Fragment>
               {getStepContent(activeStep)}
@@ -280,6 +279,25 @@ function Checkout() {
             </React.Fragment>
           )}
         </Paper>
+        {activeStep === steps.length && !isLoading && !isErrorCreateOrder && (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "2rem",
+            }}
+          >
+            <Link href={`/`}>
+              <Button
+                variant="outlined"
+                href="/"
+                className="hero-banner-button"
+              >
+                Return To Homepage
+              </Button>
+            </Link>
+          </Box>
+        )}
       </Container>
     </ThemeProvider>
   );
