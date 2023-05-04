@@ -22,7 +22,15 @@ const Cart = () => {
   } = useStateContext();
 
   return (
-    <div className="cart-wrapper" ref={cartRef}>
+    <div
+      className="cart-wrapper"
+      ref={cartRef}
+      onClick={(event) => {
+        if (event.target.classList.contains("cart-wrapper")) {
+          setShowCart(false);
+        }
+      }}
+    >
       <div className="cart-container">
         <button
           type="button"
