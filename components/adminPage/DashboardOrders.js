@@ -1,5 +1,4 @@
 import * as React from "react";
-import Link from "@mui/material/Link";
 import PropTypes from "prop-types";
 import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -94,7 +93,7 @@ TablePaginationActions.propTypes = {
 
 export default function DashboardOrders({ orders }) {
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - orders.length) : 0;
@@ -124,27 +123,24 @@ export default function DashboardOrders({ orders }) {
           </TableHead>
           <TableBody>
             {(rowsPerPage > 0
-              ? orders.slice(
-                  page * rowsPerPage,
-                  page * rowsPerPage + rowsPerPage
-                )
+              ? orders
+                  .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               : orders
-            )
-              .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-              .map((order) => {
-                return (
-                  <TableRow key={order._id}>
-                    <TableCell>{dateTransform(order.createdAt)}</TableCell>
-                    <TableCell>{order.customer.name}</TableCell>
-                    <TableCell>
-                      {order.customer.address.city},{" "}
-                      {order.customer.address.country}
-                    </TableCell>
-                    <TableCell>{order.status}</TableCell>
-                    <TableCell align="right">{`$${order.totalPrice}`}</TableCell>
-                  </TableRow>
-                );
-              })}
+            ).map((order) => {
+              return (
+                <TableRow key={order._id}>
+                  <TableCell>{dateTransform(order.createdAt)}</TableCell>
+                  <TableCell>{order.customer.name}</TableCell>
+                  <TableCell>
+                    {order.customer.address.city},{" "}
+                    {order.customer.address.country}
+                  </TableCell>
+                  <TableCell>{order.status}</TableCell>
+                  <TableCell align="right">{`$${order.totalPrice}`}</TableCell>
+                </TableRow>
+              );
+            })}
             {emptyRows > 0 && (
               <TableRow style={{ height: 33 * emptyRows }}>
                 <TableCell colSpan={6} />
@@ -155,7 +151,7 @@ export default function DashboardOrders({ orders }) {
             <TableRow>
               <TablePagination
                 rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-                colSpan={6}
+                // colSpan={6}
                 count={orders.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
