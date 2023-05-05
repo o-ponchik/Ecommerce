@@ -60,14 +60,21 @@ export default function Review(props) {
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <Typography variant="h6" color="primary" gutterBottom sx={{ mt: 2 }}>
-            Shipping:
+            Customer information
           </Typography>
           <Typography gutterBottom>
-            {firstName} {lastName}
+            <span className="highlight-text">Name:</span> {firstName} {lastName}
           </Typography>
-          <Typography gutterBottom>{phone}</Typography>
-          <Typography gutterBottom>{email}</Typography>
-          <Typography gutterBottom>{addresses.join(", ")}</Typography>
+          <Typography gutterBottom>
+            <span className="highlight-text">Phone:</span> {phone}
+          </Typography>
+          <Typography gutterBottom>
+            <span className="highlight-text">Email:</span> {email}
+          </Typography>
+          <Typography gutterBottom>
+            <span className="highlight-text">Shipping address:</span>{" "}
+            {addresses.join(", ")}
+          </Typography>
         </Grid>
         <Grid item xs={12}>
           <TextField

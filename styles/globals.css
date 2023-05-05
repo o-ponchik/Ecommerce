@@ -16,6 +16,11 @@ a {
   text-decoration: none;
 }
 
+.highlight-text {
+  font-weight: 500;
+  color: #2196f3;
+}
+
 .main-container {
   max-width: 1400px;
   margin: auto;
