@@ -5,16 +5,15 @@ import {
   AiOutlineStar,
   AiFillStar,
 } from "react-icons/ai";
-
 import { client, urlFor } from "../../lib/client";
 import Product from "../../components/Product";
 import { useStateContext } from "../../context/StateContext";
 import Link from "next/link";
 
-const ProductDetails = ({ product, products }) => {
+const ProductDetails = ({ product, products, bannerData }) => {
+  const { decreaseQty, increaseQty, qty, onAdd } = useStateContext();
   const { image, name, details, price } = product;
   const [index, setIndex] = useState(0);
-  const { decreaseQty, increaseQty, qty, onAdd } = useStateContext();
 
   return (
     <div>
@@ -41,7 +40,7 @@ const ProductDetails = ({ product, products }) => {
         </div>
         <div className="product-detail-desc">
           <h1>{name}</h1>
-          <div className="reviews">
+          {/* <div className="reviews">
             <div>
               <AiFillStar />
               <AiFillStar />
@@ -50,7 +49,7 @@ const ProductDetails = ({ product, products }) => {
               <AiOutlineStar />
             </div>
             <p>(20)</p>
-          </div>
+          </div> */}
           <h4>Details:</h4>
           <p>{details}</p>
           <p className="price">${price}</p>
@@ -132,7 +131,7 @@ export const getStaticProps = async ({ params: { slug } }) => {
   const bannerQuery = '*[_type == "banner"]';
   const bannerData = await client.fetch(bannerQuery);
 
-  return { props: { products, product } };
+  return { props: { products, product, bannerData } };
 };
 
 export default ProductDetails;

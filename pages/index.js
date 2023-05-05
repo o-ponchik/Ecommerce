@@ -1,5 +1,4 @@
 import React from "react";
-
 import { client } from "../lib/client";
 import { HeroBanner, Product, FooterBanner } from "../components";
 
@@ -7,7 +6,6 @@ const Home = ({ products, bannerData }) => {
   return (
     <>
       <HeroBanner heroBanner={bannerData.length && bannerData[0]} />
-      {console.log(bannerData)}
 
       <div className="products-heading">
         <h2>Best handmade candles ever</h2>

@@ -10,7 +10,7 @@ import Badge from "@mui/material/Badge";
 // import LayersIcon from "@mui/icons-material/Layers";
 import Link from "next/link";
 
-export function ListItems({ qty }) {
+export default function ListItems({ qty }) {
   return (
     <React.Fragment>
       <Link href={"/admin/dashboard"}>
