@@ -172,7 +172,7 @@ span.text-red {
 .hero-banner-image {
   position: absolute;
   top: 0%;
-  right: 20%;
+  right: -3%;
   width: 450px;
   height: 450px;
 }
@@ -248,10 +248,9 @@ span.text-red {
 }
 .footer-banner-image {
   position: absolute;
-  /* top: -35%;
-  left: 8%; */
-  top: -25%;
-  left: 25%;
+
+  top: 2%;
+  left: 35%;
 }
 .banner-desc .right {
   line-height: 1.4;
@@ -524,22 +523,28 @@ span.text-red {
 .buttons .buy-now:hover {
   transform: scale(1.1, 1.1);
 }
+
 .quantity-desc {
   border: 1px solid gray;
-  padding: 6px;
+  /* padding: 6px 0; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .quantity-desc span {
   font-size: 16px;
-  padding: 6px 12px;
+  padding: 8px 12px;
   cursor: pointer;
 }
 .quantity-desc .minus {
-  border-right: 1px solid gray;
   color: #f02d34;
 }
 .quantity-desc .num {
   border-right: 1px solid gray;
+  border-left: 1px solid grey;
   font-size: 20px;
+  width: 45px;
+  text-align: center;
 }
 .quantity-desc .plus {
   color: rgb(49, 168, 49);
