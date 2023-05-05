@@ -523,7 +523,13 @@ span.text-red {
 .buttons .buy-now:hover {
   transform: scale(1.1, 1.1);
 }
-
+.quantity-desc,
+.buttons {
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none;
+}
 .quantity-desc {
   border: 1px solid gray;
   /* padding: 6px 0; */
