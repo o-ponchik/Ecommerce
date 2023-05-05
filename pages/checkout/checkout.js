@@ -12,6 +12,7 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import AddressForm from "../../components/AddressForm";
 import Review from "../../components/Review";
+import OrderSummary from "../../components/OrderSummary";
 import { toast } from "react-hot-toast";
 import errors from "../../context/Constants";
 import useForm from "../../hooks/use-form";
@@ -19,13 +20,15 @@ import { generateOrderNumber } from "../../utils/generateOrderNumer";
 import Link from "next/link";
 import { useStateContext } from "../../context/StateContext";
 
-const steps = ["Shipping address", "Review your order"];
+const steps = ["Your order", "Shipping address", "Review your order"];
 
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return <AddressForm />;
+      return <OrderSummary />;
     case 1:
+      return <AddressForm />;
+    case 2:
       return <Review />;
     default:
       throw new Error("Unknown step");
@@ -79,7 +82,7 @@ function Checkout() {
   const handleNext = (e) => {
     let formIsValid = false;
 
-    if (activeStep === 0) {
+    if (activeStep === 1) {
       const firstNameIsValid = !isEmpty(firstName) && validLenght(firstName, 2);
       const lastNameIsValid = !isEmpty(lastName) && validLenght(lastName, 2);
       const cityIsValid = !isEmpty(city) && validLenght(city, 2);
@@ -124,8 +127,8 @@ function Checkout() {
   };
 
   React.useEffect(() => {
-    if (activeStep === 2) {
-      console.log("step 2");
+    if (activeStep === 3) {
+      console.log("step 3");
       const orderPayload = {
         customer: {
           name: `${firstName} ${lastName}`,
@@ -262,6 +265,11 @@ function Checkout() {
             <React.Fragment>
               {getStepContent(activeStep)}
               <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+                {activeStep === 0 && (
+                  <Link href={`/`}>
+                    <Button sx={{ mt: 3, ml: 1 }}>Return To Shopping</Button>
+                  </Link>
+                )}
                 {activeStep !== 0 && (
                   <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
                     Back
@@ -288,12 +296,8 @@ function Checkout() {
             }}
           >
             <Link href={`/`}>
-              <Button
-                variant="outlined"
-                href="/"
-                className="hero-banner-button"
-              >
-                Return To Homepage
+              <Button variant="outlined" href="/">
+                {children}
               </Button>
             </Link>
           </Box>

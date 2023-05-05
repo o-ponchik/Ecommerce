@@ -14,3 +14,4 @@ export { default as Deposits } from "./adminPage/Deposits";
 export { default as ListItems } from "./adminPage/ListItems";
 export { default as Orders } from "./adminPage/Orders";
 export { default as Title } from "./adminPage/Title";
+export { default as OrderSummary } from "./OrderSummary";
