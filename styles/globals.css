@@ -22,7 +22,7 @@ a {
 }
 
 .main-container {
-  max-width: 1400px;
+  max-width: 1300px;
   margin: auto;
   width: 100%;
   padding: 4rem 2rem 2rem;
@@ -173,13 +173,14 @@ span.text-red {
   font-size: 10em;
   margin-left: -20px;
   text-transform: uppercase;
+  position: relative;
+  z-index: 20;
 }
 .hero-banner-image {
   position: absolute;
   top: 0%;
-  right: -3%;
-  width: 450px;
-  height: 450px;
+  right: 0%;
+  z-index: 10;
 }
 
 .desc {
@@ -253,12 +254,17 @@ span.text-red {
 }
 .footer-banner-image {
   position: absolute;
-
   top: 2%;
-  left: 35%;
+  left: 25%;
+  opacity: 0.7;
+  z-index: 10;
 }
 .banner-desc .right {
   line-height: 1.4;
+  z-index: 20;
+}
+.banner-desc .left {
+  z-index: 20;
 }
 .banner-desc .right h3 {
   font-weight: 800;
@@ -707,25 +713,36 @@ span.text-red {
 
 /* ------------------ */
 
+@media screen and (max-width: 600px) {
+  .hero-banner-image {
+    top: 20%;
+    right: -75%;
+  }
+  .hero-banner-container {
+    overflow: hidden;
+  }
+  .footer-banner-container {
+    overflow: hidden;
+  }
+}
+
 @media screen and (max-width: 800px) {
+  .main-container {
+    padding: 4rem 0 0;
+  }
   .hero-banner-container {
     height: 560px;
-  }
-  .hero-banner-image {
-    width: 77%;
-    height: 62%;
-    top: -2%;
-    right: -6%;
+    overflow: hidden;
   }
   .footer-banner-container {
     height: 560px;
     margin-top: 80px;
+    overflow: hidden;
   }
   .footer-banner-image {
-    width: 77%;
-    left: 30%;
-    top: 6%;
-    height: 56%;
+    left: 0%;
+    top: 0%;
+    opacity: 0.7;
   }
   .banner-desc .left h3 {
     font-weight: 900;
