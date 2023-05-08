@@ -162,6 +162,7 @@ span.text-red {
   font-size: 18px;
   font-weight: 500;
   cursor: pointer;
+  position: relative;
   z-index: 10000 !important;
 }
 

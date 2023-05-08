@@ -22,7 +22,7 @@ export default function OrderSummary(props) {
         Picked items
       </Typography>
 
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} sx={{ overflow: "hidden" }}>
         <Table sx={{ minWidth: 300 }} aria-label="simple table">
           <TableBody>
             {cartItems.map((product) => (
