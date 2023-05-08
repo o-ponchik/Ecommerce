@@ -772,8 +772,9 @@ span.text-red {
     height: 350px;
   }
   .cart-container {
-    width: 415px;
+    width: 100%;
     padding: 4px;
+    min-width: 375px;
   }
   .cart-heading {
     margin-top: 35px;
