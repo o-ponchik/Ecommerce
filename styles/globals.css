@@ -163,7 +163,7 @@ span.text-red {
   font-weight: 500;
   cursor: pointer;
   position: relative;
-  z-index: 10000 !important;
+  z-index: 20;
 }
 
 .hero-banner-container h3 {
@@ -778,7 +778,6 @@ span.text-red {
   }
   .hero-banner-container button {
     margin-top: 90px;
-    z-index: 10000;
   }
   .desc {
     bottom: 60px;
