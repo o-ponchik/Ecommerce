@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import Link from "next/link";
 import {
   AiOutlineMinus,
@@ -9,6 +9,7 @@ import {
 import { TiDeleteOutline } from "react-icons/ti";
 import { useStateContext } from "../context/StateContext";
 import { urlFor } from "../lib/client";
+import { updateCartFromLocalStorage } from "../utils/localStorageUtil";
 
 const Cart = () => {
   const cartRef = useRef();

@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { client } from "../lib/client";
 import { HeroBanner, Product, FooterBanner } from "../components";
+import { useStateContext } from "../context/StateContext";
+import { updateCartFromLocalStorage } from "../utils/localStorageUtil";
 
 const Home = ({ products, bannerData }) => {
+  const { setCartItems, setTotalPrice, setTotalQuantities } = useStateContext();
+
+  useEffect(() => {
+    updateCartFromLocalStorage(setCartItems, setTotalPrice, setTotalQuantities);
+  }, []);
+
   return (
     <>
       <HeroBanner heroBanner={bannerData.length && bannerData[0]} />

@@ -1,4 +1,4 @@
-import React, { useState, useContext, createContext } from "react";
+import React, { useState, useContext, createContext, useEffect } from "react";
 import { toast } from "react-hot-toast";
 
 const Context = createContext();
@@ -38,6 +38,10 @@ export const StateContext = ({ children }) => {
   let foundProduct;
   let index;
 
+  const updateLocalStorage = (cartItems) => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  };
+
   const onAdd = (product, quantity) => {
     // we should check if the product that we want to add is aleary has been added before
     // if yes => update total price and qty of product and total qty)
@@ -76,7 +80,13 @@ export const StateContext = ({ children }) => {
     // setQty(1);
 
     toast.success(`${qty} ${product.name} added to the cart.`);
+
+    updateLocalStorage(cartItems);
   };
+
+  useEffect(() => {
+    updateLocalStorage(cartItems);
+  }, [cartItems]);
 
   // remove product from the Cart list
   const onRemove = (product) => {
@@ -93,6 +103,7 @@ export const StateContext = ({ children }) => {
       (prevTotalQuantity) => prevTotalQuantity - foundProduct[0].quantity
     );
     setCartItems(newCartItems);
+    updateLocalStorage(newCartItems);
   };
 
   // Change quantity of product in the cart and update cart with new qauntity of products, total price and price of product
@@ -122,6 +133,7 @@ export const StateContext = ({ children }) => {
         setTotalQuantities((prevTotalQuantity) => prevTotalQuantity - 1);
       }
     }
+    updateLocalStorage(newCartItems);
   };
 
   const increaseQty = () => {
@@ -140,6 +152,7 @@ export const StateContext = ({ children }) => {
     setCartItems([]);
     setTotalQuantities(0);
     setTotalPrice(0);
+    localStorage.clear();
   };
 
   const resetForm = () => {
@@ -161,8 +174,11 @@ export const StateContext = ({ children }) => {
         showCart,
         setShowCart,
         cartItems,
+        setCartItems,
         totalPrice,
+        setTotalPrice,
         totalQuantities,
+        setTotalQuantities,
         qty,
         increaseQty,
         decreaseQty,
