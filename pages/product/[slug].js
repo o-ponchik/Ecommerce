@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   AiOutlineMinus,
   AiOutlinePlus,
@@ -11,9 +11,14 @@ import { useStateContext } from "../../context/StateContext";
 import Link from "next/link";
 
 const ProductDetails = ({ product, products, bannerData }) => {
-  const { decreaseQty, increaseQty, qty, onAdd } = useStateContext();
+  const { decreaseQty, increaseQty, qty, onAdd, setShowIconCart } =
+    useStateContext();
   const { image, name, details, price } = product;
   const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    setShowIconCart(true);
+  }, []);
 
   return (
     <div>

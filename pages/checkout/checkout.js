@@ -46,6 +46,7 @@ function Checkout() {
     errors;
 
   const {
+    setShowIconCart,
     cartItems,
     totalPrice,
     firstName,
@@ -64,6 +65,8 @@ function Checkout() {
     orderNumber,
     setOrderNumber,
   } = useStateContext();
+
+  React.useEffect(() => setShowIconCart(false), []);
 
   const orderNum = () => {
     const generatedNum = generateOrderNumber();

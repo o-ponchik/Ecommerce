@@ -6,7 +6,8 @@ import Cart from "./Cart";
 import { useStateContext } from "../context/StateContext";
 
 const Navabar = () => {
-  const { showCart, setShowCart, totalQuantities } = useStateContext();
+  const { showCart, setShowCart, totalQuantities, showIconCart } =
+    useStateContext();
 
   return (
     <div className="navbar-wrapper">
@@ -15,15 +16,17 @@ const Navabar = () => {
           <Link href="/">LogoCandles</Link>
         </p>
 
-        <button
-          type="button"
-          className="cart-icon"
-          onClick={() => setShowCart(true)}
-        >
-          <AiOutlineShopping />
+        {showIconCart && (
+          <button
+            type="button"
+            className="cart-icon"
+            onClick={() => setShowCart(true)}
+          >
+            <AiOutlineShopping />
 
-          <span className="cart-item-qty">{totalQuantities}</span>
-        </button>
+            <span className="cart-item-qty">{totalQuantities}</span>
+          </button>
+        )}
 
         {showCart && <Cart />}
       </div>

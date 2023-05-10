@@ -5,9 +5,11 @@ import { useStateContext } from "../context/StateContext";
 import { updateCartFromLocalStorage } from "../utils/localStorageUtil";
 
 const Home = ({ products, bannerData }) => {
-  const { setCartItems, setTotalPrice, setTotalQuantities } = useStateContext();
+  const { setCartItems, setTotalPrice, setTotalQuantities, setShowIconCart } =
+    useStateContext();
 
   useEffect(() => {
+    setShowIconCart(true);
     updateCartFromLocalStorage(setCartItems, setTotalPrice, setTotalQuantities);
   }, []);
 
