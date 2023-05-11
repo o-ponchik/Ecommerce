@@ -35,7 +35,16 @@ function getStepContent(step) {
   }
 }
 
-const theme = createTheme();
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#933157",
+    },
+    secondary: {
+      main: "#324d67",
+    },
+  },
+});
 
 function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
@@ -278,7 +287,13 @@ function Checkout() {
               >
                 {activeStep === 0 && (
                   <Link href={`/`}>
-                    <Button sx={{ mt: 3, ml: 1 }}>Return To Shopping</Button>
+                    <Button
+                      sx={{ mt: 3, ml: 1 }}
+                      color="primary"
+                      variant="outlined"
+                    >
+                      Return To Shopping
+                    </Button>
                   </Link>
                 )}
                 {activeStep !== 0 && (

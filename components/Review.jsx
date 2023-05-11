@@ -34,7 +34,7 @@ export default function Review(props) {
 
   return (
     <React.Fragment>
-      <Typography variant="h6" color="primary" gutterBottom>
+      <Typography variant="h6" color="secondary" gutterBottom>
         Order summary
       </Typography>
       <List disablePadding>
@@ -58,8 +58,13 @@ export default function Review(props) {
         </ListItem>
       </List>
       <Grid container spacing={2}>
-        <Grid item xs={12} sm={6}>
-          <Typography variant="h6" color="primary" gutterBottom sx={{ mt: 2 }}>
+        <Grid item xs={12}>
+          <Typography
+            variant="h6"
+            color="secondary"
+            gutterBottom
+            sx={{ mt: 2 }}
+          >
             Customer information
           </Typography>
           <Typography gutterBottom>

@@ -18,7 +18,7 @@ export default function OrderSummary(props) {
 
   return (
     <React.Fragment>
-      <Typography variant="h6" color="primary" gutterBottom>
+      <Typography variant="h6" color="secondary" gutterBottom>
         Picked items
       </Typography>
 

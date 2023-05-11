@@ -27,7 +27,7 @@ a {
 
 .highlight-text {
   font-weight: 500;
-  color: #1976d2;
+  color: var(--second-color);
 }
 
 .main-container {
