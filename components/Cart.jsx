@@ -39,7 +39,7 @@ const Cart = () => {
           onClick={() => setShowCart(false)}
         >
           <AiOutlineClose />
-          <span className="heading">Close Your Cart</span>
+          <span className="heading">Your Cart</span>
           <span className="cart-num-items">({totalQuantities} items)</span>
         </button>
 
