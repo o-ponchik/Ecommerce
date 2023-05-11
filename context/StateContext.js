@@ -78,7 +78,7 @@ export const StateContext = ({ children }) => {
       setCartItems([...cartItems, { ...product }]);
     }
 
-    // setQty(1);
+    setQty(1);
 
     toast.success(`${qty} ${product.name} added to the cart.`);
 
