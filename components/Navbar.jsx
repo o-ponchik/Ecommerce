@@ -20,7 +20,9 @@ const Navabar = () => {
           <button
             type="button"
             className="cart-icon"
-            onClick={() => setShowCart(true)}
+            onClick={() => {
+              setShowCart(true);
+            }}
           >
             <AiOutlineShopping />
 
@@ -29,6 +31,7 @@ const Navabar = () => {
         )}
 
         {showCart && <Cart />}
+        {/* <Cart /> */}
       </div>
     </div>
   );

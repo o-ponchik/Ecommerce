@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import Link from "next/link";
 import {
   AiOutlineMinus,
@@ -9,7 +9,6 @@ import {
 import { TiDeleteOutline } from "react-icons/ti";
 import { useStateContext } from "../context/StateContext";
 import { urlFor } from "../lib/client";
-import { updateCartFromLocalStorage } from "../utils/localStorageUtil";
 
 const Cart = () => {
   const cartRef = useRef();
@@ -20,6 +19,7 @@ const Cart = () => {
     setShowCart,
     toggleCartItemQuantity,
     onRemove,
+    showCart,
   } = useStateContext();
 
   return (
@@ -32,7 +32,11 @@ const Cart = () => {
         }
       }}
     >
-      <div className="cart-container">
+      <div
+        className={`cart-container ${
+          showCart ? "cart-appear" : "cart-disappear"
+        }`}
+      >
         <button
           type="button"
           className="cart-heading"

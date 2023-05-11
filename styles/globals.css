@@ -306,8 +306,9 @@ span.text-red {
   top: 0;
   z-index: 100;
   /* will-change: transform; */
-  transition: all 1s ease-in-out;
+  /* transition: all 1s ease-in-out; */
 }
+
 .cart-container {
   height: 100vh;
   width: 600px;
@@ -315,8 +316,35 @@ span.text-red {
   float: right;
   padding: 40px 10px;
   position: relative;
-}
 
+  /* transform: translateX(100%); */
+}
+.cart-container.cart-appear {
+  animation-name: cart-appear-animation;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+}
+.cart-container.cart-disappear {
+  animation-name: cart-disappear-animation;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+}
+@keyframes cart-appear-animation {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes cart-disappear-animation {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
 .footer-container {
   color: var(--second-color);
   text-align: center;
