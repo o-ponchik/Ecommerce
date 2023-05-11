@@ -15,7 +15,7 @@ import List from "@mui/material/List";
 import Drawer from "@mui/material/Drawer";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { ListItems } from "./ListItems.js";
+import ListItems from "./ListItems.js";
 
 const drawerWidth = 240;
 
@@ -48,7 +48,10 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 const mdTheme = createTheme({
   palette: {
     primary: {
-      main: teal[800],
+      main: "#933157",
+    },
+    secondary: {
+      main: "#324d67",
     },
   },
 });

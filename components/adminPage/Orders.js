@@ -53,7 +53,7 @@ export default function Orders({ order, num, onOrderUpdate }) {
 
   const boldStyleHead = {
     fontWeight: "700",
-    color: "#212121",
+    color: "#324d67",
     fontSize: "18px",
   };
   const orderStatusStyle = {
@@ -62,8 +62,14 @@ export default function Orders({ order, num, onOrderUpdate }) {
     fontSize: "18px",
   };
   const styleHeaders = {
+    color: "#324d67",
     fontWeight: "700",
-    color: "black",
+    fontSize: "16px",
+    backgroundColor: "#f5f5f5",
+  };
+  const styleHeadersPrice = {
+    color: "#933157",
+    fontWeight: "700",
     fontSize: "16px",
     backgroundColor: "#f5f5f5",
   };
@@ -314,10 +320,10 @@ export default function Orders({ order, num, onOrderUpdate }) {
                   </TableRow>
 
                   <TableRow>
-                    <TableCell style={styleHeaders} colSpan={3}>
+                    <TableCell style={styleHeadersPrice} colSpan={3}>
                       Total Price:
                     </TableCell>
-                    <TableCell style={styleHeaders}>
+                    <TableCell style={styleHeadersPrice}>
                       {order.totalPrice} $
                     </TableCell>
                   </TableRow>
