@@ -34,7 +34,7 @@ a {
   max-width: 1300px;
   margin: auto;
   width: 100%;
-  padding: 4rem 2rem 2rem;
+  padding: 6rem 2rem 2rem;
   min-height: 80vh;
 }
 
@@ -48,7 +48,7 @@ a {
 .navbar-container {
   display: flex;
   justify-content: space-between;
-  padding: 6px 18px;
+  padding: 0.5rem 2rem;
   position: relative;
   box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.2);
 }
@@ -91,6 +91,7 @@ span.text-red {
 .logo {
   color: gray;
   font-size: 18px;
+  cursor: pointer;
 }
 .cart-icon {
   font-size: 25px;

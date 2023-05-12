@@ -10,12 +10,13 @@ import IconButton from "@mui/material/IconButton";
 import Container from "@mui/material/Container";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Button } from "@mui/material";
-import { teal } from "@mui/material/colors";
 import List from "@mui/material/List";
 import Drawer from "@mui/material/Drawer";
 import { useRouter } from "next/router";
 import axios from "axios";
 import ListItems from "./ListItems.js";
+import Image from "next/image.js";
+import Link from "next/link.js";
 
 const drawerWidth = 240;
 
@@ -111,7 +112,16 @@ const DashboardContent = ({ window, children, orders }) => {
             </IconButton>
 
             <Typography variant="h6" noWrap component="div">
-              Logo
+              <div className="logo">
+                <Link href="/">
+                  <Image
+                    src="/logo-light-pink.svg"
+                    width={100}
+                    height={50}
+                    alt="Rosy Fox Logo"
+                  />
+                </Link>
+              </div>
             </Typography>
             <Button
               className="logOut-btn"

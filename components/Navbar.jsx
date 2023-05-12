@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { AiOutlineShopping } from "react-icons/ai";
-
+import Image from "next/image";
 import Cart from "./Cart";
 import { useStateContext } from "../context/StateContext";
 
@@ -12,9 +12,16 @@ const Navabar = () => {
   return (
     <div className="navbar-wrapper">
       <div className="navbar-container">
-        <p className="logo">
-          <Link href="/">LogoCandles</Link>
-        </p>
+        <div className="logo">
+          <Link href="/">
+            <Image
+              src="/logo-pink.svg"
+              width={100}
+              height={50}
+              alt="Rosy Fox Logo"
+            />
+          </Link>
+        </div>
 
         {showIconCart && (
           <button
