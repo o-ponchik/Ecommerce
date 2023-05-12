@@ -600,12 +600,12 @@ span.text-red {
 }
 .quantity-desc span {
   font-size: 16px;
-  padding: 8px 12px;
+  padding: 8px 12px 5px;
   cursor: pointer;
 }
 .checkout span {
   font-size: 10px;
-  padding: 0px 6px;
+  padding: 3px 6px 0;
 }
 .minus {
   color: var(--main-color);
