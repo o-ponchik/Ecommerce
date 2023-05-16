@@ -1,14 +1,25 @@
 import { sign } from "jsonwebtoken";
 import { serialize } from "cookie";
-
-const secret = process.env.SECRET;
-const usernameSystem = process.env.USERNAME;
-const passwordSystem = process.env.PASSWORD;
+import clientPromise from "../../../lib/mongo/mongodb";
+import bcrypt from "bcrypt";
 
 export default async function (req, res) {
   const { username, password } = req.body;
 
-  if (username === usernameSystem && password === passwordSystem) {
+  const client = await clientPromise;
+  const db = client.db("Ecommerce");
+  const userDB = await db
+    .collection("Users")
+    .find({ user: username })
+    .toArray();
+
+  const userDBlogin = userDB[0].user;
+  const userDBpassword = userDB[0].password;
+
+  console.log({ userDB });
+  console.log({ userDBlogin });
+
+  if (userDB && bcrypt.compareSync(password, userDBpassword)) {
     const token = sign(
       {
         exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 30, // 30 days
