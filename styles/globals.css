@@ -487,8 +487,10 @@ span.text-red {
   border-radius: 15px;
   background-color: #ebebeb;
 
-  width: 400px;
-  height: 400px;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 0;
+  object-fit: cover;
   cursor: pointer;
   transition: 0.3s ease-in-out;
 }
@@ -703,7 +705,8 @@ span.text-red {
 }
 
 .image-container {
-  width: 40%;
+  width: 500px;
+  height: 500px;
 }
 
 /* ------------------ Pre-Order Form----------*/
@@ -778,6 +781,15 @@ span.text-red {
     display: flex;
     align-items: center;
   }
+  .product-detail-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .image-container {
+    width: 85vw;
+    height: 50vh;
+  }
 }
 
 @media screen and (max-width: 800px) {
@@ -844,8 +856,8 @@ span.text-red {
     flex-wrap: wrap;
   }
   .product-detail-container .product-detail-image {
-    width: 350px;
-    height: 350px;
+    width: 100%;
+    height: 100%;
   }
   .cart-container {
     width: 100%;
@@ -923,5 +935,12 @@ span.text-red {
   .btn-container {
     width: 300px;
     margin: auto;
+  }
+}
+@media screen and (max-width: 1100px) {
+  .product-detail-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }

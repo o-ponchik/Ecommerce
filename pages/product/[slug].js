@@ -27,9 +27,8 @@ const ProductDetails = ({ product, products, bannerData }) => {
           <div className="image-container">
             <img
               src={urlFor(image && image[index])}
-              alt=""
+              alt={name}
               className="product-detail-image "
-              style={{ width: "300px", height: "400px" }}
             />
           </div>
           <div className="small-images-container">

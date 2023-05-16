@@ -13,8 +13,6 @@ const Home = ({ products, bannerData }) => {
     updateCartFromLocalStorage(setCartItems, setTotalPrice, setTotalQuantities);
   }, []);
 
-  console.log({ bannerData });
-
   return (
     <>
       <HeroBanner heroBanner={bannerData.length && bannerData[0]} />
