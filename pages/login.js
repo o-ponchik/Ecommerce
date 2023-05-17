@@ -66,17 +66,40 @@ const Login = () => {
 
       if (user.status === 200) {
         router.push("/admin/dashboard");
+      } else {
+        throw new Error(response.data.message);
       }
     } catch (error) {
-      const errorMsg = error.response.data.message;
-      toast.error(`${errorMsg} Please, try one more time.`);
+      console.log({ error });
+      const message = error.response.data.message;
+      const errorMsg = message || "Something went wrong!";
+      toast.error(`${errorMsg} Please try again.`);
     }
   };
 
   return (
     <>
       <Head>
-        <title>Login|Candles</title>
+        <title>Login | RosyFox</title>
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon_logo/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon_logo/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon_logo/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/favicon_logo/site.webmanifest" />
       </Head>
       <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs">

@@ -3,23 +3,32 @@ import { serialize } from "cookie";
 import clientPromise from "../../../lib/mongo/mongodb";
 import bcrypt from "bcrypt";
 
+const dbName = process.env.DB_NAME;
+const collectionName = process.env.COLLECTION_NAME;
+
 export default async function (req, res) {
+  let client;
+
   const { username, password } = req.body;
 
-  const client = await clientPromise;
-  const db = client.db("Ecommerce");
+  client = await clientPromise;
+  const db = client.db(dbName);
+
   const userDB = await db
-    .collection("Users")
+    .collection(collectionName)
     .find({ user: username })
     .toArray();
 
-  const userDBlogin = userDB[0].user;
-  const userDBpassword = userDB[0].password;
-
   console.log({ userDB });
-  console.log({ userDBlogin });
 
-  if (userDB && bcrypt.compareSync(password, userDBpassword)) {
+  if (userDB.length === 0) {
+    res.status(401).json({ message: "User does not exist!" });
+    return;
+  }
+
+  const user = userDB[0];
+
+  if (userDB && bcrypt.compareSync(password, user.password)) {
     const token = sign(
       {
         exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 30, // 30 days
