@@ -10,7 +10,7 @@ import Head from "next/head";
 const OrdersPanel = ({ orders }) => {
   const router = useRouter();
   const [page, setPage] = useState(1);
-  const itemsPerPage = 15;
+  const itemsPerPage = 10;
 
   const refreshData = () => {
     router.replace(router.asPath);
@@ -45,7 +45,7 @@ const OrdersPanel = ({ orders }) => {
               justifyContent: "center",
               position: "fixed",
               bottom: 0,
-              left: 0,
+              left: { md: "15rem", sm: 0 },
               right: 0,
               backgroundColor: "white",
               padding: "10px",
