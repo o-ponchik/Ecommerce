@@ -58,8 +58,6 @@ const Login = () => {
       const username = data.get("username");
       const password = data.get("password");
 
-      console.log({ data });
-
       const credentials = { username, password };
 
       const user = await axios.post("/api/auth/login", credentials);

@@ -19,8 +19,6 @@ export default async function (req, res) {
     .find({ user: username })
     .toArray();
 
-  console.log({ userDB });
-
   if (userDB.length === 0) {
     res.status(401).json({ message: "User does not exist!" });
     return;

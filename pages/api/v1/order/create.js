@@ -17,8 +17,6 @@ const createOrder = async (req, res) => {
   const { ERROR_INVALID_NAME, ERROR_INVALID_PHONE, ERROR_INVALID_EMAIL } =
     errors;
 
-  console.log("req.body: ", req.body);
-
   const customer = req.body.customer;
 
   if (!validLenght(customer.name, 2)) {
@@ -59,7 +57,6 @@ const createOrder = async (req, res) => {
       },
     }
   );
-  console.log("data ", data);
 
   res.status(201).send(data);
 };

@@ -32,8 +32,6 @@ export default function Orders({ order, num, onOrderUpdate }) {
   const [orderStatus, setOrderStatus] = React.useState(order.status);
   const { setIsUpdated } = useAdminContext();
 
-  console.log({ order });
-
   let colorStatusOrder;
   let orderStatusText;
 

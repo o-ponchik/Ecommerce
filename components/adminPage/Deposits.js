@@ -3,8 +3,6 @@ import Typography from "@mui/material/Typography";
 import Title from "./Title";
 
 export default function Deposits({ orders }) {
-  console.log("Statisctics", { orders });
-
   const filteredOrders = (orders, status) => {
     return orders.filter((order) => order.status === status).length;
   };
@@ -38,7 +36,7 @@ export default function Deposits({ orders }) {
       <Typography color="error.main" component="p">
         Canceled: {canceledOrders}
       </Typography>
-      <Typography color="text.primary" sx={{ flex: 1 }}>
+      <Typography sx={{ flex: 1 }}>
         Total income of completed orders: $
         {completedOrders > 0 ? totalIncome : 0}
       </Typography>

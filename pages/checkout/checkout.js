@@ -140,7 +140,6 @@ function Checkout() {
 
   React.useEffect(() => {
     if (activeStep === 3) {
-      console.log("step 3");
       const orderPayload = {
         customer: {
           name: `${firstName} ${lastName}`,
@@ -156,7 +155,6 @@ function Checkout() {
           },
         },
         orderItems: cartItems.map((item) => {
-          console.log("item: ", item);
           return {
             ...item,
             _key: `order-${item._id}`,
@@ -187,9 +185,7 @@ function Checkout() {
             "Content-Type": "application/json",
           },
         })
-        .then(function (response) {
-          console.log(response);
-        });
+        .then(function (response) {});
 
       setIsLoading(false);
       clearCart();
