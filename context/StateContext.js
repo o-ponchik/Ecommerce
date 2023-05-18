@@ -10,6 +10,7 @@ export const StateContext = ({ children }) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalQuantities, setTotalQuantities] = useState(0);
   const [qty, setQty] = useState(1);
+  const [language, setLanguage] = useState("uk");
 
   // -----User Info----//
   const [firstName, setFirstName] = useState("");
@@ -91,8 +92,6 @@ export const StateContext = ({ children }) => {
 
   // remove product from the Cart list
   const onRemove = (product) => {
-    console.log(cartItems);
-    console.log(product);
     foundProduct = cartItems.filter((item) => item._id === product._id);
     const newCartItems = cartItems.filter((item) => item._id !== product._id);
 
@@ -214,6 +213,7 @@ export const StateContext = ({ children }) => {
         setFormInputsValidity,
         clearCart,
         resetForm,
+        language,
       }}
     >
       {children}

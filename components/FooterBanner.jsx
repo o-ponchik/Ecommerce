@@ -2,6 +2,7 @@ import React from "react";
 
 import Link from "next/link";
 import { urlFor } from "../lib/client";
+import { useStateContext } from "../context/StateContext";
 
 const FooterBanner = ({
   footerBanner: {
@@ -10,13 +11,18 @@ const FooterBanner = ({
     largeText2,
     saleTime,
     smallText,
-    midText,
+    midText2,
     desc,
     product,
     buttonText,
     image,
   },
 }) => {
+  const { language } = useStateContext();
+
+  // Access the translation based on the selected language
+  const description = desc[language];
+
   return (
     <div className="footer-banner-container ">
       <div className="banner-desc">
@@ -24,12 +30,12 @@ const FooterBanner = ({
           <p>{discount}</p>
           <h3>{largeText1}</h3>
           <h3>{largeText2}</h3>
-          <p>{saleTime}</p>
+          <p>{saleTime[language]}</p>
         </div>
         <div className="right">
           <p>{smallText}</p>
-          <h3>{midText}</h3>
-          <p>{desc}</p>
+          <h3>{midText2}</h3>
+          <p>{description}</p>
           <Link href={`/product/${product}`}>
             <button type="button">{buttonText}</button>
           </Link>

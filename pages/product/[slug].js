@@ -11,7 +11,7 @@ import { useStateContext } from "../../context/StateContext";
 import Link from "next/link";
 
 const ProductDetails = ({ product, products, bannerData }) => {
-  const { decreaseQty, increaseQty, qty, onAdd, setShowIconCart } =
+  const { decreaseQty, increaseQty, qty, onAdd, setShowIconCart, language } =
     useStateContext();
   const { image, name, details, price } = product;
   const [index, setIndex] = useState(0);
@@ -27,7 +27,7 @@ const ProductDetails = ({ product, products, bannerData }) => {
           <div className="image-container">
             <img
               src={urlFor(image && image[index])}
-              alt={name}
+              alt={name[language]}
               className="product-detail-image "
             />
           </div>
@@ -43,7 +43,7 @@ const ProductDetails = ({ product, products, bannerData }) => {
           </div>
         </div>
         <div className="product-detail-desc">
-          <h1>{name}</h1>
+          <h1>{name[language]}</h1>
           {/* <div className="reviews">
             <div>
               <AiFillStar />
@@ -55,7 +55,7 @@ const ProductDetails = ({ product, products, bannerData }) => {
             <p>(20)</p>
           </div> */}
           <h4>Details:</h4>
-          <p>{details}</p>
+          <p>{details[language]}</p>
           <p className="price">${price}</p>
           <div className="quantity">
             <h3>Quantity:</h3>
