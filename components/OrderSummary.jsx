@@ -11,6 +11,7 @@ import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { TiDeleteOutline } from "react-icons/ti";
 import { Button } from "@mui/material";
 import { useStateContext } from "../context/StateContext";
+import { FormattedMessage } from "react-intl";
 
 export default function OrderSummary(props) {
   const { cartItems, totalPrice, toggleCartItemQuantity, onRemove, language } =
@@ -19,7 +20,7 @@ export default function OrderSummary(props) {
   return (
     <React.Fragment>
       <Typography variant="h6" color="secondary" gutterBottom>
-        Picked items
+        <FormattedMessage id="h2.orderSummury" />
       </Typography>
 
       <TableContainer component={Paper} sx={{ overflow: "hidden" }}>
@@ -35,7 +36,8 @@ export default function OrderSummary(props) {
                     {product.name[language]}
                   </Typography>
                   <Typography variant="subtitle2" gutterBottom>
-                    Quantity: {product.quantity}
+                    <FormattedMessage id="quantity.slug.text" />:{" "}
+                    {product.quantity}
                   </Typography>
                 </TableCell>
                 <TableCell>
@@ -77,7 +79,7 @@ export default function OrderSummary(props) {
             <TableRow>
               <TableCell>
                 <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-                  Total
+                  <FormattedMessage id="total.text" />:
                 </Typography>
               </TableCell>
               <TableCell></TableCell>

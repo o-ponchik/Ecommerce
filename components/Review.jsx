@@ -5,7 +5,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
-
+import { FormattedMessage } from "react-intl";
 import { useStateContext } from "../context/StateContext";
 
 export default function Review(props) {
@@ -33,10 +33,14 @@ export default function Review(props) {
     ${country}`,
   ];
 
+  const totalText = <FormattedMessage id="total.text" />;
+  const messageLabel = <FormattedMessage id="message.optional" />;
+  const quantityText = language === "en" ? "Quantity" : "Кількість";
+
   return (
     <React.Fragment>
       <Typography variant="h6" color="secondary" gutterBottom>
-        Order summary
+        <FormattedMessage id="h2-a.orderReview" />
       </Typography>
       <List disablePadding>
         {cartItems.map((product) => {
@@ -44,7 +48,7 @@ export default function Review(props) {
             <ListItem key={product._id} sx={{ py: 1, px: 0 }}>
               <ListItemText
                 primary={product.name[language]}
-                secondary={`Quantity: ${product.quantity}`}
+                secondary={`${quantityText}: ${product.quantity}`}
               />
               <Typography variant="body2">${product.price}</Typography>
             </ListItem>
@@ -52,7 +56,7 @@ export default function Review(props) {
         })}
 
         <ListItem sx={{ py: 1, px: 0 }}>
-          <ListItemText primary="Total" />
+          <ListItemText primary={totalText} />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
             ₴{totalPrice}
           </Typography>
@@ -66,19 +70,33 @@ export default function Review(props) {
             gutterBottom
             sx={{ mt: 2 }}
           >
-            Customer information
+            <FormattedMessage id="h2-b.orderReview" />
           </Typography>
           <Typography gutterBottom>
-            <span className="highlight-text">Name:</span> {firstName} {lastName}
+            <span className="highlight-text">
+              <FormattedMessage id="firstName" />:{" "}
+            </span>
+            {firstName} {lastName}
           </Typography>
           <Typography gutterBottom>
-            <span className="highlight-text">Phone:</span> {phone}
+            <span className="highlight-text">
+              {" "}
+              <FormattedMessage id="phone" />:
+            </span>{" "}
+            {phone}
           </Typography>
           <Typography gutterBottom>
-            <span className="highlight-text">Email:</span> {email}
+            <span className="highlight-text">
+              {" "}
+              <FormattedMessage id="email" />:
+            </span>{" "}
+            {email}
           </Typography>
           <Typography gutterBottom>
-            <span className="highlight-text">Shipping address:</span>{" "}
+            <span className="highlight-text">
+              {" "}
+              <FormattedMessage id="step2.text" />:
+            </span>{" "}
             {addresses.join(", ")}
           </Typography>
         </Grid>
@@ -86,7 +104,7 @@ export default function Review(props) {
           <TextField
             id="details"
             name="details"
-            label="Your message (optional)..."
+            label={messageLabel}
             fullWidth
             autoComplete="details"
             variant="outlined"

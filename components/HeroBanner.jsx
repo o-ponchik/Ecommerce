@@ -3,6 +3,7 @@ import React from "react";
 import Link from "next/link";
 import { urlFor } from "../lib/client";
 import { useStateContext } from "../context/StateContext";
+import { FormattedMessage } from "react-intl";
 
 const HeroBanner = ({ heroBanner }) => {
   console.log({ heroBanner });
@@ -20,11 +21,13 @@ const HeroBanner = ({ heroBanner }) => {
         <div>
           <Link href={`/product/${heroBanner.productSlug}`}>
             <button className="hero-banner-button" type="button">
-              {heroBanner.buttonText}
+              <FormattedMessage id="banner.button.text" />
             </button>
           </Link>
           <div className="desc">
-            <h5>Description</h5>
+            <h5>
+              <FormattedMessage id="description.banner.text" />
+            </h5>
             {/* <p>{heroBanner.desc}</p> */}
             <p>{description}</p>
           </div>

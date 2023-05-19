@@ -9,6 +9,7 @@ import { client, urlFor } from "../../lib/client";
 import Product from "../../components/Product";
 import { useStateContext } from "../../context/StateContext";
 import Link from "next/link";
+import { FormattedMessage } from "react-intl";
 
 const ProductDetails = ({ product, products, bannerData }) => {
   const { decreaseQty, increaseQty, qty, onAdd, setShowIconCart, language } =
@@ -54,11 +55,15 @@ const ProductDetails = ({ product, products, bannerData }) => {
             </div>
             <p>(20)</p>
           </div> */}
-          <h4>Details:</h4>
+          <h4>
+            <FormattedMessage id="details.slug.text" />:
+          </h4>
           <p>{details[language]}</p>
           <p className="price">₴ {price}</p>
           <div className="quantity">
-            <h3>Quantity:</h3>
+            <h3>
+              <FormattedMessage id="quantity.slug.text" />:
+            </h3>
             <p className="quantity-desc">
               <span className="minus" onClick={decreaseQty}>
                 <AiOutlineMinus />
@@ -76,7 +81,7 @@ const ProductDetails = ({ product, products, bannerData }) => {
               className="add-to-cart"
               onClick={() => onAdd(product, qty)}
             >
-              Add to Cart
+              <FormattedMessage id="addToCart.button.text" />
             </button>
             <Link href={`/checkout/checkout`}>
               <button
@@ -84,7 +89,7 @@ const ProductDetails = ({ product, products, bannerData }) => {
                 className="buy-now"
                 onClick={() => onAdd(product, qty)}
               >
-                Buy Now
+                <FormattedMessage id="buyNow.button.text" />
               </button>
             </Link>
           </div>
@@ -92,7 +97,9 @@ const ProductDetails = ({ product, products, bannerData }) => {
       </div>
 
       <div className="maylike-products-wrapper">
-        <h2>You may also like</h2>
+        <h2>
+          <FormattedMessage id="subheader.slug" />
+        </h2>
         <div className="marquee">
           <div className="maylike-products-container track">
             {products.map((item) => (

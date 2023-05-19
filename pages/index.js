@@ -3,6 +3,7 @@ import { client } from "../lib/client";
 import { HeroBanner, Product, FooterBanner } from "../components";
 import { useStateContext } from "../context/StateContext";
 import { updateCartFromLocalStorage } from "../utils/localStorageUtil";
+import { FormattedMessage } from "react-intl";
 
 const Home = ({ products, bannerData }) => {
   const { setCartItems, setTotalPrice, setTotalQuantities, setShowIconCart } =
@@ -22,8 +23,13 @@ const Home = ({ products, bannerData }) => {
       <HeroBanner heroBanner={bannerData.length && bannerData[0]} />
 
       <div className="products-heading">
-        <h2>Best handmade candles ever</h2>
-        <p>Make home atmosphere more cozy</p>
+        <h2>
+          {" "}
+          <FormattedMessage id="subheader1.home" />
+        </h2>
+        <p>
+          <FormattedMessage id="subheader2.home" />
+        </p>
       </div>
 
       <div className="products-container">

@@ -4,8 +4,14 @@ import { AiOutlineShopping } from "react-icons/ai";
 import Image from "next/image";
 import Cart from "./Cart";
 import { useStateContext } from "../context/StateContext";
+import { useRouter } from "next/router";
 
 const Navabar = () => {
+  const { locales } = useRouter();
+  console.log({ locales });
+  const ukLocale = locales[0];
+  const enLocale = locales[1];
+
   const { showCart, setShowCart, totalQuantities, showIconCart, setLanguage } =
     useStateContext();
   const [activeUkr, setActiveUkr] = useState(true);
@@ -51,19 +57,24 @@ const Navabar = () => {
 
           {showCart && <Cart />}
           <div>
-            <button
-              className={`lang-btn ${!activeUkr ? "active" : ""}`}
-              onClick={() => changeLanguage("en")}
-            >
-              EN
-            </button>
+            <Link href="#" locale={enLocale}>
+              <button
+                className={`lang-btn ${!activeUkr ? "active" : ""}`}
+                onClick={() => changeLanguage("en")}
+              >
+                EN
+              </button>
+            </Link>
+
             <span>|</span>
-            <button
-              className={`lang-btn ${activeUkr ? "active" : ""}`}
-              onClick={() => changeLanguage("uk")}
-            >
-              UKR
-            </button>
+            <Link href="#" locale={ukLocale}>
+              <button
+                className={`lang-btn ${activeUkr ? "active" : ""}`}
+                onClick={() => changeLanguage("uk")}
+              >
+                UKR
+              </button>
+            </Link>
           </div>
         </div>
       </div>

@@ -9,6 +9,7 @@ import {
 import { TiDeleteOutline } from "react-icons/ti";
 import { useStateContext } from "../context/StateContext";
 import { urlFor } from "../lib/client";
+import { FormattedMessage } from "react-intl";
 
 const Cart = () => {
   const cartRef = useRef();
@@ -44,21 +45,25 @@ const Cart = () => {
           onClick={() => setShowCart(false)}
         >
           <AiOutlineClose />
-          <span className="heading">Your Cart</span>
-          <span className="cart-num-items">({totalQuantities} items)</span>
+          <span className="heading">
+            <FormattedMessage id="yourCart.text" />
+          </span>
+          <span className="cart-num-items">({totalQuantities})</span>
         </button>
 
         {cartItems.length < 1 && (
           <div className="empty-cart">
             <AiOutlineShopping size={150} />
-            <h3>Your shopping bag is empty</h3>
+            <h3>
+              <FormattedMessage id="emptyCart.text" />
+            </h3>
             <Link href="/">
               <button
                 type="button"
                 className="btn"
                 onClick={() => setShowCart(false)}
               >
-                Continue Shopping
+                <FormattedMessage id="continueShop.cart.button" />
               </button>
             </Link>
           </div>
@@ -115,7 +120,9 @@ const Cart = () => {
         {cartItems.length >= 1 && (
           <div className="cart-bottom ">
             <div className="total">
-              <h3>Subtotal:</h3>
+              <h3>
+                <FormattedMessage id="subtotalCart.text" />:
+              </h3>
               <h3>₴ {totalPrice}</h3>
             </div>
             <div className="btn-container">
@@ -125,7 +132,7 @@ const Cart = () => {
                   type="button"
                   onClick={() => setShowCart(false)}
                 >
-                  Go To Checkout
+                  <FormattedMessage id="goToCheckout.cart.button" />
                 </button>
               </Link>
             </div>

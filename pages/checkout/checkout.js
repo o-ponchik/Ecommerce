@@ -19,8 +19,13 @@ import useForm from "../../hooks/use-form";
 import { generateOrderNumber } from "../../utils/generateOrderNumer";
 import Link from "next/link";
 import { useStateContext } from "../../context/StateContext";
+import { FormattedMessage } from "react-intl";
 
-const steps = ["Your order", "Shipping address", "Review your order"];
+const step1 = <FormattedMessage id="step1.text" />;
+const step2 = <FormattedMessage id="step2.text" />;
+const step3 = <FormattedMessage id="step3.text" />;
+
+const steps = [step1, step2, step3];
 
 function getStepContent(step) {
   switch (step) {
@@ -216,14 +221,13 @@ function Checkout() {
   let orderResult = (
     <React.Fragment>
       <Typography variant="h5" gutterBottom>
-        Thank you for your order!
+        <FormattedMessage id="h1.order.result" />
       </Typography>
       <Typography variant="6" gutterBottom color="primary">
-        Your order number: {orderNumber}
+        <FormattedMessage id="orderNum.order.result" />: {orderNumber}
       </Typography>
       <Typography variant="subtitle1">
-        We will contact you soon to discuss the payment method and shipping of
-        your order.
+        <FormattedMessage id="message.order.result" />
       </Typography>
     </React.Fragment>
   );
@@ -232,7 +236,7 @@ function Checkout() {
     orderResult = (
       <React.Fragment>
         <Typography variant="h5" gutterBottom>
-          Creating an order...
+          <FormattedMessage id="creating.order.text" />
         </Typography>
       </React.Fragment>
     );
@@ -242,7 +246,8 @@ function Checkout() {
     orderResult = (
       <React.Fragment>
         <Typography variant="h5" gutterBottom>
-          Oops something went wrong...{""}
+          <FormattedMessage id="error.creating.order.text" />
+          {""}
           <p style={{ color: "red" }}>{errorMessage}</p>
         </Typography>
       </React.Fragment>
@@ -252,7 +257,7 @@ function Checkout() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Container component="main" maxWidth="sm" sx={{ mb: 4, px: 1 }}>
+      <Container component="main" maxWidth="md" sx={{ mb: 4, px: 1 }}>
         <Paper
           variant="outlined"
           sx={{
@@ -260,8 +265,13 @@ function Checkout() {
             p: { xs: 1, md: 3 },
           }}
         >
-          <Typography component="h1" variant="h4" align="center">
-            Checkout
+          <Typography
+            component="h1"
+            color="secondary"
+            variant="h4"
+            align="center"
+          >
+            <FormattedMessage id="h1.checkout.page.text" />
           </Typography>
           <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
             {steps.map((label) => (
@@ -288,13 +298,13 @@ function Checkout() {
                       color="primary"
                       variant="outlined"
                     >
-                      Return To Shopping
+                      <FormattedMessage id="returnToShop.checkout.page.button" />
                     </Button>
                   </Link>
                 )}
                 {activeStep !== 0 && (
                   <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
-                    Back
+                    <FormattedMessage id="back.checkout.page.button" />
                   </Button>
                 )}
 
@@ -303,7 +313,11 @@ function Checkout() {
                   onClick={handleNext}
                   sx={{ mt: 3, ml: 1 }}
                 >
-                  {activeStep === steps.length - 1 ? "Place order" : "Next"}
+                  {activeStep === steps.length - 1 ? (
+                    <FormattedMessage id="placeOrder.checkout.page.button" />
+                  ) : (
+                    <FormattedMessage id="next.checkout.page.button" />
+                  )}
                 </Button>
               </Box>
             </React.Fragment>
@@ -319,7 +333,7 @@ function Checkout() {
           >
             <Link href={`/`}>
               <Button variant="outlined" href="/">
-                Back to homepage
+                <FormattedMessage id="backToHomepage.checkout.page.button" />
               </Button>
             </Link>
           </Box>

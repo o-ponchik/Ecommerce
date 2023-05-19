@@ -4,12 +4,15 @@ import {
   AiOutlinePhone,
   AiOutlineMail,
 } from "react-icons/ai";
+import { FormattedMessage } from "react-intl";
 
 const Footer = () => {
   const year = new Date().getFullYear();
   return (
     <div className="footer-container">
-      <p>{year} RoxyFox All rights reserved</p>
+      <p>
+        {year} RoxyFox <FormattedMessage id="footer.rights" />
+      </p>
       <p className="icons">
         <a
           href={"https://instagram.com/rosy___fox?igshid=YmMyMTA2M2Y="}

@@ -3,6 +3,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import { useStateContext } from "../context/StateContext";
+import { FormattedMessage } from "react-intl";
 
 export default function AddressForm() {
   const {
@@ -27,10 +28,20 @@ export default function AddressForm() {
     formInputsValidity,
   } = useStateContext();
 
+  const firstNameLabel = <FormattedMessage id="firstName" />;
+  const lastNameLabel = <FormattedMessage id="lastName" />;
+  const phoneLabel = <FormattedMessage id="phone" />;
+  const emailLabel = <FormattedMessage id="email" />;
+  const addressLabel = <FormattedMessage id="address" />;
+  const cityLabel = <FormattedMessage id="city" />;
+  const stateLabel = <FormattedMessage id="state" />;
+  const zipCodeLabel = <FormattedMessage id="zipCode" />;
+  const countryLabel = <FormattedMessage id="country" />;
+
   return (
     <React.Fragment>
-      <Typography variant="h6" gutterBottom>
-        Shipping address
+      <Typography variant="h6" color="secondary" gutterBottom>
+        <FormattedMessage id="step2.text" />
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
@@ -38,15 +49,16 @@ export default function AddressForm() {
             required
             id="firstName"
             name="firstName"
-            label="First name"
+            label={firstNameLabel}
             fullWidth
             autoComplete="given-name"
             variant="standard"
             value={firstName}
             error={!formInputsValidity.inputFirstName}
             helperText={
-              !formInputsValidity.inputFirstName &&
-              "Name shouldn't be empty and contain at least 2 charachters"
+              !formInputsValidity.inputFirstName && (
+                <FormattedMessage id="firstName.warning" />
+              )
             }
             onChange={(e) => setFirstName(e.target.value)}
           />
@@ -56,15 +68,16 @@ export default function AddressForm() {
             required
             id="lastName"
             name="lastName"
-            label="Last name"
+            label={lastNameLabel}
             fullWidth
             autoComplete="family-name"
             variant="standard"
             value={lastName}
             error={!formInputsValidity.inputLastName}
             helperText={
-              !formInputsValidity.inputLastName &&
-              "Name shouldn't be empty and contain at least 2 charachters"
+              !formInputsValidity.inputLastName && (
+                <FormattedMessage id="firstName.warning" />
+              )
             }
             onChange={(e) => setLastName(e.target.value)}
           />
@@ -74,15 +87,16 @@ export default function AddressForm() {
             required
             id="phone"
             name="phone"
-            label="Phone number"
+            label={phoneLabel}
             fullWidth
             autoComplete="phone number"
             variant="standard"
             value={phone}
             error={!formInputsValidity.inputPhone}
             helperText={
-              !formInputsValidity.inputPhone &&
-              "Invalid phone number! Example: 093 123 4567"
+              !formInputsValidity.inputPhone && (
+                <FormattedMessage id="phone.warning" />
+              )
             }
             onChange={(e) => setPhone(e.target.value)}
           />
@@ -92,15 +106,16 @@ export default function AddressForm() {
             required
             id="email"
             name="email"
-            label="Email"
+            label={emailLabel}
             fullWidth
             autoComplete="email"
             variant="standard"
             value={email}
             error={!formInputsValidity.inputEmail}
             helperText={
-              !formInputsValidity.inputEmail &&
-              "Invalid email. Example: 123@gmail.com"
+              !formInputsValidity.inputEmail && (
+                <FormattedMessage id="email.warning" />
+              )
             }
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -110,14 +125,16 @@ export default function AddressForm() {
             required
             id="address"
             name="address"
-            label="Address line"
+            label={addressLabel}
             fullWidth
             autoComplete="shipping address-line"
             variant="standard"
             value={address}
             error={!formInputsValidity.inputAddress}
             helperText={
-              !formInputsValidity.inputAddress && "Address can not be empty!"
+              !formInputsValidity.inputAddress && (
+                <FormattedMessage id="address.warning" />
+              )
             }
             onChange={(e) => setAddress(e.target.value)}
           />
@@ -128,14 +145,16 @@ export default function AddressForm() {
             required
             id="city"
             name="city"
-            label="City"
+            label={cityLabel}
             fullWidth
             autoComplete="shipping address-level2"
             variant="standard"
             value={city}
             error={!formInputsValidity.inputCity}
             helperText={
-              !formInputsValidity.inputCity && "City shouldn't be empty"
+              !formInputsValidity.inputCity && (
+                <FormattedMessage id="city.warning" />
+              )
             }
             onChange={(e) => setCity(e.target.value)}
           />
@@ -144,7 +163,7 @@ export default function AddressForm() {
           <TextField
             id="state"
             name="state"
-            label="State/Province/Region"
+            label={stateLabel}
             fullWidth
             variant="standard"
             value={!state ? "" : state}
@@ -156,15 +175,16 @@ export default function AddressForm() {
             required
             id="zip"
             name="zip"
-            label="Zip / Postal code"
+            label={zipCodeLabel}
             fullWidth
             autoComplete="shipping postal-code"
             variant="standard"
             value={postalCode}
             error={!formInputsValidity.inputPostalCode}
             helperText={
-              !formInputsValidity.inputPostalCode &&
-              "Invalid postal code! Example: 01010"
+              !formInputsValidity.inputPostalCode && (
+                <FormattedMessage id="zipCode.warning" />
+              )
             }
             onChange={(e) => setPostalCode(e.target.value)}
           />
@@ -174,14 +194,16 @@ export default function AddressForm() {
             required
             id="country"
             name="country"
-            label="Country"
+            label={countryLabel}
             fullWidth
             autoComplete="shipping country"
             variant="standard"
             value={country}
             error={!formInputsValidity.inputCountry}
             helperText={
-              !formInputsValidity.inputCountry && "Country shouldn't be empty"
+              !formInputsValidity.inputCountry && (
+                <FormattedMessage id="country.warning" />
+              )
             }
             onChange={(e) => setCountry(e.target.value)}
           />

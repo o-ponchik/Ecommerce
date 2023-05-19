@@ -1,8 +1,8 @@
 import React from "react";
-
 import Link from "next/link";
 import { urlFor } from "../lib/client";
 import { useStateContext } from "../context/StateContext";
+import { FormattedMessage } from "react-intl";
 
 const FooterBanner = ({
   footerBanner: {
@@ -37,7 +37,9 @@ const FooterBanner = ({
           <h3>{midText2}</h3>
           <p>{description}</p>
           <Link href={`/product/${product}`}>
-            <button type="button">{buttonText}</button>
+            <button type="button">
+              <FormattedMessage id="banner.button.text" />
+            </button>
           </Link>
         </div>
 
