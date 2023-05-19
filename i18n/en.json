@@ -1,0 +1,60 @@
+{
+  "banner.button.text": "Shop Now",
+  "description.banner.text": "Description",
+  "subheader1.home": "Best handmade candles ever",
+  "subheader2.home": "Make home atmosphere more cozy",
+  "footer.rights": "All rights reserved",
+
+  "details.slug.text": "Details",
+  "quantity.slug.text": "Quantity",
+  "addToCart.button.text": "Add to Cart",
+  "buyNow.button.text": "Buy Now",
+  "subheader.slug": "You may also like",
+
+  "yourCart.text": "Your Cart",
+  "emptyCart.text": "Your shopping bag is empty",
+  "continueShop.cart.button": "Continue Shopping",
+  "subtotalCart.text": "Subtotal",
+  "goToCheckout.cart.button": "Go To Checkout",
+
+  "h1.checkout.page.text": "Checkout",
+  "step1.text": "Your Order",
+  "step2.text": "Shipping address",
+  "step3.text": "Review your order",
+  "returnToShop.checkout.page.button": "Return To Shopping",
+  "back.checkout.page.button": "Back",
+  "next.checkout.page.button": "Next",
+  "placeOrder.checkout.page.button": "Place order",
+  "backToHomepage.checkout.page.button": "Back to homepage",
+
+  "h2.orderSummury": "Picked items",
+
+  "firstName": "First name",
+  "name.warning": "Name shouldn't be empty and contain at least 2 charachters",
+  "lastName": "Last name",
+  "phone": "Phone number",
+  "phone.warning": "Invalid phone number! Example: 093 123 4567",
+  "email": "Email",
+  "email.warning": "Invalid email. Example: 123@gmail.com",
+  "address": "Address line",
+  "address.warning": "Address can not be empty!",
+  "city": "City",
+  "city.warning": "City shouldn't be empty",
+  "state": "State / Province / Region",
+  "zipCode": "Zip / Postal Code",
+  "zipCode.warning": "Invalid postal code! Example: 01010",
+  "country": "Country",
+  "country.warning": "Country shouldn't be empty",
+
+  "h2-a.orderReview": "Order summary",
+  "h2-b.orderReview": "Customer information",
+  "message.optional": "Your message (optional)...",
+
+  "h1.order.result": "Thank you for your order!",
+  "creating.order.text": "Creating an order...",
+  "error.creating.order.text": "Oops something went wrong...",
+  "orderNum.order.result": "Your order number",
+  "message.order.result": "We will contact you soon to discuss the payment method and shipping of your order.",
+
+  "total.text": "Total"
+}

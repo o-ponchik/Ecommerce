@@ -1,0 +1,60 @@
+{
+  "banner.button.text": "Купити",
+  "description.banner.text": "Опис",
+  "subheader1.home": "Найкращі свічки ручної роботи",
+  "subheader2.home": "Відтвори затишок вдома",
+  "footer.rights": "Всі права захищені",
+
+  "details.slug.text": "Деталі",
+  "quantity.slug.text": "Кількість",
+  "addToCart.button.text": "Додати до кошика",
+  "buyNow.button.text": "Придбати зараз",
+  "subheader.slug": "Вам також може сподобатись",
+
+  "yourCart.text": "Ваш кошик",
+  "emptyCart.text": "Ваш кошик порожній",
+  "continueShop.cart.button": "Продовжити покупки",
+  "subtotalCart.text": "Разом",
+  "goToCheckout.cart.button": "Оформити замовлення",
+
+  "h1.checkout.page.text": "Оформлення замовлення",
+  "step1.text": "Ваше замовлення",
+  "step2.text": "Адреса доставки",
+  "step3.text": "Перегляд і підтвердження",
+  "returnToShop.checkout.page.button": "Повернутися до магазину",
+  "back.checkout.page.button": "Назад",
+  "next.checkout.page.button": "Продовжити",
+  "placeOrder.checkout.page.button": "Оформлення замовлення",
+  "backToHomepage.checkout.page.button": "Повернутися до магазину",
+
+  "h2.orderSummury": "Обрані товари",
+
+  "firstName": "Ім'я",
+  "name.warning": "Це поле не може бути порожнім!",
+  "lastName": "Прізвище",
+  "phone": "Мобільний телефон",
+  "phone.warning": "Введіть номер мобільного телефону! Приклад: 093 123 4567",
+  "email": "Електронна пошта",
+  "email.warning": "Введіть електронну пошту. Приклад: 123@gmail.com",
+  "address": "Введіть адресу",
+  "address.warning": "Це поле не може бути порожнім!",
+  "city": "Місто",
+  "city.warning": "Це поле не може бути порожнім!",
+  "state": "Область",
+  "zipCode": "Поштовий індекс / номер поштового відділення",
+  "zipCode.warning": "Це поле не може бути порожнім!",
+  "country": "Країна",
+  "country.warning": "Це поле не може бути порожнім!",
+
+  "h2-a.orderReview": "Order summary",
+  "h2-b.orderReview": "Ваші контактні дані",
+  "message.optional": "Ваше повідомлення (за бажанням)...",
+
+  "h1.order.result": "Дякуємо за ваше замовлення!",
+  "creating.order.text": "Створення замовлення...",
+  "error.creating.order.text": "Oops щось пішло не так...",
+  "orderNum.order.result": "Ваш номер замовлення",
+  "message.order.result": "Ми зв'яжемося з вами найближчим часом для обговорення способу оплати та деталей доставки вашого замовлення.",
+
+  "total.text": "Разом"
+}
