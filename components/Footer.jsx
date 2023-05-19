@@ -6,9 +6,10 @@ import {
 } from "react-icons/ai";
 
 const Footer = () => {
+  const year = new Date().getFullYear();
   return (
     <div className="footer-container">
-      <p>2023 LogoCandles All rights reserved</p>
+      <p>{year} RoxyFox All rights reserved</p>
       <p className="icons">
         <a
           href={"https://instagram.com/rosy___fox?igshid=YmMyMTA2M2Y="}
