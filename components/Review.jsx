@@ -22,6 +22,7 @@ export default function Review(props) {
     postalCode,
     country,
     setDetails,
+    language,
   } = useStateContext();
 
   const addresses = [
@@ -42,7 +43,7 @@ export default function Review(props) {
           return (
             <ListItem key={product._id} sx={{ py: 1, px: 0 }}>
               <ListItemText
-                primary={product.name}
+                primary={product.name[language]}
                 secondary={`Quantity: ${product.quantity}`}
               />
               <Typography variant="body2">${product.price}</Typography>
@@ -53,7 +54,7 @@ export default function Review(props) {
         <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText primary="Total" />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-            ${totalPrice}
+            ₴{totalPrice}
           </Typography>
         </ListItem>
       </List>

@@ -30,7 +30,7 @@ export default function Orders({ order, num, onOrderUpdate }) {
   const [open, setOpen] = React.useState(false);
   order.status = order.status[0].toUpperCase() + order.status.slice(1);
   const [orderStatus, setOrderStatus] = React.useState(order.status);
-  const { setIsUpdated } = useAdminContext();
+  const { setIsUpdated, language } = useAdminContext();
 
   let colorStatusOrder;
   let orderStatusText;
@@ -222,7 +222,7 @@ export default function Orders({ order, num, onOrderUpdate }) {
 
                   {order.orderItems.map((item) => (
                     <TableRow key={item._id}>
-                      <TableCell colSpan={2}>{item.name}</TableCell>
+                      <TableCell colSpan={2}>{item.name[language]}</TableCell>
                       <TableCell align="left">{item.quantity}</TableCell>
                       <TableCell>{item.price} $</TableCell>
                     </TableRow>

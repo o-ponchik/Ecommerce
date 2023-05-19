@@ -81,7 +81,7 @@ export const StateContext = ({ children }) => {
 
     setQty(1);
 
-    toast.success(`${qty} ${product.name} added to the cart.`);
+    toast.success(`${qty} ${product.name[language]} added to the cart.`);
 
     updateLocalStorage(cartItems);
   };
@@ -214,6 +214,7 @@ export const StateContext = ({ children }) => {
         clearCart,
         resetForm,
         language,
+        setLanguage,
       }}
     >
       {children}

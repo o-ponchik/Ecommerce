@@ -13,7 +13,7 @@ import { Button } from "@mui/material";
 import { useStateContext } from "../context/StateContext";
 
 export default function OrderSummary(props) {
-  const { cartItems, totalPrice, toggleCartItemQuantity, onRemove } =
+  const { cartItems, totalPrice, toggleCartItemQuantity, onRemove, language } =
     useStateContext();
 
   return (
@@ -27,12 +27,12 @@ export default function OrderSummary(props) {
           <TableBody>
             {cartItems.map((product) => (
               <TableRow
-                key={product.name}
+                key={product.name[language]}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="product">
                   <Typography variant="subtitle1" gutterBottom>
-                    {product.name}
+                    {product.name[language]}
                   </Typography>
                   <Typography variant="subtitle2" gutterBottom>
                     Quantity: {product.quantity}
@@ -62,7 +62,7 @@ export default function OrderSummary(props) {
                     </p>
                   </Box>
                 </TableCell>
-                <TableCell align="left">${product.price}</TableCell>
+                <TableCell align="left">₴{product.price}</TableCell>
                 <TableCell>
                   <Button
                     className="remove-item"
@@ -83,7 +83,7 @@ export default function OrderSummary(props) {
               <TableCell></TableCell>
               <TableCell>
                 <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-                  ${totalPrice}
+                  ₴{totalPrice}
                 </Typography>
               </TableCell>
             </TableRow>

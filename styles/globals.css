@@ -45,7 +45,27 @@ a {
   width: 100%;
   background-color: white;
 }
-
+.navbar-buttons-wrapper {
+  width: 10rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.lang-btn {
+  padding: 0.1rem 0.3rem;
+  background: none;
+  border: none;
+  color: var(--second-color);
+  transition: 0.2s ease-in-out 0s;
+}
+.lang-btn:hover {
+  cursor: pointer;
+  transform: scale(1.25);
+}
+.lang-btn.active {
+  color: var(--main-color);
+}
 .navbar-container {
   display: flex;
   justify-content: space-between;
@@ -433,6 +453,8 @@ span.text-red {
 }
 .flex h5 {
   font-size: 24px;
+  display: inline-block;
+  width: 80%;
 }
 .flex h4 {
   font-size: 20px;
