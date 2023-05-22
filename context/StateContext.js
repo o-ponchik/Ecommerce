@@ -81,7 +81,10 @@ export const StateContext = ({ children }) => {
 
     setQty(1);
 
-    toast.success(`${qty} ${product.name[language]} added to the cart.`);
+    const successMsgAdd =
+      language === "en" ? "added to the cart." : "додано в кошик.";
+
+    toast.success(`${qty} ${product.name[language]} ${successMsgAdd}`);
 
     updateLocalStorage(cartItems);
   };

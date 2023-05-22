@@ -56,5 +56,10 @@
   "orderNum.order.result": "Your order number",
   "message.order.result": "We will contact you soon to discuss the payment method and shipping of your order.",
 
-  "total.text": "Total"
+  "total.text": "Total",
+
+  "toast.loading": "Process...",
+  "toast.error": "Error occurs with sending data",
+  "toast.success.checkout": "Success!",
+  "toast.success.add": "added to the cart."
 }

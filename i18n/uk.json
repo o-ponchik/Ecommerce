@@ -56,5 +56,10 @@
   "orderNum.order.result": "Ваш номер замовлення",
   "message.order.result": "Ми зв'яжемося з вами найближчим часом для обговорення способу оплати та деталей доставки вашого замовлення.",
 
-  "total.text": "Разом"
+  "total.text": "Разом",
+
+  "toast.loading": "Оформлення...",
+  "toast.error": "Помилка надсилання даних",
+  "toast.success.checkout": "Успішно!",
+  "toast.success.add": "додано в кошик."
 }

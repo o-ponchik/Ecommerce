@@ -172,11 +172,15 @@ function Checkout() {
         totalPrice: totalPrice,
       };
 
+      const loadingMsg = <FormattedMessage id="toast.loading" />;
+      const errorMsg = <FormattedMessage id="toast.error" />;
+      const successMsg = <FormattedMessage id="toast.success.checkout" />;
+
       const callSendDataFunction = sendData(orderPayload);
       toast.promise(callSendDataFunction, {
-        loading: "Process",
-        error: "Error occurs with sending data",
-        success: "Success!",
+        loading: loadingMsg,
+        error: errorMsg,
+        success: successMsg,
       });
     }
   }, [activeStep]);
