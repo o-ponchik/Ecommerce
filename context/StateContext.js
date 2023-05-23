@@ -1,16 +1,19 @@
 import React, { useState, useContext, createContext, useEffect } from "react";
 import { toast } from "react-hot-toast";
+import { useRouter } from "next/router";
 
 const Context = createContext();
 
 export const StateContext = ({ children }) => {
+  const { locale } = useRouter();
+
   const [showCart, setShowCart] = useState(false);
   const [showIconCart, setShowIconCart] = useState(true);
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalQuantities, setTotalQuantities] = useState(0);
   const [qty, setQty] = useState(1);
-  const [language, setLanguage] = useState("uk");
+  const [language, setLanguage] = useState(locale);
 
   // -----User Info----//
   const [firstName, setFirstName] = useState("");

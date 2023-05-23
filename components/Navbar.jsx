@@ -7,23 +7,15 @@ import { useStateContext } from "../context/StateContext";
 import { useRouter } from "next/router";
 
 const Navabar = () => {
-  const { locales } = useRouter();
-  console.log({ locales });
-  const ukLocale = locales[0];
-  const enLocale = locales[1];
+  const { locale } = useRouter();
 
   const { showCart, setShowCart, totalQuantities, showIconCart, setLanguage } =
     useStateContext();
-  const [activeUkr, setActiveUkr] = useState(true);
+  const [activeUkr, setActiveUkr] = useState(locale === "uk");
 
-  const changeLanguage = (l) => {
-    if (l === "en") {
-      setLanguage("en");
-      setActiveUkr(false);
-    } else {
-      setLanguage("uk");
-      setActiveUkr(true);
-    }
+  const changeLanguage = (newLocale) => {
+    setLanguage(newLocale);
+    setActiveUkr(newLocale === "uk");
   };
 
   return (
@@ -57,7 +49,7 @@ const Navabar = () => {
 
           {showCart && <Cart />}
           <div>
-            <Link href="#" locale={enLocale}>
+            <Link href="#" locale={"en"}>
               <button
                 className={`lang-btn ${!activeUkr ? "active" : ""}`}
                 onClick={() => changeLanguage("en")}
@@ -67,7 +59,7 @@ const Navabar = () => {
             </Link>
 
             <span>|</span>
-            <Link href="#" locale={ukLocale}>
+            <Link href="#" locale={"uk"}>
               <button
                 className={`lang-btn ${activeUkr ? "active" : ""}`}
                 onClick={() => changeLanguage("uk")}
