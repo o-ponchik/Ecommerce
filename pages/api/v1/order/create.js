@@ -4,9 +4,10 @@ import errors from "../../../../context/Constants";
 import useForm from "../../../../hooks/use-form";
 
 const createOrder = async (req, res) => {
-  const projectId = "as16wqx5";
+  const projectId = process.env.PROJECT_ID;
   const dataset = "production";
   const tokenWithWriteAccess = process.env.NEXT_PUBLIC_SANITY_TOKEN;
+  const url = process.env.SANITY_URL;
   const {
     isEmpty,
     validLenght,
@@ -38,7 +39,7 @@ const createOrder = async (req, res) => {
   }
 
   const { data } = await axios.post(
-    `https://${projectId}.api.sanity.io/v2021-10-21/data/mutate/${dataset}`,
+    `https://${projectId}${url}${dataset}`,
     {
       mutations: [
         {
