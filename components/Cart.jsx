@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import Link from "next/link";
 import {
   AiOutlineMinus,
@@ -12,7 +12,6 @@ import { urlFor } from "../lib/client";
 import { FormattedMessage } from "react-intl";
 
 const Cart = () => {
-  const cartRef = useRef();
   const {
     totalPrice,
     totalQuantities,
@@ -27,7 +26,6 @@ const Cart = () => {
   return (
     <div
       className="cart-wrapper"
-      ref={cartRef}
       onClick={(event) => {
         if (event.target.classList.contains("cart-wrapper")) {
           setShowCart(false);

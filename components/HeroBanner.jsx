@@ -6,7 +6,6 @@ import { useStateContext } from "../context/StateContext";
 import { FormattedMessage } from "react-intl";
 
 const HeroBanner = ({ heroBanner }) => {
-  console.log({ heroBanner });
   const { language } = useStateContext();
 
   // Access the translation based on the selected language
