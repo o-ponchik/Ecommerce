@@ -106,8 +106,7 @@ function Checkout() {
       const countryIsValid = !isEmpty(country) && validLenght(country, 2);
       const emailIsVaild = !isEmpty(email) && emailValidation(email);
       const phoneIsValid = !isEmpty(phone) && phoneValidation(phone);
-      const postalCodeIsValid =
-        !isEmpty(postalCode) && postalCodeValidation(postalCode);
+      const postalCodeIsValid = !isEmpty(postalCode);
       const addressIsValid = !isEmpty(address) && validLenght(address, 5);
 
       setFormInputsValidity({
