@@ -22,13 +22,15 @@ const Navabar = () => {
     <div className="navbar-wrapper">
       <div className="navbar-container">
         <div className="logo">
-          <Link href="/">
-            <Image
-              src="/logo-pink.svg"
-              width={100}
-              height={50}
-              alt="Rosy Fox Logo"
-            />
+          <Link href="/" passHref>
+            <a>
+              <Image
+                src="/logo-pink.svg"
+                width={100}
+                height={50}
+                alt="Rosy Fox Logo"
+              />
+            </a>
           </Link>
         </div>
 
