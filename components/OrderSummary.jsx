@@ -26,7 +26,7 @@ export default function OrderSummary(props) {
       <TableContainer component={Paper} sx={{ overflow: "hidden" }}>
         <Table sx={{ minWidth: 300 }} aria-label="simple table">
           <TableBody>
-            {cartItems.map((product) => (
+            {cartItems.map((product, index) => (
               <TableRow
                 key={product.name[language]}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}

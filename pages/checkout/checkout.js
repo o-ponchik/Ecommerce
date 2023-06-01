@@ -277,8 +277,8 @@ function Checkout() {
             <FormattedMessage id="h1.checkout.page.text" />
           </Typography>
           <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
-            {steps.map((label) => (
-              <Step key={label}>
+            {steps.map((label, index) => (
+              <Step key={index}>
                 <StepLabel>{label}</StepLabel>
               </Step>
             ))}
