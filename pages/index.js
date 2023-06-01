@@ -5,7 +5,7 @@ import { useStateContext } from "../context/StateContext";
 import { updateCartFromLocalStorage } from "../utils/localStorageUtil";
 import { FormattedMessage } from "react-intl";
 
-const Home = ({ products, bannerData }) => {
+const Home = ({ products, bannerData, footerData }) => {
   const { setCartItems, setTotalPrice, setTotalQuantities, setShowIconCart } =
     useStateContext();
 
@@ -34,7 +34,7 @@ const Home = ({ products, bannerData }) => {
         ))}
       </div>
 
-      <FooterBanner footerBanner={bannerData && bannerData[0]} />
+      <FooterBanner footerBanner={footerData && footerData[0]} />
     </>
   );
 };
@@ -46,7 +46,10 @@ export const getServerSideProps = async () => {
   const bannerQuery = '*[_type == "banner"]';
   const bannerData = await client.fetch(bannerQuery);
 
-  return { props: { products, bannerData } };
+  const footerQuery = '*[_type == "footer"]';
+  const footerData = await client.fetch(footerQuery);
+
+  return { props: { products, bannerData, footerData } };
 };
 
 export default Home;

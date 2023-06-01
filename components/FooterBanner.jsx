@@ -11,10 +11,9 @@ const FooterBanner = ({
     largeText2,
     saleTime,
     smallText,
-    midText2,
+    midText1,
     desc,
-    product,
-    buttonText,
+    productSlug,
     image,
   },
 }) => {
@@ -34,9 +33,9 @@ const FooterBanner = ({
         </div>
         <div className="right">
           <p>{smallText}</p>
-          <h3>{midText2}</h3>
+          <h3>{midText1}</h3>
           <p>{description}</p>
-          <Link href={`/product/${product}`}>
+          <Link href={`/product/${productSlug}`}>
             <button type="button">
               <FormattedMessage id="banner.button.text" />
             </button>
