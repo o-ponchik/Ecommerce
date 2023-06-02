@@ -5,6 +5,7 @@ import bcrypt from "bcrypt";
 
 const dbName = process.env.DB_NAME;
 const collectionName = process.env.COLLECTION_NAME;
+const secret = process.env.SECRET;
 
 export default async function (req, res) {
   let client;
@@ -19,7 +20,7 @@ export default async function (req, res) {
     .find({ user: username })
     .toArray();
 
-  if (userDB.length === 0) {
+  if (userDB.length === 0 || !userDB) {
     res.status(401).json({ message: "User does not exist!" });
     return;
   }
@@ -29,17 +30,17 @@ export default async function (req, res) {
   if (userDB && bcrypt.compareSync(password, user.password)) {
     const token = sign(
       {
-        exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 30, // 30 days
+        exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24, // 24 hours
         username: username,
       },
-      "secret"
+      secret
     );
 
     const serialised = serialize("OursiteJWT", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV !== "development",
       sameSite: "strict",
-      maxAge: 60 * 60 * 24 * 30,
+      maxAge: 60 * 60 * 24, // 24 hours
       path: "/",
     });
 

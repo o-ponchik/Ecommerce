@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { jwtVerify } from "jose";
 
+const secret = process.env.SECRET;
+
 export async function middleware(request) {
   const jwt = request.cookies?.OursiteJWT;
 
@@ -18,7 +20,7 @@ export async function middleware(request) {
     try {
       const { payload } = await jwtVerify(
         jwt,
-        new TextEncoder().encode("secret")
+        new TextEncoder().encode(secret)
       );
     } catch (err) {
       console.error({ err });
