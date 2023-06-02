@@ -51,7 +51,7 @@ const Login = () => {
     event.preventDefault();
   };
 
-  const handleSubmit = async (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
     try {
       const data = new FormData(event.currentTarget);
@@ -69,7 +69,9 @@ const Login = () => {
       }
     } catch (error) {
       console.log({ error });
-      const message = error.response.data.message;
+      const message = error.response?.data?.message
+        ? error.response?.data?.message
+        : error.message;
       const errorMsg = message || "Something went wrong!";
       toast.error(`${errorMsg} Please try again.`);
     }
@@ -118,7 +120,7 @@ const Login = () => {
             </Typography>
             <Box
               component="form"
-              onSubmit={handleSubmit}
+              onSubmit={handleLogin}
               noValidate
               sx={{ mt: 1 }}
             >
