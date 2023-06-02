@@ -114,12 +114,14 @@ const DashboardContent = ({ window, children, orders }) => {
             <Typography variant="h6" noWrap component="div">
               <div className="logo">
                 <Link href="/">
-                  <Image
-                    src="/logo-light-pink.svg"
-                    width={100}
-                    height={50}
-                    alt="Rosy Fox Logo"
-                  />
+                  <a>
+                    <Image
+                      src="/logo-light-pink.svg"
+                      width={100}
+                      height={50}
+                      alt="Rosy Fox Logo"
+                    />
+                  </a>
                 </Link>
               </div>
             </Typography>
