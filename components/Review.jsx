@@ -5,6 +5,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
+import { Box } from "@mui/material";
 import { FormattedMessage } from "react-intl";
 import { useStateContext } from "../context/StateContext";
 
@@ -38,7 +39,7 @@ export default function Review(props) {
   const quantityText = language === "en" ? "Quantity" : "Кількість";
 
   return (
-    <React.Fragment>
+    <Box sx={{ padding: { xs: 0, md: "0px 20px" } }}>
       <Typography variant="h6" color="secondary" gutterBottom>
         <FormattedMessage id="h2-a.orderReview" />
       </Typography>
@@ -117,6 +118,6 @@ export default function Review(props) {
           />
         </Grid>
       </Grid>
-    </React.Fragment>
+    </Box>
   );
 }
