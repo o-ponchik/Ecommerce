@@ -188,7 +188,7 @@ function Checkout() {
     try {
       setIsLoading(true);
       await axios
-        .post("../api/v1/order/create", data, {
+        .post("/api/v1/order/create", data, {
           headers: {
             "Content-Type": "application/json",
           },
@@ -214,6 +214,10 @@ function Checkout() {
       if (subcode === ERROR_INVALID_EMAIL) {
         console.error("error subcode: ", subcode, "Email invalid");
         setErrorMessage("Email is invalid");
+      }
+
+      if (error) {
+        setErrorMessage(error.message);
       }
 
       setIsLoading(false);
@@ -278,7 +282,7 @@ function Checkout() {
           </Typography>
           <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
             {steps.map((label, index) => (
-              <Step key={index}>
+              <Step key={label}>
                 <StepLabel>{label}</StepLabel>
               </Step>
             ))}
