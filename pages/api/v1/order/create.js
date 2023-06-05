@@ -3,7 +3,7 @@ import axios from "axios";
 import errors from "../../../../context/Constants";
 import useForm from "../../../../hooks/use-form";
 
-const createOrder = async (req, res) => {
+const CreateOrder = async (req, res) => {
   const projectId = process.env.PROJECT_ID;
   const dataset = "production";
   const tokenWithWriteAccess = process.env.NEXT_PUBLIC_SANITY_TOKEN;
@@ -62,4 +62,4 @@ const createOrder = async (req, res) => {
   res.status(201).send(data);
 };
 
-export default createOrder;
+export default CreateOrder;
