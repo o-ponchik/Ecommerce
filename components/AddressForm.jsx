@@ -57,7 +57,7 @@ export default function AddressForm() {
             error={!formInputsValidity.inputFirstName}
             helperText={
               !formInputsValidity.inputFirstName && (
-                <FormattedMessage id="firstName.warning" />
+                <FormattedMessage id="name.warning" />
               )
             }
             onChange={(e) => setFirstName(e.target.value)}
@@ -76,7 +76,7 @@ export default function AddressForm() {
             error={!formInputsValidity.inputLastName}
             helperText={
               !formInputsValidity.inputLastName && (
-                <FormattedMessage id="firstName.warning" />
+                <FormattedMessage id="name.warning" />
               )
             }
             onChange={(e) => setLastName(e.target.value)}
