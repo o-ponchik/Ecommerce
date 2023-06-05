@@ -73,6 +73,7 @@ const Cart = () => {
               <div className="product" key={item._id}>
                 <img
                   src={urlFor(item?.image[0])}
+                  alt={item.name[language]}
                   className="cart-product-image"
                 />
                 <div className="item-desc">
