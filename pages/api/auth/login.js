@@ -7,7 +7,7 @@ const dbName = process.env.DB_NAME;
 const collectionName = process.env.COLLECTION_NAME;
 const secret = process.env.SECRET;
 
-export default async function (req, res) {
+export default async function login(req, res) {
   let client;
 
   const { username, password } = req.body;

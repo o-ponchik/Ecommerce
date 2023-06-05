@@ -1,6 +1,6 @@
 import { serialize } from "cookie";
 
-export default async function (req, res) {
+export default async function logout(req, res) {
   const { cookies } = req;
 
   const jwt = cookies.OursiteJWT;
