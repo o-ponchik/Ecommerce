@@ -282,7 +282,7 @@ function Checkout() {
           </Typography>
           <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
             {steps.map((label, index) => (
-              <Step key={label}>
+              <Step key={index}>
                 <StepLabel>{label}</StepLabel>
               </Step>
             ))}
