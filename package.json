@@ -37,5 +37,9 @@
     "recharts": "^2.4.3",
     "stripe": "^8.209.0",
     "swr": "^2.1.3"
+  },
+  "devDependencies": {
+    "eslint": "8.42.0",
+    "eslint-config-next": "13.4.4"
   }
 }
