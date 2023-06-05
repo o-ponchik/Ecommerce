@@ -11,6 +11,8 @@ import { useStateContext } from "../../context/StateContext";
 import Link from "next/link";
 import { FormattedMessage } from "react-intl";
 
+import Image from "next/image";
+
 const ProductDetails = ({ product, products, bannerData }) => {
   const { decreaseQty, increaseQty, qty, onAdd, setShowIconCart, language } =
     useStateContext();
@@ -38,6 +40,7 @@ const ProductDetails = ({ product, products, bannerData }) => {
                 key={i}
                 src={urlFor(item)}
                 className={i === index ? "small-image" : "small-image"}
+                alt={name[language]}
                 onMouseEnter={() => setIndex(i)}
               />
             ))}
