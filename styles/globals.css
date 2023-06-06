@@ -136,6 +136,7 @@ span.text-red {
   height: 18px;
   border-radius: 50%;
   text-align: center;
+  line-height: 1.45;
   font-weight: 600;
 }
 .products-container {
