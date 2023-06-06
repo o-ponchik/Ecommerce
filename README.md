@@ -5,8 +5,6 @@ RosyFox Candles is an e-commerce website built using React, Next.js, and Sanity.
 ## Key Features
 
 - User-Friendly Interface: Enjoy a smooth and intuitive shopping experience with an easy-to-use interface.
-  ![Hero section of website](public/laptop-mockup-1.png)
-
 - Admin Page: Manage your site's content, orders, and statistics through the secure admin page.
 - Data Storage with Sanity: The website utilizes Sanity, a flexible and scalable content management system, to store and manage structured data.
 
@@ -22,3 +20,5 @@ This project utilizes Next.js, a powerful framework that enables server-side ren
 For enhanced security and privacy, the project incorporates a secure admin page that is protected by password authentication and token-based authorization. This admin page enables you to manage orders and access valuable statistics to gain insights into your e-commerce operations.
 
 To provide a personalized experience for users, the website supports internationalization with English and Ukrainian translations. This ensures that visitors can interact with the site in their preferred language, creating a more engaging and inclusive environment.
+
+![Hero section of website](public/website-mockup.png)
