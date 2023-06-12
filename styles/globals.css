@@ -396,6 +396,11 @@ span.text-red {
   cursor: pointer;
 }
 
+.footer-container .developer {
+  font-size: 0.5rem;
+  color: var(--second-color-transparent);
+}
+
 .cart-heading {
   display: flex;
   align-items: center;

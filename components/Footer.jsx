@@ -11,7 +11,7 @@ const Footer = () => {
   return (
     <div className="footer-container">
       <p>
-        {year} RoxyFox <FormattedMessage id="footer.rights" />
+        {year} RoxyFox © <FormattedMessage id="footer.rights" />
       </p>
       <p className="icons">
         <a
@@ -26,6 +26,12 @@ const Footer = () => {
         </a>
         <a href="tel:+380637009106">
           <AiOutlinePhone />
+        </a>
+      </p>
+      <p className="developer">
+        Built by{" "}
+        <a href={"https://mariia-matviian.netlify.app"} target="_blank">
+          Mariia Matviian
         </a>
       </p>
     </div>
