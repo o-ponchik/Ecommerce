@@ -24,19 +24,43 @@ import toast, { Toaster } from "react-hot-toast";
 
 function Copyright(props) {
   return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
+    <Box
+      sx={{
+        position: "absolute",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "flex-end",
+        alignItems: "center",
+        left: "50%",
+        transform: "translate(-50%, 0)",
+        // minHeight: "100vh",
+        bottom: 0,
+      }}
     >
-      {"Copyright © "}
-      <Link color="inherit" href="https://rosyfox-candles.vercel.app/#">
-        RosyFox
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
+      <Typography
+        variant="body2"
+        color="text.primary"
+        align="center"
+        sx={{ marginBottom: "1rem" }}
+      >
+        {"Copyright © "}
+        <Link color="inherit" href="https://rosyfox-candles.vercel.app/#">
+          RosyFox
+        </Link>{" "}
+        {new Date().getFullYear()}
+        {"."}
+      </Typography>
+      <Typography variant="body2" color="text.secondary" align="center">
+        Built by{" "}
+        <Link
+          color="inherit"
+          sx={{ textDecoration: "none" }}
+          href="https://mariia-matviian.netlify.app"
+        >
+          Mariia Matviian
+        </Link>{" "}
+      </Typography>
+    </Box>
   );
 }
 
