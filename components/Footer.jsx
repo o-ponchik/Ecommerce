@@ -24,9 +24,6 @@ const Footer = () => {
         <a href="mailto: abc@example.com">
           <AiOutlineMail />
         </a>
-        <a href="tel:+380637009106">
-          <AiOutlinePhone />
-        </a>
       </p>
       <p className="developer">
         Built by{" "}
