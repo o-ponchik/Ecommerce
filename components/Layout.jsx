@@ -8,6 +8,11 @@ const Layout = ({ children, dir }) => {
     <div className="layout ">
       <Head>
         <title>RosyFox | HomyCandles</title>
+        <meta
+          name="description"
+          content="Свічки ручної роботи від RosyFox для створення домашнього затишку."
+          key="desc"
+        />
         <link
           rel="icon"
           type="image/png"
