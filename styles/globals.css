@@ -441,6 +441,7 @@ span.text-red {
   display: flex;
   gap: 30px;
   padding: 20px;
+  justify-content: space-evenly;
 }
 .product .cart-product-image {
   width: 180px;
@@ -448,6 +449,7 @@ span.text-red {
   border-radius: 15px;
   background-color: #ebebeb;
 }
+
 .item-desc .flex {
   display: flex;
   justify-content: space-between;
@@ -736,10 +738,10 @@ span.text-red {
   margin-top: 10px;
 }
 
-.image-container {
+/* .image-container {
   width: 500px;
   height: 500px;
-}
+} */
 
 /* ------------------ Pre-Order Form----------*/
 

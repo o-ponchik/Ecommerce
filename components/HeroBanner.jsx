@@ -27,7 +27,6 @@ const HeroBanner = ({ heroBanner }) => {
             <h5>
               <FormattedMessage id="description.banner.text" />
             </h5>
-            {/* <p>{heroBanner.desc}</p> */}
             <p>{description}</p>
           </div>
         </div>
