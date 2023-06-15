@@ -10,6 +10,7 @@ import { TiDeleteOutline } from "react-icons/ti";
 import { useStateContext } from "../context/StateContext";
 import { urlFor } from "../lib/client";
 import { FormattedMessage } from "react-intl";
+import Image from "next/image";
 
 const Cart = () => {
   const {
@@ -71,11 +72,15 @@ const Cart = () => {
           {cartItems.length >= 1 &&
             cartItems.map((item) => (
               <div className="product" key={item._id}>
-                <img
-                  src={urlFor(item?.image[0])}
+                <Image
+                  src={urlFor(item?.image[0]).url()}
                   alt={item.name[language]}
+                  width={100}
+                  height={100}
+                  loading="lazy"
                   className="cart-product-image"
                 />
+
                 <div className="item-desc">
                   <div className="flex top">
                     <h5>{item.name[language]}</h5>

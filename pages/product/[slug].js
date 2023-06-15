@@ -10,6 +10,7 @@ import Product from "../../components/Product";
 import { useStateContext } from "../../context/StateContext";
 import Link from "next/link";
 import { FormattedMessage } from "react-intl";
+import Image from "next/image";
 
 const ProductDetails = ({ product, products, bannerData }) => {
   const { decreaseQty, increaseQty, qty, onAdd, setShowIconCart, language } =
@@ -26,22 +27,30 @@ const ProductDetails = ({ product, products, bannerData }) => {
       <div className="product-detail-container">
         <div>
           <div className="image-container">
-            <img
-              src={urlFor(image && image[index])}
+            <Image
+              src={urlFor(image && image[index]).url()}
               alt={name[language]}
-              className="product-detail-image "
+              className="product-detail-image"
+              width={500}
+              height={500}
+              loading="lazy"
             />
           </div>
           <div className="small-images-container">
-            {image?.map((item, i) => (
-              <img
-                key={i}
-                src={urlFor(item)}
-                className={i === index ? "small-image" : "small-image"}
-                alt={name[language]}
-                onMouseEnter={() => setIndex(i)}
-              />
-            ))}
+            {image?.map((item, i) => {
+              return (
+                <Image
+                  key={i}
+                  src={urlFor(item.asset._ref).url()}
+                  className={i === index ? "small-image" : "small-image"}
+                  alt={name[language]}
+                  width={100}
+                  height={100}
+                  loading="lazy"
+                  onMouseEnter={() => setIndex(i)}
+                />
+              );
+            })}
           </div>
         </div>
         <div className="product-detail-desc">
