@@ -21,3 +21,7 @@ export const updateCartFromLocalStorage = (
     }
   }
 };
+
+export const updateLocalStorage = (cartItems) => {
+  localStorage.setItem("cartItems", JSON.stringify(cartItems));
+};

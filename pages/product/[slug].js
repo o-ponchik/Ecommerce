@@ -11,15 +11,26 @@ import { useStateContext } from "../../context/StateContext";
 import Link from "next/link";
 import { FormattedMessage } from "react-intl";
 import Image from "next/image";
+import { updateCartFromLocalStorage } from "../../utils/localStorageUtil";
 
 const ProductDetails = ({ product, products, bannerData }) => {
-  const { decreaseQty, increaseQty, qty, onAdd, setShowIconCart, language } =
-    useStateContext();
+  const {
+    decreaseQty,
+    increaseQty,
+    qty,
+    onAdd,
+    setShowIconCart,
+    language,
+    setCartItems,
+    setTotalPrice,
+    setTotalQuantities,
+  } = useStateContext();
   const { image, name, details, price } = product;
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
     setShowIconCart(true);
+    updateCartFromLocalStorage(setCartItems, setTotalPrice, setTotalQuantities);
   }, []);
 
   return (

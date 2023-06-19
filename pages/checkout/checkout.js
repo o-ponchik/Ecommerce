@@ -20,6 +20,7 @@ import { generateOrderNumber } from "../../utils/generateOrderNumer";
 import Link from "next/link";
 import { useStateContext } from "../../context/StateContext";
 import { FormattedMessage } from "react-intl";
+import { updateCartFromLocalStorage } from "../../utils/localStorageUtil";
 
 const step1 = <FormattedMessage id="step1.text" />;
 const step2 = <FormattedMessage id="step2.text" />;
@@ -78,9 +79,19 @@ function Checkout() {
     resetForm,
     orderNumber,
     setOrderNumber,
+    setCartItems,
+    setTotalPrice,
+    setTotalQuantities,
   } = useStateContext();
 
-  React.useEffect(() => setShowIconCart(false), [setShowIconCart]);
+  React.useEffect(() => {
+    setShowIconCart(false),
+      updateCartFromLocalStorage(
+        setCartItems,
+        setTotalPrice,
+        setTotalQuantities
+      );
+  }, [setShowIconCart]);
 
   const orderNum = () => {
     const generatedNum = generateOrderNumber();

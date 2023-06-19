@@ -1,6 +1,7 @@
-import React, { useState, useContext, createContext, useEffect } from "react";
+import React, { useState, useContext, createContext } from "react";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/router";
+import { updateLocalStorage } from "../utils/localStorageUtil";
 
 const Context = createContext();
 
@@ -9,8 +10,8 @@ export const StateContext = ({ children }) => {
 
   const [showCart, setShowCart] = useState(false);
   const [showIconCart, setShowIconCart] = useState(true);
-  const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [cartItems, setCartItems] = useState([]);
   const [totalQuantities, setTotalQuantities] = useState(0);
   const [qty, setQty] = useState(1);
   const [language, setLanguage] = useState(locale);
@@ -42,10 +43,6 @@ export const StateContext = ({ children }) => {
 
   let foundProduct;
   let index;
-
-  const updateLocalStorage = (cartItems) => {
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-  };
 
   const onAdd = (product, quantity) => {
     // we should check if the product that we want to add is aleary has been added before
@@ -91,10 +88,6 @@ export const StateContext = ({ children }) => {
 
     updateLocalStorage(cartItems);
   };
-
-  useEffect(() => {
-    updateLocalStorage(cartItems);
-  }, [cartItems]);
 
   // remove product from the Cart list
   const onRemove = (product) => {
